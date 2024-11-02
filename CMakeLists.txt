@@ -4,5 +4,5 @@ project(laying_grass)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(laying_grass main.cpp
-        src/Player.h
-        include/Player.cpp)
+        include/Player.h
+        src/Player.cpp)

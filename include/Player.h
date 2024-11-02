@@ -2,22 +2,26 @@
 #define LAYING_GRASS_PLAYER_H
 
 #include <iostream>
+#include <vector>
 
 class Player {
 private:
     std::string name;
-    std::string color;
-    int cells[];
+    int color;
+    std::vector<std::pair<int, int>> cells; // => Using "pair" to use (x, y) position
 
 public:
     Player();
     ~Player();
+
     void setName(std::string);
-    std::string getName();
-    void setColor(std::string );
-    std::string getColor();
+    void setColor(int);
     void setCells(int);
-    int getCells();
+
+    std::string getName();
+    int getColor();
+
+    std::pair<int, int> getCells();
 };
 
 

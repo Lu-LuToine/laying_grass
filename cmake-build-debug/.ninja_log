@@ -1,6 +1,14 @@
 # ninja log v6
-4	718	7519407091962217	CMakeFiles/laying_grass.dir/main.cpp.obj	7fc9bac04d043ffe
-727	1153	7519407099191698	laying_grass.exe	c88be05d3de904fe
-80	871	7520362463095149	build.ninja	ad9a0818b5703cc6
 15	805	7520362464193214	CMakeFiles/laying_grass.dir/main.cpp.obj	7fc9bac04d043ffe
 805	1040	7520362472093938	laying_grass.exe	c88be05d3de904fe
+80	871	7522857214044263	build.ninja	ad9a0818b5703cc6
+21	417	7522859568112792	CMakeFiles/laying_grass.dir/main.cpp.obj	7fc9bac04d043ffe
+26	519	7522859568162804	CMakeFiles/laying_grass.dir/src/Player.cpp.obj	dee419b21868958f
+519	639	7522859573090180	laying_grass.exe	50f7c58ecf6146ab
+36	1164	7522867643156661	CMakeFiles/laying_grass.dir/src/Player.cpp.obj	dee419b21868958f
+14	1161	7522867960019587	CMakeFiles/laying_grass.dir/main.cpp.obj	7fc9bac04d043ffe
+1162	1324	7522867971499499	laying_grass.exe	50f7c58ecf6146ab
+15	1182	7522868555187842	CMakeFiles/laying_grass.dir/main.cpp.obj	7fc9bac04d043ffe
+1182	1262	7522868566862604	laying_grass.exe	50f7c58ecf6146ab
+16	1145	7522868638914818	CMakeFiles/laying_grass.dir/main.cpp.obj	7fc9bac04d043ffe
+1146	1227	7522868650218958	laying_grass.exe	50f7c58ecf6146ab

@@ -55,6 +55,12 @@ build CMakeFiles/laying_grass.dir/main.cpp.obj: CXX_COMPILER__laying_grass_unsca
   OBJECT_DIR = CMakeFiles\laying_grass.dir
   OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir
 
+build CMakeFiles/laying_grass.dir/src/Player.cpp.obj: CXX_COMPILER__laying_grass_unscanned_Debug C$:/Users/Lulu/Documents/!cours/2_annee/2ccpp/laying_grass/src/Player.cpp || cmake_object_order_depends_target_laying_grass
+  DEP_FILE = CMakeFiles\laying_grass.dir\src\Player.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\laying_grass.dir
+  OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir\src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target laying_grass
@@ -63,7 +69,7 @@ build CMakeFiles/laying_grass.dir/main.cpp.obj: CXX_COMPILER__laying_grass_unsca
 #############################################
 # Link the executable laying_grass.exe
 
-build laying_grass.exe: CXX_EXECUTABLE_LINKER__laying_grass_Debug CMakeFiles/laying_grass.dir/main.cpp.obj
+build laying_grass.exe: CXX_EXECUTABLE_LINKER__laying_grass_Debug CMakeFiles/laying_grass.dir/main.cpp.obj CMakeFiles/laying_grass.dir/src/Player.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\laying_grass.dir
