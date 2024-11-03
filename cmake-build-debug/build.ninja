@@ -61,6 +61,42 @@ build CMakeFiles/laying_grass.dir/src/Player.cpp.obj: CXX_COMPILER__laying_grass
   OBJECT_DIR = CMakeFiles\laying_grass.dir
   OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir\src
 
+build CMakeFiles/laying_grass.dir/src/board/Board.cpp.obj: CXX_COMPILER__laying_grass_unscanned_Debug C$:/Users/Lulu/Documents/!cours/2_annee/2ccpp/laying_grass/src/board/Board.cpp || cmake_object_order_depends_target_laying_grass
+  DEP_FILE = CMakeFiles\laying_grass.dir\src\board\Board.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\laying_grass.dir
+  OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir\src\board
+
+build CMakeFiles/laying_grass.dir/src/board/Cells.cpp.obj: CXX_COMPILER__laying_grass_unscanned_Debug C$:/Users/Lulu/Documents/!cours/2_annee/2ccpp/laying_grass/src/board/Cells.cpp || cmake_object_order_depends_target_laying_grass
+  DEP_FILE = CMakeFiles\laying_grass.dir\src\board\Cells.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\laying_grass.dir
+  OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir\src\board
+
+build CMakeFiles/laying_grass.dir/src/Game.cpp.obj: CXX_COMPILER__laying_grass_unscanned_Debug C$:/Users/Lulu/Documents/!cours/2_annee/2ccpp/laying_grass/src/Game.cpp || cmake_object_order_depends_target_laying_grass
+  DEP_FILE = CMakeFiles\laying_grass.dir\src\Game.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\laying_grass.dir
+  OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir\src
+
+build CMakeFiles/laying_grass.dir/src/Tiles.cpp.obj: CXX_COMPILER__laying_grass_unscanned_Debug C$:/Users/Lulu/Documents/!cours/2_annee/2ccpp/laying_grass/src/Tiles.cpp || cmake_object_order_depends_target_laying_grass
+  DEP_FILE = CMakeFiles\laying_grass.dir\src\Tiles.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\laying_grass.dir
+  OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir\src
+
+build CMakeFiles/laying_grass.dir/src/menu/menu.cpp.obj: CXX_COMPILER__laying_grass_unscanned_Debug C$:/Users/Lulu/Documents/!cours/2_annee/2ccpp/laying_grass/src/menu/menu.cpp || cmake_object_order_depends_target_laying_grass
+  DEP_FILE = CMakeFiles\laying_grass.dir\src\menu\menu.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\laying_grass.dir
+  OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir\src\menu
+
+build CMakeFiles/laying_grass.dir/src/colors.cpp.obj: CXX_COMPILER__laying_grass_unscanned_Debug C$:/Users/Lulu/Documents/!cours/2_annee/2ccpp/laying_grass/src/colors.cpp || cmake_object_order_depends_target_laying_grass
+  DEP_FILE = CMakeFiles\laying_grass.dir\src\colors.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\laying_grass.dir
+  OBJECT_FILE_DIR = CMakeFiles\laying_grass.dir\src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target laying_grass
@@ -69,8 +105,9 @@ build CMakeFiles/laying_grass.dir/src/Player.cpp.obj: CXX_COMPILER__laying_grass
 #############################################
 # Link the executable laying_grass.exe
 
-build laying_grass.exe: CXX_EXECUTABLE_LINKER__laying_grass_Debug CMakeFiles/laying_grass.dir/main.cpp.obj CMakeFiles/laying_grass.dir/src/Player.cpp.obj
+build laying_grass.exe: CXX_EXECUTABLE_LINKER__laying_grass_Debug CMakeFiles/laying_grass.dir/main.cpp.obj CMakeFiles/laying_grass.dir/src/Player.cpp.obj CMakeFiles/laying_grass.dir/src/board/Board.cpp.obj CMakeFiles/laying_grass.dir/src/board/Cells.cpp.obj CMakeFiles/laying_grass.dir/src/Game.cpp.obj CMakeFiles/laying_grass.dir/src/Tiles.cpp.obj CMakeFiles/laying_grass.dir/src/menu/menu.cpp.obj CMakeFiles/laying_grass.dir/src/colors.cpp.obj
   FLAGS = -g
+  LINK_FLAGS = -static
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\laying_grass.dir
   POST_BUILD = cd .
