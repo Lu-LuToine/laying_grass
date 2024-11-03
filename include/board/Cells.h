@@ -1,17 +1,17 @@
 #ifndef LAYING_GRASS_CELLS_H
 #define LAYING_GRASS_CELLS_H
 
+class Cells{
 
-class Cells {
-
-private:
-    int status;
+protected:
+    char status;
 
 public:
     Cells();
     ~Cells();
-    void setStatus(int);
-    int getStatus();
+
+    void setStatus(char);
+    int getStatus() const;
 
 };
 
