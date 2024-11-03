@@ -7,13 +7,19 @@
 
 using namespace std;
 
-const int Player_number = 2;
-Player Player[Player_number];
-
-
 int main()
 {
+    int nb_player;
+
+    startGameName();
     startGameMenu();
+
+    cout << "[INIT] - How many Players " << endl;
+    cin >> nb_player;
+
+    Player* players = new Player[nb_player]; // Set players
+
+
 
     Board Board1;
     Board1.setSize(5);
@@ -22,19 +28,20 @@ int main()
     Board1.getBoard();
 
     // [DEBUG] => check PLAYER and colors
-    for (int i = 0; i < Player_number; i++) {
+    for (int i = 0; i < nb_player; i++) {
         if (i == 1) {
-            Player[i].setName("Jean michel");
-            Player[i].setColor(2);
+            players[i].setName("Jean michel");
+            players[i].setColor(2);
         } else {
-            Player[i].setName("Edward");
-            Player[i].setColor(3);
+            players[i].setName("Edward");
+            players[i].setColor(3);
         }
-        setConsoleColor(Player[i].getColor());
-        cout << "Hi i'm " << Player[i].getName() << endl;
+        setConsoleColor(players[i].getColor());
+        cout << "Hi i'm " << players[i].getName() << endl;
         setConsoleColor(7);
     }
 
+    delete[] players;
     std::cout << "Hello, Worlde!" << std::endl;
     system("pause");
     return 0;

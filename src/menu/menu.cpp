@@ -1,13 +1,13 @@
 #include "../../include/menu.h"
 #include "../../include/colors.h"
+#include "../../include/Player.h"
 
 #include <unistd.h>
 #include <iostream>
 
 using namespace std;
 
-void startGameMenu() {
-    int user_choice;
+void startGameName() {
     setConsoleColor(14);
     cout << ">>==========================================================<<" <<endl;
     usleep(200000);
@@ -26,8 +26,10 @@ void startGameMenu() {
     cout << ">>==========================================================<<" <<endl;
     cout << endl;
     usleep(200000);
+}
 
-
+void startGameMenu(){
+    int user_choice;
     setConsoleColor(46);
     cout << "          [START MENU] - Welcome on 'Laying Grass'            " << endl;
     setConsoleColor(32);
@@ -40,6 +42,6 @@ void startGameMenu() {
     cin >> user_choice;
 }
 
-void chooseStats(){
+void chooseStats(Player players[], int nb_player){
 
 };
