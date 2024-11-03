@@ -128,30 +128,6 @@ laying_grass/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/build
 .PHONY : laying_grass/fast
 
-include/Player.obj: include/Player.cpp.obj
-.PHONY : include/Player.obj
-
-# target to build an object file
-include/Player.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/include/Player.cpp.obj
-.PHONY : include/Player.cpp.obj
-
-include/Player.i: include/Player.cpp.i
-.PHONY : include/Player.i
-
-# target to preprocess a source file
-include/Player.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/include/Player.cpp.i
-.PHONY : include/Player.cpp.i
-
-include/Player.s: include/Player.cpp.s
-.PHONY : include/Player.s
-
-# target to generate assembly for a file
-include/Player.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/include/Player.cpp.s
-.PHONY : include/Player.cpp.s
-
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -176,6 +152,126 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Game.obj: src/Game.cpp.obj
+.PHONY : src/Game.obj
+
+# target to build an object file
+src/Game.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Game.cpp.obj
+.PHONY : src/Game.cpp.obj
+
+src/Game.i: src/Game.cpp.i
+.PHONY : src/Game.i
+
+# target to preprocess a source file
+src/Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Game.cpp.i
+.PHONY : src/Game.cpp.i
+
+src/Game.s: src/Game.cpp.s
+.PHONY : src/Game.s
+
+# target to generate assembly for a file
+src/Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Game.cpp.s
+.PHONY : src/Game.cpp.s
+
+src/Player.obj: src/Player.cpp.obj
+.PHONY : src/Player.obj
+
+# target to build an object file
+src/Player.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Player.cpp.obj
+.PHONY : src/Player.cpp.obj
+
+src/Player.i: src/Player.cpp.i
+.PHONY : src/Player.i
+
+# target to preprocess a source file
+src/Player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Player.cpp.i
+.PHONY : src/Player.cpp.i
+
+src/Player.s: src/Player.cpp.s
+.PHONY : src/Player.s
+
+# target to generate assembly for a file
+src/Player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Player.cpp.s
+.PHONY : src/Player.cpp.s
+
+src/Tiles.obj: src/Tiles.cpp.obj
+.PHONY : src/Tiles.obj
+
+# target to build an object file
+src/Tiles.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Tiles.cpp.obj
+.PHONY : src/Tiles.cpp.obj
+
+src/Tiles.i: src/Tiles.cpp.i
+.PHONY : src/Tiles.i
+
+# target to preprocess a source file
+src/Tiles.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Tiles.cpp.i
+.PHONY : src/Tiles.cpp.i
+
+src/Tiles.s: src/Tiles.cpp.s
+.PHONY : src/Tiles.s
+
+# target to generate assembly for a file
+src/Tiles.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/Tiles.cpp.s
+.PHONY : src/Tiles.cpp.s
+
+src/board/Board.obj: src/board/Board.cpp.obj
+.PHONY : src/board/Board.obj
+
+# target to build an object file
+src/board/Board.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/board/Board.cpp.obj
+.PHONY : src/board/Board.cpp.obj
+
+src/board/Board.i: src/board/Board.cpp.i
+.PHONY : src/board/Board.i
+
+# target to preprocess a source file
+src/board/Board.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/board/Board.cpp.i
+.PHONY : src/board/Board.cpp.i
+
+src/board/Board.s: src/board/Board.cpp.s
+.PHONY : src/board/Board.s
+
+# target to generate assembly for a file
+src/board/Board.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/board/Board.cpp.s
+.PHONY : src/board/Board.cpp.s
+
+src/board/Cells.obj: src/board/Cells.cpp.obj
+.PHONY : src/board/Cells.obj
+
+# target to build an object file
+src/board/Cells.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/board/Cells.cpp.obj
+.PHONY : src/board/Cells.cpp.obj
+
+src/board/Cells.i: src/board/Cells.cpp.i
+.PHONY : src/board/Cells.i
+
+# target to preprocess a source file
+src/board/Cells.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/board/Cells.cpp.i
+.PHONY : src/board/Cells.cpp.i
+
+src/board/Cells.s: src/board/Cells.cpp.s
+.PHONY : src/board/Cells.s
+
+# target to generate assembly for a file
+src/board/Cells.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/board/Cells.cpp.s
+.PHONY : src/board/Cells.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -185,12 +281,24 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... laying_grass
-	@echo ... include/Player.obj
-	@echo ... include/Player.i
-	@echo ... include/Player.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/Game.obj
+	@echo ... src/Game.i
+	@echo ... src/Game.s
+	@echo ... src/Player.obj
+	@echo ... src/Player.i
+	@echo ... src/Player.s
+	@echo ... src/Tiles.obj
+	@echo ... src/Tiles.i
+	@echo ... src/Tiles.s
+	@echo ... src/board/Board.obj
+	@echo ... src/board/Board.i
+	@echo ... src/board/Board.s
+	@echo ... src/board/Cells.obj
+	@echo ... src/board/Cells.i
+	@echo ... src/board/Cells.s
 .PHONY : help
 
 

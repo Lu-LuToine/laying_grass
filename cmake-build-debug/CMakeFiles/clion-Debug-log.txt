@@ -1,4 +1,4 @@
-C:\Users\Lulu\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/Lulu/AppData/Local/Programs/CLion/bin/ninja/win/x64/ninja.exe -G Ninja -S C:\Users\Lulu\Documents\!cours\2_annee\2ccpp\laying_grass -B C:\Users\Lulu\Documents\!cours\2_annee\2ccpp\laying_grass\cmake-build-debug
--- Configuring done (0.2s)
+C:\Users\toine\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles" -S D:\SupInfo\B2\2CCPP\laying_grass -B D:\SupInfo\B2\2CCPP\laying_grass\cmake-build-debug
+-- Configuring done (0.1s)
 -- Generating done (0.0s)
--- Build files have been written to: C:/Users/Lulu/Documents/!cours/2_annee/2ccpp/laying_grass/cmake-build-debug
+-- Build files have been written to: D:/SupInfo/B2/2CCPP/laying_grass/cmake-build-debug

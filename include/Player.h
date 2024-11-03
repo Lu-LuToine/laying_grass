@@ -20,7 +20,6 @@ public:
 
     std::string getName();
     int getColor();
-
     std::pair<int, int> getCells();
 };
 

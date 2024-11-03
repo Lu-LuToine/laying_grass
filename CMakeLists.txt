@@ -5,4 +5,12 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(laying_grass main.cpp
         include/Player.h
-        src/Player.cpp)
+        src/Player.cpp
+        include/board/Board.h
+        src/board/Board.cpp
+        include/board/Cells.h
+        src/board/Cells.cpp
+        include/Game.h
+        src/Game.cpp
+        include/Tiles.h
+        src/Tiles.cpp)

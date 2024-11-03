@@ -1,0 +1,3 @@
+C:\Users\toine\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E rm -f CMakeFiles\laying_grass.dir/objects.a
+C:\Users\toine\AppData\Local\Programs\CLion\bin\mingw\bin\ar.exe qc CMakeFiles\laying_grass.dir/objects.a @CMakeFiles\laying_grass.dir\objects1.rsp
+C:\Users\toine\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\laying_grass.dir/objects.a -Wl,--no-whole-archive -o laying_grass.exe -Wl,--out-implib,liblaying_grass.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\laying_grass.dir\linkLibs.rsp
