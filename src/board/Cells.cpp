@@ -1,17 +1,21 @@
 #include "../../include/board/Cells.h"
 
 Cells::Cells(){
-    this->status = 0;
+    this->status = '0';
 };
 
-Cells::~Cells(){
-    this->status;
-};
+// ===== SETTERS =====
 
-void Cells::setStatus(int newStatus){
+void Cells::setStatus(char newStatus){
     this->status = newStatus;
 };
 
-int Cells::getStatus(){
+
+// ===== GETTERS =====
+
+int Cells::getStatus() const{
     return this->status;
 };
+
+
+Cells::~Cells(){};

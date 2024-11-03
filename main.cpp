@@ -1,4 +1,5 @@
 #include "include/Player.h"
+#include "include/board/Board.h"
 #include "include/colors.h"
 #include "include/menu.h"
 
@@ -13,6 +14,13 @@ Player Player[Player_number];
 int main()
 {
     startGameMenu();
+
+    Board Board1;
+    Board1.setSize(5);
+    cout << Board1.getSize() << endl;
+    Board1.setBoard();
+    Board1.getBoard();
+
     // [DEBUG] => check PLAYER and colors
     for (int i = 0; i < Player_number; i++) {
         if (i == 1) {
@@ -28,5 +36,6 @@ int main()
     }
 
     std::cout << "Hello, Worlde!" << std::endl;
+    system("pause");
     return 0;
 }
