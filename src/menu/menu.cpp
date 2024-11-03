@@ -39,3 +39,7 @@ void startGameMenu() {
     cout << "*> :";
     cin >> user_choice;
 }
+
+void chooseStats(){
+
+};

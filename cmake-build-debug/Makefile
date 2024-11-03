@@ -272,6 +272,54 @@ src/board/Cells.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/board/Cells.cpp.s
 .PHONY : src/board/Cells.cpp.s
 
+src/colors.obj: src/colors.cpp.obj
+.PHONY : src/colors.obj
+
+# target to build an object file
+src/colors.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/colors.cpp.obj
+.PHONY : src/colors.cpp.obj
+
+src/colors.i: src/colors.cpp.i
+.PHONY : src/colors.i
+
+# target to preprocess a source file
+src/colors.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/colors.cpp.i
+.PHONY : src/colors.cpp.i
+
+src/colors.s: src/colors.cpp.s
+.PHONY : src/colors.s
+
+# target to generate assembly for a file
+src/colors.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/colors.cpp.s
+.PHONY : src/colors.cpp.s
+
+src/menu/menu.obj: src/menu/menu.cpp.obj
+.PHONY : src/menu/menu.obj
+
+# target to build an object file
+src/menu/menu.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/menu/menu.cpp.obj
+.PHONY : src/menu/menu.cpp.obj
+
+src/menu/menu.i: src/menu/menu.cpp.i
+.PHONY : src/menu/menu.i
+
+# target to preprocess a source file
+src/menu/menu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/menu/menu.cpp.i
+.PHONY : src/menu/menu.cpp.i
+
+src/menu/menu.s: src/menu/menu.cpp.s
+.PHONY : src/menu/menu.s
+
+# target to generate assembly for a file
+src/menu/menu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\laying_grass.dir\build.make CMakeFiles/laying_grass.dir/src/menu/menu.cpp.s
+.PHONY : src/menu/menu.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -299,6 +347,12 @@ help:
 	@echo ... src/board/Cells.obj
 	@echo ... src/board/Cells.i
 	@echo ... src/board/Cells.s
+	@echo ... src/colors.obj
+	@echo ... src/colors.i
+	@echo ... src/colors.s
+	@echo ... src/menu/menu.obj
+	@echo ... src/menu/menu.i
+	@echo ... src/menu/menu.s
 .PHONY : help
 
 
