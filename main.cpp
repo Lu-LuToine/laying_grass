@@ -31,7 +31,15 @@ int main()
     Board1.setBoard();
     Board1.getBoard();
 
-    // [DEBUG] => check PLAYER and colors
+    // [DEBUG] => check COLOR details
+    Colors UsersColors;
+    UsersColors.setColors();
+    UsersColors.getColorsInfos();
+    UsersColors.removeColor("white");
+    UsersColors.getColorsInfos();
+
+
+    // [DEBUG] => check PLAYERS and colors
     for (int i = 0; i < nb_player; i++) {
         if (i == 1) {
             players[i].setName("Jean michel");

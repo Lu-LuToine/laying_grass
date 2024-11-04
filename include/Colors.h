@@ -9,13 +9,18 @@ void setConsoleColor(int color);
 class Colors{
 
 private:
-    std::map<char, char> colors;
+    std::map<std::string, int> colors;
 
 public:
     Colors();
     ~Colors();
-    std::map<char, int> getColors();
-    std::map<char, int> removeColor(int);
+
+    void setColors();
+    std::map<std::string, int> getColors();
+    void removeColor(const std::string &color);
+
+    void getColorsInfos() const;
+
 };
 
 #endif //COLORS_H
