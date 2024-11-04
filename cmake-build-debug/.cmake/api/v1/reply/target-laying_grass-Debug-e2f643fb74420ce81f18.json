@@ -192,12 +192,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/colors.cpp",
+			"path" : "src/Colors.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "include/colors.h",
+			"path" : "include/Colors.h",
 			"sourceGroupIndex" : 1
 		},
 		{
