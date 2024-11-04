@@ -26,10 +26,10 @@ Colors::Colors(){
 
 Colors::~Colors(){};
 
-std::map<char, char> Colors::getColors(){
+std::map<char, int> Colors::getColors(){
     return this->colors;
 };
 
-std::map<char, char> Colors::removeColor(int color){
+std::map<char, int> Colors::removeColor(int color){
     this->colors.erase(color);
 };

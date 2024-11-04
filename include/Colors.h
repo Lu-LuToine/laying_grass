@@ -14,8 +14,8 @@ private:
 public:
     Colors();
     ~Colors();
-    std::map<char, char> getColors();
-    std::map<char, char> removeColor(int);
+    std::map<char, int> getColors();
+    std::map<char, int> removeColor(int);
 };
 
 #endif //COLORS_H
