@@ -1,6 +1,6 @@
 #include "include/Player.h"
 #include "include/board/Board.h"
-#include "include/colors.h"
+#include "include/Colors.h"
 #include "include/menu.h"
 #include "include/Game.h"
 

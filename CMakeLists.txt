@@ -16,6 +16,6 @@ add_executable(laying_grass main.cpp
         include/Tiles.h
         src/Tiles.cpp
         src/menu/menu.cpp
-        src/colors.cpp
-        include/colors.h
+        src/Colors.cpp
+        include/Colors.h
         include/menu.h)
