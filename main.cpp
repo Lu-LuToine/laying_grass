@@ -23,16 +23,10 @@ int main()
 
     cout << "[INIT] - You chose " << game.getNbPlayer() << " Players" << endl;
 
-    if (2 <= game.getNbPlayer() <= 4){
-
-    } else {Board1}
-
     Player* players = new Player[nb_player]; // Set players
 
-
-
     Board Board1;
-    Board1.setSize(5);
+    Board1.setSize(game.getNbPlayer());
     cout << Board1.getSize() << endl;
     Board1.setBoard();
     Board1.getBoard();
