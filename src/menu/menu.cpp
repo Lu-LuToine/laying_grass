@@ -42,6 +42,9 @@ void startGameMenu(){
     cin >> user_choice;
 }
 
+
+
+//TODO choose stats
 void chooseStats(Player players[], int nb_player){
 
 };
