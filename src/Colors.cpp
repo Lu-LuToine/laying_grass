@@ -38,8 +38,11 @@ void Colors::removeColor(const std::string& color){
 
 void Colors::getColorsInfos() const {
     setConsoleColor(32);
-    std::cout << "[INIT] - Here you can see each possible colors : " << std::endl;
-    for (int code = 1; code <= 15; ++code) {
+    std::cout << "[INIT] - Here you can see each possible colors : ";
+    setConsoleColor(7);
+    std::cout << std::endl; // In order to not get next line with color and background
+
+    for (int code = 0; code <= 15; ++code) {
         for (const auto& color : colors) {
             if (color.second == code) {
                 setConsoleColor(color.second);
