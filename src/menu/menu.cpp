@@ -43,12 +43,26 @@ void startGameMenu(){
     cin >> user_choice;
 }
 
-
-
-//TODO choose stats
 void chooseStats(Player players[], int nb_player){
 
+    for (int i = 0; i < nb_player; i++) {
+        string name;
+        cout << "Entrez un nom de joueur : ";
+        cin >> name;
+        string color;
+        cout << "Choisissez une couleur (liste des couleurs disponibles : colors) : ";
+        cin >> color;
+        if (color == "colors"){
+            Colors::getColorsInfos();
+        } else {}
+        players[i].setName(name);
+        players[i].setColor(color);
+    }
 
+};
+
+//DEBUG MOI
+void chooseStats(Player players[], int nb_player){
 
     for (int i = 0; i < nb_player; i++) {
         if (i == 1) {
