@@ -18,6 +18,7 @@ int main()
         Game game;
         int nb_player;
 
+        // TODO : faire un do while pour que la saisie utilisateur soit bien entre 2 et 9
         setConsoleColor(32);
         cout << "[INIT-MENU] - First let's define the number of players " << endl;
         setConsoleColor(10);
@@ -42,6 +43,7 @@ int main()
 
 
         // [DEBUG] => check PLAYERS and colors
+        // TODO : faire un affichage pour afficher chaque joueurs avec leur nom + le numéro de joueur (attention a faire i + 1 dans l'affichage)
         for (int i = 0; i < nb_player; i++) {
             setConsoleColor(players[i].getColor());
             cout << "Hi i'm " << players[i].getName() << endl;
