@@ -29,18 +29,30 @@ void startGameName() {
     usleep(200000);
 }
 
-void startGameMenu(){
+int startGameMenu(){
     int user_choice;
-    setConsoleColor(46);
+    setConsoleColor(134);
     cout << "          [START MENU] - Welcome on 'Laying Grass'            " << endl;
-    setConsoleColor(32);
+    setConsoleColor(128);
     cout << "         [START MENU] - Choose your next action :             " << endl;
     cout << "         [START MENU] - 1 : Start game                        " << endl;
     cout << "         [START MENU] - 2 : Display rules                     " << endl;
     cout << "         [START MENU] - 3 : Leave                             " << endl;
     setConsoleColor(10);
-    cout << "*> :";
-    cin >> user_choice;
+
+    do {
+        cout << "*> :";
+        cin >> user_choice;
+    } while (user_choice < 0 || user_choice > 3);
+
+    switch (user_choice) {
+        case 1 :
+            return 1;
+        case 2 :
+            return 2;
+        case 3:
+            return 3;
+    }
 }
 
 void chooseStats(Player players[], int nb_player, Colors chooseColors){
