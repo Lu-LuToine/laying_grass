@@ -17,6 +17,9 @@ public:
 
     void setColors();
     std::map<std::string, int> getColors();
+
+    int getColorCode(const std::string &colorName) const;
+
     void removeColor(const std::string &color);
 
     void getColorsInfos() const;

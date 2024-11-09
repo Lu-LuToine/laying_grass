@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <windows.h>
+#include <map>
+#include <algorithm>
+#include <stdexcept>
 
 
 void setConsoleColor(int color) {
@@ -11,7 +14,7 @@ void setConsoleColor(int color) {
 };
 
 Colors::Colors(){
-    this->colors;
+    setColors();
 };
 
 void Colors::setColors() {
@@ -30,6 +33,31 @@ void Colors::setColors() {
 std::map<std::string, int> Colors::getColors(){
     return this->colors;
 };
+
+int Colors::getColorCode(const std::string& colorName) const {
+    // Use to get color's code by user color string
+    std::string colorLower = colorName;
+
+    // Convert to be not case-sensitive
+    std::transform(colorLower.begin(), colorLower.end(), colorLower.begin(), ::tolower);
+
+    auto it = colors.find(colorLower);
+    if ( colorName != "colors") {
+        if (it != colors.end()) {
+            return it->second;
+        } else {
+            setConsoleColor(79);
+            std::cout << "[ERROR] - Invalid color";
+            setConsoleColor(7);
+            std::cout << std::endl;
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+
+}
+
 
 void Colors::removeColor(const std::string& color){
     this->colors.erase(color);

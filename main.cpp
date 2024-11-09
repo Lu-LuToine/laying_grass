@@ -33,21 +33,12 @@ int main()
 
     // [DEBUG] => check COLOR details
     Colors UsersColors;
-    UsersColors.setColors();
-    UsersColors.getColorsInfos();
-    UsersColors.removeColor("white");
-    UsersColors.getColorsInfos();
+
+    chooseStats(players, nb_player, UsersColors);
 
 
     // [DEBUG] => check PLAYERS and colors
     for (int i = 0; i < nb_player; i++) {
-        if (i == 1) {
-            players[i].setName("Jean michel");
-            players[i].setColor(2);
-        } else {
-            players[i].setName("Edward");
-            players[i].setColor(3);
-        }
         setConsoleColor(players[i].getColor());
         cout << "Hi i'm " << players[i].getName() << endl;
         setConsoleColor(7);

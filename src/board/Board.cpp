@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 
+#include "../../include/Colors.h"
+
 Board::Board(){
     this->size = 0;
     this->boardStruct;
@@ -42,6 +44,7 @@ int Board::getSize(){
 
 
 void Board::getBoard() {
+    setConsoleColor(7);
     int row_count = 1;
     int cols_count = -1;
 
@@ -70,7 +73,7 @@ void Board::getBoard() {
         }
         for (const Cells& cell : row) {
             if (cell.getStatus() == '0'){ //Empty
-                std::cout << "-" << ' ';
+                std::cout << char(250) << ' ';
             }
         }
         row_count++;

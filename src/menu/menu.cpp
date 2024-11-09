@@ -43,26 +43,44 @@ void startGameMenu(){
     cin >> user_choice;
 }
 
-void chooseStats(Player players[], int nb_player){
-
+void chooseStats(Player players[], int nb_player, Colors chooseColors){
+    setConsoleColor(32);
+    cout << "[INIT-MENU] - First choose player's name and player's colors" << endl;
+    setConsoleColor(10);
     for (int i = 0; i < nb_player; i++) {
         string name;
-        cout << "Entrez un nom de joueur : ";
-        cin >> name;
         string color;
-        cout << "Choisissez une couleur (liste des couleurs disponibles : colors) : ";
-        cin >> color;
-        if (color == "colors"){
-            Colors::getColorsInfos();
-        } else {}
+
+        cout << "[INIT] - Players's " << i + 1 << " name : " << endl;
+        cout << "*> :";
+        cin >> name;
+
+        do {
+            setConsoleColor(10);
+            cout << "[INIT] - Choose colors (you can see all available colors with : 'colors') : "<< endl;
+            cout << "*> :";
+            cin >> color;
+            if (color == "colors"){
+                chooseColors.getColorsInfos();
+            }
+        } while (chooseColors.getColorCode(color) == 0);
+
         players[i].setName(name);
-        players[i].setColor(color);
+        int colorCode = chooseColors.getColorCode(color);
+        players[i].setColor(colorCode);
+
+        setConsoleColor(players[i].getColor());
+        cout << "[INIT] - Player "  << i + 1 << " Your name is " << players[i].getName() << endl;
+
+        chooseColors.removeColor(color);
+        setConsoleColor(10);
+        cout << "[INIT] - '" << color << "' is now removed from available colors"  << endl;
     }
 
 };
 
 //DEBUG MOI
-void chooseStats(Player players[], int nb_player){
+void DEBUGchooseStats(Player players[], int nb_player){
 
     for (int i = 0; i < nb_player; i++) {
         if (i == 1) {
