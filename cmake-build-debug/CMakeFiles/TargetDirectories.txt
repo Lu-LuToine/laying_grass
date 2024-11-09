@@ -1,3 +1,0 @@
-D:/SupInfo/B2/2CCPP/laying_grass/cmake-build-debug/CMakeFiles/laying_grass.dir
-D:/SupInfo/B2/2CCPP/laying_grass/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/SupInfo/B2/2CCPP/laying_grass/cmake-build-debug/CMakeFiles/rebuild_cache.dir
