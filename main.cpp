@@ -22,7 +22,7 @@ int main()
         setConsoleColor(32);
         cout << "[INIT-MENU] - First let's define the number of players " << endl;
         setConsoleColor(10);
-        cout << "[INIT] - How many Players (2-9)" << endl;
+        cout << "[INIT] - How many Players (2-9) ? " << endl;
         cin >> nb_player;
 
         game.setNbPlayer(nb_player);
