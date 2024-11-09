@@ -17,10 +17,12 @@ public:
     void setName(std::string);
     void setColor(int);
     void setCells(int);
+    void setBeginPlace(int coordonnees[1]);
 
     std::string getName();
     int getColor();
     std::pair<int, int> getCells();
+    int getBeginPlace();
 };
 
 

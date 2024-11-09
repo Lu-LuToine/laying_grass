@@ -43,4 +43,5 @@ pair<int, int> Player::getCells(){
 
 // TODO : une fonction set et get placement pour définir la position de départ du joueur
 
+
 Player::~Player() {}

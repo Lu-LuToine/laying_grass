@@ -25,7 +25,6 @@ void Colors::setColors() {
     this->colors["purple"] = 5;
     this->colors["orange"] = 6;
     this->colors["gray"] = 8;
-    this->colors["light-green"] = 10; //TODO Voir si on le garde car c'est la même couleur que l'init
     this->colors["cyan"] = 11;
     this->colors["white"] = 15;
 };
