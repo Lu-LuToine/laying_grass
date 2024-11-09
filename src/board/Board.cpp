@@ -32,6 +32,9 @@ void Board::setBoard(){
             this->boardStruct[i][j].setStatus('0');
         }
     }
+    setConsoleColor(10);
+    std::cout << "[INIT] - Board initialized successfully !" << std::endl;
+
 }
 
 

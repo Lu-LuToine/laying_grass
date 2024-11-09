@@ -16,6 +16,9 @@ int main()
     startGameName();
     startGameMenu();
 
+    setConsoleColor(32);
+    cout << "[INIT-MENU] - First let's define the number of players " << endl;
+    setConsoleColor(10);
     cout << "[INIT] - How many Players (2-9)" << endl;
     cin >> nb_player;
 
@@ -27,9 +30,9 @@ int main()
 
     Board Board1;
     Board1.setSize(game.getNbPlayer());
-    cout << Board1.getSize() << endl;
     Board1.setBoard();
-    Board1.getBoard();
+    //2
+    //Board1.getBoard();
 
     // [DEBUG] => check COLOR details
     Colors UsersColors;

@@ -55,9 +55,7 @@ int Colors::getColorCode(const std::string& colorName) const {
     } else {
         return 0;
     }
-
 }
-
 
 void Colors::removeColor(const std::string& color){
     this->colors.erase(color);

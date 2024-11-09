@@ -45,7 +45,7 @@ void startGameMenu(){
 
 void chooseStats(Player players[], int nb_player, Colors chooseColors){
     setConsoleColor(32);
-    cout << "[INIT-MENU] - First choose player's name and player's colors" << endl;
+    cout << "[INIT-MENU] - Now choose player's name and player's colors" << endl;
     setConsoleColor(10);
     for (int i = 0; i < nb_player; i++) {
         string name;
