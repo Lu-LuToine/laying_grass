@@ -18,15 +18,20 @@ int main()
         Game game;
         int nb_player;
 
-        // TODO : faire un do while pour que la saisie utilisateur soit bien entre 2 et 9
         setConsoleColor(32);
         cout << "[INIT-MENU] - First let's define the number of players " << endl;
         setConsoleColor(10);
         cout << "[INIT] - How many Players (2-9) ? " << endl;
         cin >> nb_player;
+        do{
+            setConsoleColor(64);
+            cout << "[ERROR] - Chose between 2 and 9 players" << endl;
+            cin >> nb_player;
+        } while ( 2 > nb_player or nb_player > 9);
 
         game.setNbPlayer(nb_player);
 
+        setConsoleColor(10);
         cout << "[INIT] - You chose " << game.getNbPlayer() << " Players" << endl;
 
         Player* players = new Player[nb_player]; // Set players
