@@ -2,6 +2,7 @@
 #define LAYING_GRASS_PLAYER_H
 
 #include <iostream>
+#include <list>
 #include <vector>
 
 class Player {
@@ -9,6 +10,7 @@ private:
     std::string name;
     int color;
     std::vector<std::pair<int, int>> cells; // => Using "pair" to use (x, y) position
+    std::list<int> beginPlace[2];
 
 public:
     Player();
@@ -17,12 +19,12 @@ public:
     void setName(std::string);
     void setColor(int);
     void setCells(int);
-    void setBeginPlace(int coordonnees[1]);
+    void setBeginPlace(int, int);
 
     std::string getName();
     int getColor();
     std::pair<int, int> getCells();
-    int getBeginPlace();
+    std::list<int> getBeginPlace();
 };
 
 
