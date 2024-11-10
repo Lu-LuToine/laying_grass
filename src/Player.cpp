@@ -43,10 +43,10 @@ pair<int, int> Player::getCells(){
 
 // TODO : une fonction set et get placement pour définir la position de départ du joueur
 void Player::setBeginPlace(int cos1, int cos2){
-    this->beginPlace[cos1, cos2];
+    this->beginPlace = std::make_pair(cos1, cos2);
 };
 
-std::list<int> Player::getBeginPlace() {
+std::pair<int, int> Player::getBeginPlace() {
     return this->beginPlace;
 };
 

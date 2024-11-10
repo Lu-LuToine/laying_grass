@@ -50,6 +50,27 @@ int main()
             setConsoleColor(7);
         }
 
+
+        //[DEBUG] => set and check player's begin place
+        // TODO Il va falloir le mettre dans une fonction a part après
+        for (int i = 0; i < nb_player; i++) {
+            int x;
+            int y;
+
+            setConsoleColor(players[i].getColor());
+            cout << "Player " << i+1 << endl;
+            setConsoleColor(10);
+            cout << "Choose your starting place x : " << endl;
+            cout << "*> ";
+            cin >> x;
+            cout << "Choose your starting place y : " << endl;
+            cout << "*> ";
+            cin >> y;
+            players[i].setBeginPlace(x, y);
+            cout << "Player " << i + 1 << " start at x " <<  players[i].getBeginPlace().first << " and y " << players[i].getBeginPlace().second << endl;
+        }
+
+
         delete[] players;
         system("pause");
         return 0;
