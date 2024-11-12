@@ -8,6 +8,7 @@ Player::Player() {
     this->name = "Player";
     this->color = 0;
     this->cells[1];
+    this->bonus[0];
 }
 
 // ===== SETTERS =====
@@ -22,6 +23,11 @@ void Player::setColor(int color){
 
 /*void Player::setCells(int cell){
     this->cells[0] = cell;
+};*/
+//TODO bonus joueur
+/*
+void Player::setBonus(std::map<std::string, int> bonus){
+    this->bonus.insert(vec.begin(),bonus);
 };*/
 
 // ===== GETTERS =====

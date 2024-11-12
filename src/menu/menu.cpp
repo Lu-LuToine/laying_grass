@@ -88,8 +88,9 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors){
         setConsoleColor(10);
         cout << "[INIT] - '" << color << "' is now removed from available colors"  << endl;
     }
-
 };
+
+
 
 //DEBUG MOI
 void DEBUGchooseStats(Player players[], int nb_player){

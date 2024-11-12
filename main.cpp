@@ -34,7 +34,7 @@ int main()
         setConsoleColor(10);
         cout << "[INIT] - You chose " << game.getNbPlayer() << " Players" << endl;
 
-        Player* players = new Player[nb_player]; // Set players
+        Player* players = new Player[game.getNbPlayer()]; // Set players
 
         Board Board1;
         Board1.setSize(game.getNbPlayer());
@@ -44,31 +44,32 @@ int main()
 
         Colors UsersColors;
 
-        chooseStats(players, nb_player, UsersColors);
+        chooseStats(players, game.getNbPlayer(), UsersColors);
 
 
         // [DEBUG] => check PLAYERS and colors
         // TODO : faire un affichage pour afficher chaque joueurs avec leur nom + le numéro de joueur (attention a faire i + 1 dans l'affichage)
-        for (int i = 0; i < nb_player; i++) {
+        for (int i = 0; i < game.getNbPlayer(); i++) {
             setConsoleColor(players[i].getColor());
             cout << "Hi i'm " << players[i].getName() << endl;
             setConsoleColor(7);
         }
 
+        Board1.getBoard();
 
         //[DEBUG] => set and check player's begin place
         // TODO Il va falloir le mettre dans une fonction a part après
-        for (int i = 0; i < nb_player; i++) {
+        for (int i = 0; i < game.getNbPlayer(); i++) {
             int x;
             int y;
 
             setConsoleColor(players[i].getColor());
             cout << "Player " << i+1 << endl;
             setConsoleColor(10);
-            cout << "Choose your starting place x : " << endl;
+            cout << "Choose your starting place x (a letter) : " << endl;
             cout << "*> ";
             cin >> x;
-            cout << "Choose your starting place y : " << endl;
+            cout << "Choose your starting place y (a number) : " << endl;
             cout << "*> ";
             cin >> y;
             players[i].setBeginPlace(x, y);
