@@ -20,3 +20,7 @@ Class: Game
 
 
 Class: Tiles
+- name
+- player
+- rotation
+- flip
