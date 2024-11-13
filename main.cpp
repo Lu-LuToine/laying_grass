@@ -57,25 +57,7 @@ int main()
 
         Board1.getBoard();
 
-        //[DEBUG] => set and check player's begin place
-        // TODO Il va falloir le mettre dans une fonction a part après
-        for (int i = 0; i < game.getNbPlayer(); i++) {
-            int x;
-            int y;
-
-            setConsoleColor(players[i].getColor());
-            cout << "Player " << i+1 << endl;
-            setConsoleColor(10);
-            cout << "Choose your starting place x (a letter) : " << endl;
-            cout << "*> ";
-            cin >> x;
-            cout << "Choose your starting place y (a number) : " << endl;
-            cout << "*> ";
-            cin >> y;
-            players[i].setBeginPlace(x, y);
-            cout << "Player " << i + 1 << " start at x " <<  players[i].getBeginPlace().first << " and y " << players[i].getBeginPlace().second << endl;
-        }
-
+        startingPlace(players, game);
 
         delete[] players;
         system("pause");

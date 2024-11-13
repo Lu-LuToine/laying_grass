@@ -62,6 +62,6 @@ Player::~Player() {};
 
 // ===== Functions =====
 void Player::deleteBonus(std::string deletedElement){
-    this->bonus.erase(find(this->bonus.begin(), this->bonus.end(), deletedElement))
+    this->bonus.erase(find(this->bonus.begin(), this->bonus.end(), deletedElement));
 };
 
