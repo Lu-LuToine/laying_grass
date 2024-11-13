@@ -24,3 +24,18 @@ Class: Tiles
 - player
 - rotation
 - flip
+
+Class: Bonus
+- Nom
+- Description
+
+
+
+# Valeurs
+
+- 1-9 -> joueurs
+- 10-12 -> Bonus
+  - Tile exchange -> 10
+  - Stone -> 11
+  - Robbery -> 12
+- Tuiles
