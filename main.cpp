@@ -22,11 +22,14 @@ int main()
         cout << "[INIT-MENU] - First let's define the number of players " << endl;
         setConsoleColor(10);
         cout << "[INIT] - How many Players (2-9) ? " << endl;
+        cout << "*> :";
         cin >> nb_player;
         if (2 > nb_player or nb_player > 9) {
             do {
                 setConsoleColor(64);
                 cout << "[ERROR] - Chose between 2 and 9 players" << endl;
+                setConsoleColor(10);
+                cout << "*> :";
                 cin >> nb_player;
             } while ( 2 > nb_player or nb_player > 9);
         }
@@ -46,16 +49,7 @@ int main()
 
         Colors UsersColors;
 
-        chooseStats(players, game.getNbPlayer(), UsersColors);
-
-
-        // [DEBUG] => check PLAYERS and colors
-        // TODO : faire un affichage pour afficher chaque joueurs avec leur nom + le numéro de joueur (attention a faire i + 1 dans l'affichage)
-        for (int i = 0; i < game.getNbPlayer(); i++) {
-            setConsoleColor(players[i].getColor());
-            cout << "Hi i'm " << players[i].getName() << endl;
-            setConsoleColor(7);
-        }
+        chooseStats(players, game.getNbPlayer(), UsersColors, game);
 
         Board1.getBoard();
 

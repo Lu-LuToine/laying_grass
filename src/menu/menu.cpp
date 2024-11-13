@@ -54,7 +54,7 @@ int startGameMenu(){
     }
 }
 
-void chooseStats(Player players[], int nb_player, Colors chooseColors){
+void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game){
     setConsoleColor(32);
     cout << "[INIT-MENU] - Now choose player's name and player's colors" << endl;
     setConsoleColor(10);
@@ -89,6 +89,13 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors){
         setConsoleColor(10);
         cout << "[INIT] - '" << color << "' is now removed from available colors"  << endl;
     }
+
+    // TODO : faire un affichage pour afficher chaque joueurs avec leur nom + le numéro de joueur (attention a faire i + 1 dans l'affichage)
+    for (int i = 0; i < game.getNbPlayer(); i++) {
+        setConsoleColor(players[i].getColor());
+        cout << "Hi i'm " << players[i].getName() << endl;
+        setConsoleColor(7);
+    }
 };
 
 
@@ -108,5 +115,4 @@ void DEBUGchooseStats(Player players[], int nb_player){
         cout << "Hi i'm " << players[i].getName() << endl;
         setConsoleColor(7);
     }
-
 };
