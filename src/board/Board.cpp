@@ -75,17 +75,17 @@ void Board::getBoard() {
 
         }
         for (const Cells& cell : row) {
-            if (cell.getStatus() == 0){ //Empty
-                std::cout << char(250) << ' ';
-            }
-            else if (cell.getStatus() == 1){
-                std::cout << '1' << ' ';
-            }
-            else if (cell.getStatus() == 2){
-                std::cout << "2" << ' ';
-            }  else {
-                // Optional: Handle unexpected cell status if needed
-                std::cout << '?' << ' ';
+            switch (cell.getStatus()) {
+                case 0:
+                    std::cout << char(250) << ' ';
+                    break;
+                case 1:
+                    std::cout << '1' << ' ';
+                    break;
+                case 2:
+                    std::cout << "2" << ' ';
+                    break;
+
             }
         }
         row_count++;

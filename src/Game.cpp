@@ -41,8 +41,6 @@ void startingPlace(Player players[], Game game, Board &board){
         cout << "Choose your starting place y (a number) : " << endl;
         cout << "*> ";
         cin >> y;
-        x -= 1;
-        y -= 1;
         players[i].setBeginPlace(x, y);
         cout << "Player " << i + 1 << " start at x " <<  players[i].getBeginPlace().first << " and y " << players[i].getBeginPlace().second << endl;
 
