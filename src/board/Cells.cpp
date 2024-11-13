@@ -1,12 +1,12 @@
 #include "../../include/board/Cells.h"
 
 Cells::Cells(){
-    this->status = '0';
+    this->status = 0;
 };
 
 // ===== SETTERS =====
 
-void Cells::setStatus(char newStatus){
+void Cells::setStatus(int newStatus){
     this->status = newStatus;
 };
 

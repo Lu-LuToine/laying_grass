@@ -29,7 +29,7 @@ void Board::setBoard(){
         row.reserve(this->size);
         for (int j = 0; j < this->size; j++) {
             this->boardStruct[i][j] = Cells();
-            this->boardStruct[i][j].setStatus('0');
+            this->boardStruct[i][j].setStatus(0);
         }
     }
     setConsoleColor(10);
@@ -74,14 +74,17 @@ void Board::getBoard() {
 
         }
         for (const Cells& cell : row) {
-            if (cell.getStatus() == '0'){ //Empty
+            if (cell.getStatus() == 0){ //Empty
                 std::cout << char(250) << ' ';
             }
-            else if (cell.getStatus() == '1'){
-                std::cout << "1" << ' ';
+            else if (cell.getStatus() == 1){
+                std::cout << '1' << ' ';
             }
-            else if (cell.getStatus() == '2'){
+            else if (cell.getStatus() == 2){
                 std::cout << "2" << ' ';
+            }  else {
+                // Optional: Handle unexpected cell status if needed
+                std::cout << '?' << ' ';
             }
         }
         row_count++;

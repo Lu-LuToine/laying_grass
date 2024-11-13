@@ -24,7 +24,7 @@ public:
 
 };
 
-void startingPlace(Player players[], Game game, Board board);
+void startingPlace(Player players[], Game game, Board &board);
 
 
 #endif //LAYING_GRASS_GAME_H

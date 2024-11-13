@@ -10,7 +10,7 @@ public:
     Cells();
     ~Cells();
 
-    void setStatus(char);
+    void setStatus(int);
     int getStatus() const;
 
 };
