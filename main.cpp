@@ -51,7 +51,7 @@ int main()
 
         chooseStats(players, game.getNbPlayer(), UsersColors, game);
 
-        Board1.getBoard();
+        //Board1.getBoard();
 
         startingPlace(players, game, Board1);
         Board1.getBoard();

@@ -67,7 +67,7 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game
         cin >> name;
 
         //TODO retirer le commentaire
-        /*
+
         do {
             setConsoleColor(10);
             cout << "[INIT] - Choose colors (you can see all available colors with : 'colors') : "<< endl;
@@ -77,7 +77,7 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game
                 chooseColors.getColorsInfos();
             }
         } while (chooseColors.getColorCode(color) == 0);
-        */
+
         players[i].setName(name);
         int colorCode = chooseColors.getColorCode(color);
         players[i].setColor(colorCode);
@@ -90,12 +90,17 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game
         cout << "[INIT] - '" << color << "' is now removed from available colors"  << endl;
     }
 
-    // TODO : faire un affichage pour afficher chaque joueurs avec leur nom + le numéro de joueur (attention a faire i + 1 dans l'affichage)
+    setConsoleColor(10);
+    cout << "[INIT] - Player's list" << endl;
     for (int i = 0; i < game.getNbPlayer(); i++) {
         setConsoleColor(players[i].getColor());
-        cout << "Hi i'm " << players[i].getName() << endl;
+        cout << "Player " << i+1 << " : " << players[i].getName() << endl;
         setConsoleColor(7);
     }
+
+    setConsoleColor(32);
+    cout << "[INIT-MENU] - Last step now choose your territory !" << endl;
+
 };
 
 
