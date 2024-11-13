@@ -8,7 +8,6 @@
 class Board : public Cells{
 private:
     int size;
-    std::vector<std::vector<Cells>> boardStruct;
 
 public:
     Board();
@@ -19,6 +18,7 @@ public:
     int getSize();
     void getBoard();
 
+    std::vector<std::vector<Cells>> boardStruct;
 };
 
 

@@ -3,6 +3,7 @@
 
 
 #include "Player.h"
+#include "board/Board.h"
 
 class Game {
 
@@ -23,7 +24,7 @@ public:
 
 };
 
-void startingPlace(Player players[], Game game);
+void startingPlace(Player players[], Game game, Board board);
 
 
 #endif //LAYING_GRASS_GAME_H

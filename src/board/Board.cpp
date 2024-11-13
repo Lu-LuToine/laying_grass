@@ -1,9 +1,9 @@
 #include "../../include/board/Board.h"
+#include "../../include/Colors.h"
 
 #include <iostream>
 #include <vector>
 
-#include "../../include/Colors.h"
 
 Board::Board(){
     this->size = 0;
@@ -34,7 +34,6 @@ void Board::setBoard(){
     }
     setConsoleColor(10);
     std::cout << "[INIT] - Board initialized successfully !" << std::endl;
-
 }
 
 
@@ -77,6 +76,12 @@ void Board::getBoard() {
         for (const Cells& cell : row) {
             if (cell.getStatus() == '0'){ //Empty
                 std::cout << char(250) << ' ';
+            }
+            else if (cell.getStatus() == '1'){
+                std::cout << "1" << ' ';
+            }
+            else if (cell.getStatus() == '2'){
+                std::cout << "2" << ' ';
             }
         }
         row_count++;

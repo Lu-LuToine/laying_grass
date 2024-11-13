@@ -57,7 +57,9 @@ int main()
 
         Board1.getBoard();
 
-        startingPlace(players, game);
+        startingPlace(players, game, Board1);
+        Board1.getBoard();
+
 
         delete[] players;
         system("pause");

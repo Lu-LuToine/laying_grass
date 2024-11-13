@@ -27,7 +27,7 @@ int Game::getNbPlayer(){
     return this->nbPlayer;
 };
 
-void startingPlace(Player players[], Game game){
+void startingPlace(Player players[], Game game, Board board){
     for (int i = 0; i < game.getNbPlayer(); i++) {
         int x;
         int y;
@@ -43,6 +43,10 @@ void startingPlace(Player players[], Game game){
         cin >> y;
         players[i].setBeginPlace(x, y);
         cout << "Player " << i + 1 << " start at x " <<  players[i].getBeginPlace().first << " and y " << players[i].getBeginPlace().second << endl;
+        board.boardStruct[x][y] = Cells();
+        board.boardStruct[x][y].setStatus(char(i + 1));
+        std::cout << "cocuou" << board.boardStruct[x][y].getStatus();
+        board.getBoard();
     }
 }
 
