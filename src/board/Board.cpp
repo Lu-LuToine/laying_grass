@@ -47,13 +47,14 @@ int Board::getSize(){
 
 void Board::getBoard() {
     setConsoleColor(7);
-    int row_count = 1;
+    int row_count = 0;
     int cols_count = -1;
 
     for (int i = 0; i < this->size+1; ++i) {
-        if (cols_count == -1){
+        if (cols_count == -1) {
             std::cout << "  " << "   ";
-        } else if (cols_count < 26){
+        }
+        else if (cols_count < 26){
             char lettersLine = 'A' + cols_count;
             std::cout << lettersLine << " ";
         } else {

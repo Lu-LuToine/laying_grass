@@ -23,12 +23,14 @@ int main()
         setConsoleColor(10);
         cout << "[INIT] - How many Players (2-9) ? " << endl;
         cin >> nb_player;
-        do{
-            setConsoleColor(64);
-            cout << "[ERROR] - Chose between 2 and 9 players" << endl;
-            cin >> nb_player;
-        } while ( 2 > nb_player or nb_player > 9);
-
+        if (2 > nb_player or nb_player > 9) {
+            do {
+                setConsoleColor(64);
+                cout << "[ERROR] - Chose between 2 and 9 players" << endl;
+                cin >> nb_player;
+            } while ( 2 > nb_player or nb_player > 9);
+        }
+        
         game.setNbPlayer(nb_player);
 
         setConsoleColor(10);
