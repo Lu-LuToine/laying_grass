@@ -4,7 +4,6 @@
 
 #include <unistd.h>
 #include <iostream>
-#include <map>
 
 using namespace std;
 
@@ -67,6 +66,8 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors){
         cout << "*> :";
         cin >> name;
 
+        //TODO retirer le commentaire
+        /*
         do {
             setConsoleColor(10);
             cout << "[INIT] - Choose colors (you can see all available colors with : 'colors') : "<< endl;
@@ -76,7 +77,7 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors){
                 chooseColors.getColorsInfos();
             }
         } while (chooseColors.getColorCode(color) == 0);
-
+        */
         players[i].setName(name);
         int colorCode = chooseColors.getColorCode(color);
         players[i].setColor(colorCode);

@@ -1,6 +1,7 @@
 #include "../include/Player.h"
 
 #include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -24,11 +25,10 @@ void Player::setColor(int color){
 /*void Player::setCells(int cell){
     this->cells[0] = cell;
 };*/
-//TODO bonus joueur
-/*
-void Player::setBonus(std::map<std::string, int> bonus){
-    this->bonus.insert(vec.begin(),bonus);
-};*/
+
+void Player::setBonus(string bonus){
+    this->bonus.insert(this->bonus.end(), bonus);
+};
 
 // ===== GETTERS =====
 
@@ -50,8 +50,18 @@ void Player::setBeginPlace(int cos1, int cos2){
     this->beginPlace = std::make_pair(cos1, cos2);
 };
 
-std::pair<int, int> Player::getBeginPlace() {
+pair<int, int> Player::getBeginPlace() {
     return this->beginPlace;
 };
 
-Player::~Player() {}
+vector<std::string> Player::getBonus(){
+    return this->bonus;
+};
+
+Player::~Player() {};
+
+// ===== Functions =====
+void Player::deleteBonus(std::string deletedElement){
+    this->bonus.erase(find(this->bonus.begin(), this->bonus.end(), deletedElement))
+};
+
