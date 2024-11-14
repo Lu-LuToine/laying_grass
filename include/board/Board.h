@@ -5,6 +5,8 @@
 
 #include <vector>
 
+#include "../Player.h"
+
 class Board : public Cells{
 private:
     int size;
@@ -16,7 +18,7 @@ public:
     void setSize(int);
     void setBoard();
     int getSize();
-    void getBoard();
+    void getBoard(Player players[]);
 
     std::vector<std::vector<Cells>> boardStruct;
 };

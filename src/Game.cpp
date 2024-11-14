@@ -47,7 +47,7 @@ void startingPlace(Player players[], Game game, Board &board){
         board.boardStruct[x][y] = Cells();
         board.boardStruct[x][y].setStatus(i + 1);
 
-        board.getBoard();
+        board.getBoard(players);
     }
 
 }
