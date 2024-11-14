@@ -26,5 +26,6 @@ public:
 
 void startingPlace(Player players[], Game game, Board &board);
 int convertLetterToCoos(char);
+void setBonuses();
 
 #endif //LAYING_GRASS_GAME_H

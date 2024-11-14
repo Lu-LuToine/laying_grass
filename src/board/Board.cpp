@@ -136,6 +136,4 @@ void Board::getBoard(Player players[]) {
     }
 }
 
-
-
 Board::~Board(){}
