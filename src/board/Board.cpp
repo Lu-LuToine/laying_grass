@@ -41,7 +41,6 @@ void Board::setBoard(){
 
 // ===== GETTERS =====
 
-
 int Board::getSize(){
     return this->size;
 }
