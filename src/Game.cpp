@@ -50,9 +50,29 @@ void startingPlace(Player players[], Game game, Board &board){
         cout << "Choose your starting place x (a number) : " << endl;
         cout << "*> ";
         cin >> x;
+
         cout << "Choose your starting place y (a letter) : " << endl;
         cout << "*> ";
         cin >> y;
+
+        if (board.getSize() <= 20 && (0 > x || x > 20 || 65 > int(y) || int(y) > 84) ){ // Check if x and y are correct
+            do {
+                setConsoleColor(79);
+                cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl;
+                setConsoleColor(10);
+                cout << "Choose your starting place x (a number) : " << endl;
+                cout << "*> ";
+                cin >> x;
+
+                setConsoleColor(79);
+                cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl;
+                setConsoleColor(10);
+                cout << "Choose your starting place y (a number) : " << endl;
+                cout << "*> ";
+                cin >> y;
+            } while (0 > x || x > 20 || 65 > int(y) || int(y) > 84);
+        }
+
         yco = convertLetterToCoos(y);
         players[i].setBeginPlace(x, yco);
         cout << "Player " << i + 1 << " start at x " <<  players[i].getBeginPlace().first << " and y " << players[i].getBeginPlace().second << endl;
