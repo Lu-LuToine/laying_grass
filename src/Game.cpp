@@ -47,7 +47,6 @@ void startingPlace(Player players[], Game game, Board &board){
         board.boardStruct[x][y] = Cells();
         board.boardStruct[x][y].setStatus(i + 1);
 
-        std::cout << "cocuou" << board.boardStruct[x][y].getStatus();
         board.getBoard();
     }
 
