@@ -58,7 +58,7 @@ int main()
         Board1.getBoard(players);
         Tiles tiles;
 
-        tiles.setForm();
+        tiles.setForm(game);
         tiles.debugDisplayAllForms();
 
         delete[] players;

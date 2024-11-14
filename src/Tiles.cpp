@@ -1,7 +1,12 @@
 #include "../include/Tiles.h"
 
+#include <cstdlib>
+#include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <random>
+
+#include "../include/Game.h"
 
 std::vector<Tiles> Tiles::allForms;
 
@@ -47,7 +52,7 @@ bool Tiles::getFlip() const{
     return this->flip;
 };
 
-void Tiles::setForm() {
+void Tiles::setForm(Game game) {
     int count = 97;
     allForms.clear();
 
@@ -71,7 +76,7 @@ void Tiles::setForm() {
             }
             file.close();
         } else {
-            std::cerr << "Erreur : impossible d'ouvrir le fichier " << filename << std::endl;
+            std::cerr << "Error - can't open this file : " << filename << std::endl;
         }
 
         Tiles tile;
@@ -79,6 +84,23 @@ void Tiles::setForm() {
         tile.form = shape;
         allForms.push_back(tile);
     }
+
+    // Shuffle allForms ; adapt to get different result every time restart game
+    std::random_device rd;
+    std::mt19937 generator(rd());
+
+    std::ranges::shuffle(allForms, generator);
+
+    // Set number of tiles to suit of number of players
+    int nbPlayers = game.getNbPlayer() ;
+    int nbTiles = round(10.67 * nbPlayers);
+    int nbTilesToRemove = allForms.size() - nbTiles;
+
+    for (int i = 0; i < nbTilesToRemove; ++i) {
+        allForms.pop_back();
+    }
+
+    std::cout << allForms.size() << std::endl;
 }
 
 void Tiles::debugDisplayAllForms() {

@@ -1,9 +1,13 @@
 #ifndef LAYING_GRASS_TILES_H
 #define LAYING_GRASS_TILES_H
 
+#include "Game.h"
+
+
 #include <iostream>
 #include <vector>
 #include <string>
+
 
 class Tiles {
 
@@ -34,7 +38,7 @@ public:
     bool getFlip() const;
 
     // Static functions
-    static void setForm();
+    static void setForm(Game game);
     static void debugDisplayAllForms();
 
     // Non-static function to get a specific form
