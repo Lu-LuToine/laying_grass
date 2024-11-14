@@ -3,6 +3,8 @@
 #include <fstream>
 #include <iostream>
 
+std::vector<Tiles> Tiles::allForms;
+
 Tiles::Tiles(){
     this->name =  "";
     this->player = 0;
@@ -16,7 +18,7 @@ void Tiles::setPlayer(int player){
     this->player = player;
 };
 
-int Tiles::getPlayer(){
+int Tiles::getPlayer() const{
     return this->player;
 };
 
@@ -24,7 +26,7 @@ void Tiles::setLetters() {
 
 }
 
-char Tiles::getLetters() {
+char Tiles::getLetters() const {
     return this->letters;
 }
 
@@ -33,7 +35,7 @@ void Tiles::setRotation(int rotation){
     this->rotation = rotation;
 };
 
-int Tiles::getRotation(){
+int Tiles::getRotation() const{
     return this->rotation;
 };
 
@@ -41,15 +43,15 @@ void Tiles::setFlip(bool flip){
     this->flip = flip;
 };
 
-bool Tiles::getFlip(){
+bool Tiles::getFlip() const{
     return this->flip;
 };
 
 void Tiles::setForm() {
-    int count = 96;
+    int count = 97;
     allForms.clear();
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 1; i < count; i++) {
         std::string filename = "../tiles/tile" + std::to_string(i) + ".txt";
         std::vector<std::vector<int>> shape;
         std::ifstream file(filename);
@@ -87,7 +89,7 @@ void Tiles::debugDisplayAllForms() {
         // Afficher la forme ligne par ligne
         for (const auto& row : tile.form) {
             for (int cell : row) {
-                std::cout << (cell == 1 ? '*' : '.');
+                std::cout << (cell == 1 ? char(219) : ' ');
             }
             std::cout << std::endl; // Passer à la ligne suivante
         }

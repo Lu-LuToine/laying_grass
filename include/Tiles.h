@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 class Tiles {
 
@@ -13,6 +14,7 @@ private:
     int rotation;
     bool flip;
     std::vector<std::vector<int>> form;
+
     static std::vector<Tiles> allForms;
 
 public:
@@ -20,22 +22,23 @@ public:
     ~Tiles();
 
     void setPlayer(int);
-    int getPlayer();
+    int getPlayer() const;
 
     void setLetters();
-    char getLetters();
+    char getLetters() const;
 
     void setRotation(int);
-    int getRotation();
+    int getRotation() const;
 
     void setFlip(bool);
-    bool getFlip();
+    bool getFlip() const;
 
-    void setForm();
+    // Static functions
+    static void setForm();
+    static void debugDisplayAllForms();
+
+    // Non-static function to get a specific form
     std::vector<std::vector<int>> getForm() const;
-    void debugDisplayAllForms();
-
 };
-
 
 #endif //LAYING_GRASS_TILES_H

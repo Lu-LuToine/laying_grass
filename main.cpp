@@ -3,6 +3,7 @@
 #include "include/Colors.h"
 #include "include/menu.h"
 #include "include/Game.h"
+#include "include/Tiles.h"
 
 #include <iostream>
 
@@ -33,7 +34,7 @@ int main()
                 cin >> nb_player;
             } while ( 2 > nb_player or nb_player > 9);
         }
-        
+
         game.setNbPlayer(nb_player);
 
         setConsoleColor(10);
@@ -55,7 +56,10 @@ int main()
 
         startingPlace(players, game, Board1);
         Board1.getBoard(players);
+        Tiles tiles;
 
+        tiles.setForm();
+        tiles.debugDisplayAllForms();
 
         delete[] players;
         system("pause");
