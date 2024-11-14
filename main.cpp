@@ -12,12 +12,14 @@ using namespace std;
 int main()
 {
     startGameName();
+    setBonuses();
 
     if (startGameMenu() == 3) {
         return 0;
     } else {
         Game game;
         int nb_player;
+
 
         setConsoleColor(32);
         cout << "[INIT-MENU] - First let's define the number of players " << endl;

@@ -1,10 +1,10 @@
 #include "../../include/board/Board.h"
 #include "../../include/Colors.h"
+#include "../../include/Player.h"
+
 
 #include <iostream>
 #include <vector>
-
-#include "../../include/Player.h"
 
 
 Board::Board(){

@@ -86,10 +86,10 @@ void Tiles::setForm(Game game) {
     }
 
     // Shuffle allForms ; adapt to get different result every time restart game
-    std::random_device rd;
-    std::mt19937 generator(rd());
+    srand(time(0));
+    std::default_random_engine engine(static_cast<unsigned int>(time(0)));
 
-    std::ranges::shuffle(allForms, generator);
+    std::shuffle(allForms.begin(), allForms.end(), engine);
 
     // Set number of tiles to suit of number of players
     int nbPlayers = game.getNbPlayer() ;

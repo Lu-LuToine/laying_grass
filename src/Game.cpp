@@ -3,6 +3,7 @@
 #include "../include/Player.h"
 
 #include <iostream>
+#include <random>
 
 using namespace std;
 
@@ -62,5 +63,13 @@ void startingPlace(Player players[], Game game, Board &board){
         board.getBoard(players);
     }
 }
+
+void setBonuses(){
+    srand(time(0));
+    int random = rand() % 101;
+
+    cout << "random" << random << endl;
+    //board.boardStruct[x][yco] = Cells();
+};
 
 Game::~Game(){};
