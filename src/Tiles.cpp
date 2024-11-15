@@ -126,9 +126,29 @@ void Tiles::displayQueueForm() const {
     for (size_t i = 0; i < formsToDisplay; ++i) {
         maxHeight = std::max(maxHeight, allForms[i].form.size());
     }
-
+    std::cout << "Current tile : " << std::endl;
     for (size_t row = 0; row < maxHeight; ++row) {
-        for (size_t i = 0; i < formsToDisplay; ++i) {
+        for (size_t i = 0; i < 1; ++i) {
+            const auto& tile = allForms[i];
+
+            if (row < tile.form.size()) {
+                for (int val : tile.form[row]) {
+                    std::cout << (val ? char(219) : ' ');
+                }
+            } else {
+                for (size_t col = 0; col < tile.form[0].size(); ++col) {
+                    std::cout << ' ';
+                }
+            }
+
+            std::cout << "  ";
+        }
+        std::cout << '\n';
+    }
+
+    std::cout << "Next tiles : " << std::endl;
+    for (size_t row = 0; row < maxHeight; ++row) {
+        for (size_t i = 1; i < formsToDisplay; ++i) {
             const auto& tile = allForms[i];
 
             if (row < tile.form.size()) {
