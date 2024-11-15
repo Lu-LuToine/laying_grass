@@ -4,6 +4,7 @@
 #include "include/menu.h"
 #include "include/Game.h"
 #include "include/Tiles.h"
+#include "include/Bonus.h"
 
 #include <iostream>
 
@@ -12,16 +13,26 @@ using namespace std;
 int main()
 {
     startGameName();
-    /*
-    setBonuses();
-    */
+
+    /*Bonus Initialization*/
+    Bonus TileExchange;
+    Bonus Stone;
+    Bonus Robbery;
+
+    TileExchange.setName("Tile Exchange");
+    TileExchange.setDescription("Exchange your current tile with a tile in the queue.");
+
+    Stone.setName("Stone");
+    Stone.setDescription("Place a stone and block your enemy.");
+
+    Robbery.setName("Robbery");
+    Robbery.setDescription("Choose a tile from your enemy territory, this tile becames part of your's territory.");
 
     if (startGameMenu() == 3) {
         return 0;
     } else {
         Game game;
         int nb_player;
-
 
         setConsoleColor(32);
         cout << "[INIT-MENU] - First let's define the number of players " << endl;
@@ -49,8 +60,11 @@ int main()
         Board Board1;
         Board1.setSize(game.getNbPlayer());
         Board1.setBoard();
+
+        setBonuses(Board1, game);
+
         //2
-        //Board1.getBoard();
+        Board1.getBoard(players);
 
         Colors UsersColors;
 

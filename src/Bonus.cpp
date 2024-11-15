@@ -7,7 +7,6 @@ using namespace std;
 Bonus::Bonus(){
     this->player = 0;
     this->name = "";
-    this->status = 0;
     this->description = "";
 };
 

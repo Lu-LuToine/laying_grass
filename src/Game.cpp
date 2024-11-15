@@ -1,6 +1,7 @@
 #include "../include/Game.h"
 #include "../include/Colors.h"
 #include "../include/Player.h"
+#include "../include/Bonus.h"
 
 #include <iostream>
 #include <random>
@@ -97,13 +98,32 @@ void startingPlace(Player players[], Game game, Board &board){
     }
 }
 
-void setBonuses(Board board){
-    srand(time(0));
-    int random = rand() % board.getSize() ;
-    int random2 = rand() % board.getSize() ;
+void setBonuses(Board &board, Game game){
 
-    board.boardStruct[random][random2] = Cells();
-    board.boardStruct[random][random2].setStatus(10);
+    double probaBonus[3];
+
+    probaBonus[0] = 1.5*game.getNbPlayer();
+    probaBonus[1] = 0.5*game.getNbPlayer();
+    probaBonus[2] = game.getNbPlayer();
+
+    srand(time(0));
+
+    for(int j = 0; j < sizeof(probaBonus); j++){
+        for(int i = 0; i < int(probaBonus[j]); i++){
+
+            do{
+                int random = rand() % board.getSize() ;
+                int random2 = rand() % board.getSize() ;
+
+                board.boardStruct[random][random2] = Cells();
+                board.boardStruct[random][random2].setStatus(j + 10);
+            } while (board.boardStruct[random][random2].getStatus() = 0)
+
+
+
+            cout << "bonus random" << random << random2 << " status" << board.boardStruct[random][random2].getStatus() << endl;
+        }
+    }
 
 };
 
