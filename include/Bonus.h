@@ -22,9 +22,6 @@ public:
     void setName(std::string);
     std::string getName();
 
-    void setStatus(int);
-    int getStatus();
-
     void setDescription(std::string);
     std::string getDescription();
 

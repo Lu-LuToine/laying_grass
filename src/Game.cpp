@@ -97,14 +97,14 @@ void startingPlace(Player players[], Game game, Board &board){
     }
 }
 
-/*void setBonuses(Board board){
+void setBonuses(Board board){
     srand(time(0));
     int random = rand() % board.getSize() ;
     int random2 = rand() % board.getSize() ;
 
     board.boardStruct[random][random2] = Cells();
-    board.boardStruct[random][random2].setStatus(1);
+    board.boardStruct[random][random2].setStatus(10);
 
-};*/
+};
 
 Game::~Game(){};

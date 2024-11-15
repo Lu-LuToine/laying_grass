@@ -28,14 +28,6 @@ std::string Bonus::getName(){
     return this->name;
 };
 
-void Bonus::setStatus(int status){
-    this->status = status;
-};
-
-int Bonus::getStatus(){
-    return this->status;
-};
-
 void Bonus::setDescription(string desc){
     this->description = desc;
 };
