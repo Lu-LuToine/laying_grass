@@ -4,12 +4,15 @@
 
 #include <iostream>
 #include <random>
+#include <vector>
 
 using namespace std;
 
+/*Game Class*/
 Game::Game(){
     this->turn = 0;
     this->nbPlayer = 0;
+    this->initBonus = {1, 2, 3};
 };
 
 void Game::setTurn(int turn){
@@ -28,6 +31,16 @@ int Game::getNbPlayer(){
     return this->nbPlayer;
 };
 
+std::vector<int> Game::getInitBonus(){
+    return this->initBonus;
+};
+
+std::vector<int> Game::removeInitBonus(int bonus){
+    this->initBonus.erase(find(this->initBonus.begin(), this->initBonus.end(), bonus));
+};
+
+
+/*Others Functions*/
 int convertLetterToCoos(char letter){
     int yco = int(letter);
     cout << "LETTER RESULT" << yco-65 << endl;
@@ -84,12 +97,19 @@ void startingPlace(Player players[], Game game, Board &board){
     }
 }
 
-void setBonuses(){
+void setBonuses(Board board){
     srand(time(0));
-    int random = rand() % 101;
+    if (board.getSize() <= 20){
+        int random = rand() % 20;
+        int random2 = rand() % 20;
+    } else {
+        int random = rand() % 30;
+        int random2 = rand() % 30;
+    }
 
-    cout << "random" << random << endl;
-    //board.boardStruct[x][yco] = Cells();
+    board.boardStruct[random][random2] = Cells();
+    board.boardStruct[random][random2].setStatus(1);
+
 };
 
 Game::~Game(){};
