@@ -119,6 +119,34 @@ void Tiles::debugDisplayAllForms() {
     }
 }
 
+void Tiles::displayQueueForm() const {
+    size_t maxHeight = 0;
+    size_t formsToDisplay = std::min(allForms.size(), size_t(5));
+
+    for (size_t i = 0; i < formsToDisplay; ++i) {
+        maxHeight = std::max(maxHeight, allForms[i].form.size());
+    }
+
+    for (size_t row = 0; row < maxHeight; ++row) {
+        for (size_t i = 0; i < formsToDisplay; ++i) {
+            const auto& tile = allForms[i];
+
+            if (row < tile.form.size()) {
+                for (int val : tile.form[row]) {
+                    std::cout << (val ? char(219) : ' ');
+                }
+            } else {
+                for (size_t col = 0; col < tile.form[0].size(); ++col) {
+                    std::cout << ' ';
+                }
+            }
+
+            std::cout << "  ";
+        }
+        std::cout << '\n';
+    }
+}
+
 
 
 std::vector<std::vector<int>> Tiles::getForm() const {

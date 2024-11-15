@@ -35,9 +35,9 @@ std::vector<int> Game::getInitBonus(){
     return this->initBonus;
 };
 
-std::vector<int> Game::removeInitBonus(int bonus){
+/*std::vector<int> Game::removeInitBonus(int bonus){
     this->initBonus.erase(find(this->initBonus.begin(), this->initBonus.end(), bonus));
-};
+};*/
 
 
 /*Others Functions*/
@@ -97,19 +97,14 @@ void startingPlace(Player players[], Game game, Board &board){
     }
 }
 
-void setBonuses(Board board){
+/*void setBonuses(Board board){
     srand(time(0));
-    if (board.getSize() <= 20){
-        int random = rand() % 20;
-        int random2 = rand() % 20;
-    } else {
-        int random = rand() % 30;
-        int random2 = rand() % 30;
-    }
+    int random = rand() % board.getSize() ;
+    int random2 = rand() % board.getSize() ;
 
     board.boardStruct[random][random2] = Cells();
     board.boardStruct[random][random2].setStatus(1);
 
-};
+};*/
 
 Game::~Game(){};

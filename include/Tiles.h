@@ -41,6 +41,8 @@ public:
     static void setForm(Game game);
     static void debugDisplayAllForms();
 
+    void displayQueueForm() const;
+
     // Non-static function to get a specific form
     std::vector<std::vector<int>> getForm() const;
 };

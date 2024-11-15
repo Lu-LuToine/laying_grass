@@ -12,7 +12,9 @@ using namespace std;
 int main()
 {
     startGameName();
+    /*
     setBonuses();
+    */
 
     if (startGameMenu() == 3) {
         return 0;
@@ -61,7 +63,7 @@ int main()
         Tiles tiles;
 
         tiles.setForm(game);
-        tiles.debugDisplayAllForms();
+        tiles.displayQueueForm();
 
         delete[] players;
         system("pause");
