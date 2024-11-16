@@ -170,35 +170,45 @@ void Tiles::displayCurrentTile() {
 bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int currentPlayer) {
     bool isCompatible = true;
 
-    for (int i = 0; i < this->form.size(); i++) {
-        for (int j = 0; j < this->form[i].size(); j++) {
-            if (this->form[i][j] == 1) {
-                int status = board.boardStruct[player_x + i][player_y + j].getStatus();
-                if (!(status == 0 || status == 10 || status == 11 || status == 12)) {
-                    isCompatible = false;
-                    std::cout << "Error : can't place at (" << player_x + i << ", " << player_y + j << ") invalid position." << std::endl;
-                    break;
-                }
-            }
-        }
-        if (!isCompatible) break;
-    }
+    int boardSize = board.getSize();
+    int formWidth = this->form.size();
+    int formHeight = this->form[0].size();
 
-    if (isCompatible) {
-        for (int i = 0; i < this->form.size(); i++) {
-            for (int j = 0; j < this->form[i].size(); j++) {
-                if (this->form[i][j] == 1) {
-                    board.boardStruct[player_x + i][player_y + j].setStatus(currentPlayer);
+    if (player_x < 0 || player_y < 0 || player_x + formWidth > boardSize || player_y + formHeight > boardSize) {
+        std::cout << "Error: out of range" << std::endl;
+        return false;
+    } else {
+        for (int i = 0; i < formWidth; i++) {
+            for (int j = 0; j < formHeight; j++) {
+                if (this->form[i][0] == 1) {
+                    int status = board.boardStruct[player_x + i][player_y + j].getStatus();
+
+                    if (status != 0 && status != 10 && status != 11 && status != 12) {
+                        isCompatible = false;
+                        std::cout << "Error: can't place at (" << player_x << ", " << player_y << ") invalid position." << std::endl;
+                        break;
+                    }
                 }
             }
+            if (!isCompatible) break;
         }
-        allForms.erase(allForms.begin());
-        this->player = currentPlayer;
-        std::cout << this->name << this->player << std::endl;
-        return true;
-    } else {
-        std::cout << "Current tile can't be placed here, nothing append, try another position" << std::endl;
-        return false;
+
+        if (isCompatible) {
+            for (int i = 0; i < formWidth; i++) {
+                for (int j = 0; j < formHeight; j++) {
+                    if (this->form[i][j] == 1) {
+                        board.boardStruct[player_x + i][player_y + j].setStatus(currentPlayer);
+                    }
+                }
+            }
+            allForms.erase(allForms.begin());
+            this->player = currentPlayer;
+            std::cout << this->name << this->player << std::endl;
+            return true;
+        } else {
+            std::cout << "Current tile can't be placed here, nothing happened, try another position" << std::endl;
+            return false;
+        }
     }
 }
 

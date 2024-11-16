@@ -89,7 +89,7 @@ int main()
         tiles.displayCurrentTile();
 
 
-        int test;
+        int test = 0;
         do {
             int placementx;
             int placementy;
