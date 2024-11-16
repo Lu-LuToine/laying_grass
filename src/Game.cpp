@@ -34,69 +34,11 @@ int Game::getNbPlayer(){
 
 
 /*Others Functions*/
-int convertLetterToCoos(char letter){
-    int yco = int(letter);
-    cout << "LETTER RESULT" << yco-65 << endl;
-    if (yco-65 > 26){
-        return yco-71;
-    } else {
-        return yco-65;
-    }
-};
 
-void startingPlace(Player players[], Game game, Board &board){
-    for (int i = 0; i < game.getNbPlayer(); i++) {
-        int x;
-        char y;
-        int yco;
-
-        setConsoleColor(players[i].getColor());
-        cout << "Player " << i+1 << endl;
-        setConsoleColor(10);
-        cout << "Choose your starting place x (a number) : " << endl;
-        cout << "*> ";
-        cin >> x;
-
-        cout << "Choose your starting place y (a letter) : " << endl;
-        cout << "*> ";
-        cin >> y;
-
-        if (board.getSize() <= 20 && (0 > x || x > 20 || 65 > int(y) || int(y) > 84) ){ // Check if x and y are correct
-            do {
-                setConsoleColor(79);
-                cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl;
-                setConsoleColor(10);
-                cout << "Choose your starting place x (a number) : " << endl;
-                cout << "*> ";
-                cin >> x;
-
-                setConsoleColor(79);
-                cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl;
-                setConsoleColor(10);
-                cout << "Choose your starting place y (a number) : " << endl;
-                cout << "*> ";
-                cin >> y;
-            } while (0 > x || x > 20 || 65 > int(y) || int(y) > 84);
-        }
-
-        yco = convertLetterToCoos(y);
-        players[i].setBeginPlace(x, yco);
-        cout << "Player " << i + 1 << " start at x " <<  players[i].getBeginPlace().first << " and y " << players[i].getBeginPlace().second << endl;
-
-        board.boardStruct[x][yco] = Cells();
-        board.boardStruct[x][yco].setStatus(i + 1);
-        players->setCells(x, yco);
-        players->getCells();
-
-        board.getBoard(players);
-    }
-}
-
-
-bool cardinateStatusCases(Board &board, int x, int y, bool bonus, int value) {
+bool cardinateStatusCases(Board &board, int x, int y, bool bonusOrStartingPlace, int value) {
     // Check for bonus
     // 4 corners
-    if (bonus) {
+    if (bonusOrStartingPlace) {
         if(x == 0 && y == 0) {
             if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
                 return true;
@@ -251,6 +193,67 @@ bool cardinateStatusCases(Board &board, int x, int y, bool bonus, int value) {
     return false;
 
 }
+
+int convertLetterToCoos(char letter){
+    int yco = int(letter);
+    cout << "LETTER RESULT" << yco-65 << endl;
+    if (yco-65 > 26){
+        return yco-71;
+    } else {
+        return yco-65;
+    }
+};
+
+void startingPlace(Player players[], Game game, Board &board){
+    for (int i = 0; i < game.getNbPlayer(); i++) {
+        int x;
+        char y;
+        int yco;
+
+        setConsoleColor(players[i].getColor());
+        cout << "Player " << i+1 << endl;
+        setConsoleColor(10);
+        cout << "Choose your starting place x (a number) : " << endl;
+        cout << "*> ";
+        cin >> x;
+
+        cout << "Choose your starting place y (a letter) : " << endl;
+        cout << "*> ";
+        cin >> y;
+
+        if (board.getSize() <= 20 && (0 > x || x > 20 || 65 > int(y) || int(y) > 84 || !cardinateStatusCases(board, x, yco, true, 0)) ){ // Check if x and y are correct
+            do {
+                setConsoleColor(79);
+                cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl;
+                setConsoleColor(10);
+                cout << "Choose your starting place x (a number) : " << endl;
+                cout << "*> ";
+                cin >> x;
+
+                setConsoleColor(79);
+                cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl;
+                setConsoleColor(10);
+                cout << "Choose your starting place y (a number) : " << endl;
+                cout << "*> ";
+                cin >> y;
+                yco = convertLetterToCoos(y);
+            } while (0 > x || x > 20 || 65 > int(y) || int(y) > 84 || !cardinateStatusCases(board, x, yco, true, 0));
+        }
+
+        yco = convertLetterToCoos(y);
+        players[i].setBeginPlace(x, yco);
+        cout << "Player " << i + 1 << " start at x " <<  players[i].getBeginPlace().first << " and y " << players[i].getBeginPlace().second << endl;
+
+        board.boardStruct[x][yco] = Cells();
+        board.boardStruct[x][yco].setStatus(i + 1);
+        players->setCells(x, yco);
+        players->getCells();
+
+        board.getBoard(players);
+    }
+}
+
+
 
 void setBonuses(Board &board, Game game){
 

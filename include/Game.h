@@ -25,7 +25,7 @@ public:
 
 };
 
-bool cardinateStatusCases(Board &board, int x, int y, bool bonus, int value);
+bool cardinateStatusCases(Board &board, int x, int y, bool bonusOrStartingPlace, int value);
 void startingPlace(Player players[], Game game, Board &board);
 int convertLetterToCoos(char);
 void setBonuses(Board &board, Game game);
