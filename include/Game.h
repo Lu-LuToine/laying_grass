@@ -23,9 +23,9 @@ public:
     void setNbPlayer(int);
     int getNbPlayer();
 
-    bool cardinateEmptyCases(Board &board, int x, int y);
 };
 
+bool cardinateStatusCases(Board &board, int x, int y, bool bonus, int value);
 void startingPlace(Player players[], Game game, Board &board);
 int convertLetterToCoos(char);
 void setBonuses(Board &board, Game game);

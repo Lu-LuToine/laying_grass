@@ -93,80 +93,160 @@ void startingPlace(Player players[], Game game, Board &board){
 }
 
 
-bool cardinateEmptyCases(Board &board, int x, int y) {
+bool cardinateStatusCases(Board &board, int x, int y, bool bonus, int value) {
+    // Check for bonus
     // 4 corners
-    if(x == 0 && y == 0) {
-        if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
-            return true;
+    if (bonus) {
+        if(x == 0 && y == 0) {
+            if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+                return true;
+            }
+        }
+
+        else if(x == 0 && y == board.getSize()) {
+            if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0) {
+                return true;
+            }
+        }
+
+        else if(y == 0 && x == board.getSize()) {
+            if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+                return true;
+            }
+
+        }
+
+        else if(x  == board.getSize() && y == board.getSize()) {
+            if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+                return true;
+            }
+
+        }
+
+
+        // -------------------------------------
+
+
+        // 4 lines
+
+        // Top line
+        else if(x == 0 && y < board.getSize() -1 ) {
+            if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+                return true;
+            }
+
+        }
+
+        // Left line
+        else if(y == 0 && x < board.getSize() -1 ) {
+            if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0) {
+                return true;
+            }
+
+        }
+
+        // Bottom line
+        else if(y == board.getSize() && x < board.getSize() -1 ) {
+            if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x - 1][y].getStatus() == 0) {
+                return true;
+            }
+
+        }
+
+        // Right line
+        else if(x == board.getSize() && y < board.getSize() -1 ) {
+            if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+                return true;
+            }
+        }
+
+        // -------------------------------------
+
+
+        // Default
+        else if(x > 0 && x < board.getSize() - 1 && y > 0 && y < board.getSize() - 1) {
+            if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+                return true;
+            }
+        }
+    // --------------------------------------------------------------------------
+    // Check for tiles
+    // 4 corners
+    } else {
+        if(x == 0 && y == 0) {
+            if (board.boardStruct[x][y + 1].getStatus() == value || board.boardStruct[x + 1][y].getStatus() == value) {
+                return true;
+            }
+        }
+
+        else if(x == 0 && y == board.getSize()) {
+            if (board.boardStruct[x - 1][y].getStatus() == value || board.boardStruct[x][y + 1].getStatus() == value) {
+                return true;
+            }
+        }
+
+        else if(y == 0 && x == board.getSize()) {
+            if (board.boardStruct[x][y - 1].getStatus() == value || board.boardStruct[x + 1][y].getStatus() == value) {
+                return true;
+            }
+
+        }
+
+        else if(x  == board.getSize() && y == board.getSize()) {
+            if (board.boardStruct[x - 1][y].getStatus() == value || board.boardStruct[x][y - 1].getStatus() == value) {
+                return true;
+            }
+
+        }
+
+
+        // -------------------------------------
+
+
+        // 4 lines
+
+        // Top line
+        else if(x == 0 && y < board.getSize() -1 ) {
+            if (board.boardStruct[x][y - 1].getStatus() == value || board.boardStruct[x][y + 1].getStatus() == value || board.boardStruct[x + 1][y].getStatus() == value) {
+                return true;
+            }
+
+        }
+
+        // Left line
+        else if(y == 0 && x < board.getSize() -1 ) {
+            if (board.boardStruct[x - 1][y].getStatus() == value || board.boardStruct[x + 1][y].getStatus() == value || board.boardStruct[x][y + 1].getStatus() == value) {
+                return true;
+            }
+
+        }
+
+        // Bottom line
+        else if(y == board.getSize() && x < board.getSize() -1 ) {
+            if (board.boardStruct[x][y - 1].getStatus() == value || board.boardStruct[x][y + 1].getStatus() == value || board.boardStruct[x - 1][y].getStatus() == value) {
+                return true;
+            }
+
+        }
+
+        // Right line
+        else if(x == board.getSize() && y < board.getSize() -1 ) {
+            if (board.boardStruct[x - 1][y].getStatus() == value || board.boardStruct[x + 1][y].getStatus() == value || board.boardStruct[x][y - 1].getStatus() == value) {
+                return true;
+            }
+        }
+
+        // -------------------------------------
+
+
+        // Default
+        else if(x > 0 && x < board.getSize() - 1 && y > 0 && y < board.getSize() - 1) {
+            if (board.boardStruct[x][y + 1].getStatus() == value || board.boardStruct[x + 1][y].getStatus() == value || board.boardStruct[x - 1][y].getStatus() == value || board.boardStruct[x][y - 1].getStatus() == value) {
+                return true;
+            }
         }
     }
 
-    else if(x == 0 && y == board.getSize()) {
-        if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0) {
-            return true;
-        }
-    }
-
-    else if(y == 0 && x == board.getSize()) {
-        if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
-            return true;
-        }
-
-    }
-
-    else if(x  == board.getSize() && y == board.getSize()) {
-        if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
-            return true;
-        }
-
-    }
-
-
-    // -------------------------------------
-
-
-    // 4 lines
-
-    // Top line
-    else if(x == 0 && y < board.getSize() -1 ) {
-        if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
-            return true;
-        }
-
-    }
-
-    // Left line
-    else if(y == 0 && x < board.getSize() -1 ) {
-        if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0) {
-            return true;
-        }
-
-    }
-
-    // Bottom line
-    else if(y == board.getSize() && x < board.getSize() -1 ) {
-        if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x - 1][y].getStatus() == 0) {
-            return true;
-        }
-
-    }
-
-    // Right line
-    else if(x == board.getSize() && y < board.getSize() -1 ) {
-        if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
-            return true;
-        }
-    }
-
-    // -------------------------------------
-
-
-    // Default
-    else if(x > 0 && x < board.getSize() - 1 && y > 0 && y < board.getSize() - 1) {
-        if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
-            return true;
-        }
-    }
 
     return false;
 
@@ -190,7 +270,7 @@ void setBonuses(Board &board, Game game){
             do {
                 random = rand() % board.getSize();
                 random2 = rand() % board.getSize();
-            } while (board.boardStruct[random][random2].getStatus() != 0 || random == 0 || random2 == 0 || random == board.getSize() || random2 == board.getSize() || !cardinateEmptyCases(board, random, random2));
+            } while (board.boardStruct[random][random2].getStatus() != 0 || random == 0 || random2 == 0 || random == board.getSize() || random2 == board.getSize() || !cardinateStatusCases(board, random, random2, true, 0));
 
             board.boardStruct[random][random2] = Cells();
             board.boardStruct[random][random2].setStatus(j + 10);

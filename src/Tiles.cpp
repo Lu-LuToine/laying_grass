@@ -190,7 +190,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
 
                     originalStatuses[i][j] = status;
 
-                    if (status != 0 && status != 10 && status != 11 && status != 12) {
+                    if (status != 0 && status != 10 && status != 11 && status != 12 || !cardinateStatusCases(board, player_x, player_y, false, currentPlayer)) {
                         isCompatible = false;
                         std::cout << "Error: can't place at (" << player_x << ", " << player_y << ") invalid position." << std::endl;
                         break;
