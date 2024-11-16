@@ -89,6 +89,25 @@ int main()
         tiles.displayCurrentTile();
 
 
+        int test;
+        do {
+            int placementx;
+            int placementy;
+
+            cout << "DEBUG - placement de la tuile : x :" << endl;
+            cin >> placementx;
+            cout << "DEBUG - placement de la tuile : y :" << endl;
+            cin >> placementy;
+
+            tiles.placeFormInBoard(Board1, placementx, placementy, 1 );
+            Board1.getBoard(players);
+            tiles.displayQueueForm();
+            test++;
+        }while(test !=3);
+
+
+
+
         delete[] players;
         system("pause");
         return 0;

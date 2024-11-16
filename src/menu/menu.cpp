@@ -67,7 +67,7 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game
         cin >> name;
 
         //TODO retirer le commentaire
-        /*
+
         do {
             setConsoleColor(10);
             cout << "[INIT] - Choose colors (you can see all available colors with : 'colors') : "<< endl;
@@ -76,7 +76,7 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game
             if (color == "colors"){
                 chooseColors.getColorsInfos();
             }
-        } while (chooseColors.getColorCode(color) == 0);*/
+        } while (chooseColors.getColorCode(color) == 0);
 
         players[i].setName(name);
         int colorCode = chooseColors.getColorCode(color);

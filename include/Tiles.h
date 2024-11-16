@@ -49,6 +49,9 @@ public:
     void rotateForm();
 
     void displayCurrentTile();
+
+    bool placeFormInBoard(Board &board, int player_x, int player_y, int currentPlayer);
+
     void displayQueueForm() ;
 
     std::vector<std::vector<int>> getForm() const;

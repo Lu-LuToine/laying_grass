@@ -97,8 +97,6 @@ void Tiles::setForm(Game game) {
     for (int i = 0; i < nbTilesToRemove; ++i) {
         allForms.pop_back();
     }
-
-    std::cout << allForms.size() << std::endl;
 }
 
 void Tiles::debugDisplayAllForms() {
@@ -106,12 +104,11 @@ void Tiles::debugDisplayAllForms() {
         const Tiles& tile = allForms[i];
         std::cout << "Tile " << i << " (" << tile.name << "):" << std::endl;
 
-        // Afficher la forme ligne par ligne
         for (const auto& row : tile.form) {
             for (int cell : row) {
                 std::cout << (cell == 1 ? char(219) : ' ');
             }
-            std::cout << std::endl; // Passer à la ligne suivante
+            std::cout << std::endl;
         }
         std::cout << "-------------------------" << std::endl;
     }
@@ -167,7 +164,45 @@ void Tiles::displayCurrentTile() {
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
+
+bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int currentPlayer) {
+    bool isCompatible = true;
+
+    for (int i = 0; i < this->form.size(); i++) {
+        for (int j = 0; j < this->form[i].size(); j++) {
+            if (this->form[i][j] == 1) {
+                int status = board.boardStruct[player_x + i][player_y + j].getStatus();
+                if (!(status == 0 || status == 10 || status == 11 || status == 12)) {
+                    isCompatible = false;
+                    std::cout << "Error : can't place at (" << player_x + i << ", " << player_y + j << ") invalid position." << std::endl;
+                    break;
+                }
+            }
+        }
+        if (!isCompatible) break;
+    }
+
+    if (isCompatible) {
+        for (int i = 0; i < this->form.size(); i++) {
+            for (int j = 0; j < this->form[i].size(); j++) {
+                if (this->form[i][j] == 1) {
+                    board.boardStruct[player_x + i][player_y + j].setStatus(currentPlayer);
+                }
+            }
+        }
+        allForms.erase(allForms.begin());
+        this->player = currentPlayer;
+        std::cout << this->name << this->player << std::endl;
+        return true;
+    } else {
+        std::cout << "Current tile can't be placed here, nothing append, try another position" << std::endl;
+        return false;
+    }
+}
+
+
 
 void Tiles::displayQueueForm() {
     size_t maxHeight = 0;
@@ -200,7 +235,7 @@ void Tiles::displayQueueForm() {
         std::cout << '\n';
     }
 
-    std::cout << "Next tiles : " << std::endl;
+    std::cout << "Next tiles - remain " << allForms.size() << " tiles : " << std::endl;
     for (size_t row = 0; row < maxHeight; ++row) {
         for (size_t i = 1; i < formsToDisplay; ++i) {
             const auto& tile = allForms[i];
