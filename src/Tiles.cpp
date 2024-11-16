@@ -28,13 +28,11 @@ int Tiles::getPlayer() const{
 };
 
 void Tiles::setLetters() {
-
 }
 
 char Tiles::getLetters() const {
     return this->letters;
 }
-
 
 void Tiles::setRotation(int rotation){
     this->rotation = rotation;
@@ -119,13 +117,69 @@ void Tiles::debugDisplayAllForms() {
     }
 }
 
-void Tiles::displayQueueForm() const {
+std::vector<std::vector<int>> Tiles::rotate90(const std::vector<std::vector<int>>& matrice) const {
+    if (matrice.empty() || matrice[0].empty()) {
+        std::cerr << "Error : can't rotate this tiles\n";
+        return matrice;
+    }
+
+    int rows = matrice.size();
+    int cols = matrice[0].size();
+    std::vector<std::vector<int>> rotated(cols, std::vector<int>(rows));
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            rotated[j][rows - i - 1] = matrice[i][j];
+        }
+    }
+    return rotated;
+}
+
+bool Tiles::isSameShape(const std::vector<std::vector<int>>& a, const std::vector<std::vector<int>>& b) const {
+    return a == b;
+}
+
+void Tiles::rotateForm() {
+    std::vector<std::vector<int>> currentForm = this->form;
+
+    std::vector<std::vector<int>> rotatedForm = rotate90(currentForm);
+
+    if (!isSameShape(currentForm, rotatedForm)) {
+        this->form = rotatedForm;
+    }
+}
+
+void Tiles::displayCurrentTile() {
+    size_t maxHeight = this->form.size();
+    size_t maxWidth = 0;
+
+    for (const auto& row : this->form) {
+        maxWidth = std::max(maxWidth, row.size());
+    }
+
+    for (size_t row = 0; row < maxHeight; ++row) {
+        for (size_t col = 0; col < maxWidth; ++col) {
+            if (col < this->form[row].size()) {
+                std::cout << (this->form[row][col] == 1 ? char(219) : ' ');
+            } else {
+                std::cout << ' ';
+            }
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Tiles::displayQueueForm() {
     size_t maxHeight = 0;
     size_t formsToDisplay = std::min(allForms.size(), size_t(5));
 
     for (size_t i = 0; i < formsToDisplay; ++i) {
         maxHeight = std::max(maxHeight, allForms[i].form.size());
     }
+    if (!allForms.empty()) {
+        this->form = allForms[0].form;
+    }
+
     std::cout << "Current tile : " << std::endl;
     for (size_t row = 0; row < maxHeight; ++row) {
         for (size_t i = 0; i < 1; ++i) {

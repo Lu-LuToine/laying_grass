@@ -39,11 +39,18 @@ public:
 
     // Static functions
     static void setForm(Game game);
+
     static void debugDisplayAllForms();
 
-    void displayQueueForm() const;
+    std::vector<std::vector<int>> rotate90(const std::vector<std::vector<int>> &matrice) const;
 
-    // Non-static function to get a specific form
+    bool isSameShape(const std::vector<std::vector<int>> &a, const std::vector<std::vector<int>> &b) const;
+
+    void rotateForm();
+
+    void displayCurrentTile();
+    void displayQueueForm() ;
+
     std::vector<std::vector<int>> getForm() const;
 };
 

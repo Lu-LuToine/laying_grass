@@ -79,6 +79,16 @@ int main()
         tiles.setForm(game);
         tiles.displayQueueForm();
 
+        tiles.rotateForm();
+        tiles.displayCurrentTile();
+        tiles.rotateForm();
+        tiles.displayCurrentTile();
+        tiles.rotateForm();
+        tiles.displayCurrentTile();
+        tiles.rotateForm();
+        tiles.displayCurrentTile();
+
+
         delete[] players;
         system("pause");
         return 0;

@@ -15,6 +15,7 @@ Game::Game(){
     this->nbPlayer = 0;
 };
 
+// TODO => attention pour finir le jeu on doit faire que 9 turn, on ne doit s pas poser toutes les tuiles !!
 void Game::setTurn(int turn){
     this->turn = turn;
 };
@@ -84,6 +85,8 @@ void startingPlace(Player players[], Game game, Board &board){
 
         board.boardStruct[x][yco] = Cells();
         board.boardStruct[x][yco].setStatus(i + 1);
+        players->setCells(x, yco);
+        players->getCells();
 
         board.getBoard(players);
     }
@@ -187,12 +190,11 @@ void setBonuses(Board &board, Game game){
             do {
                 random = rand() % board.getSize();
                 random2 = rand() % board.getSize();
-            } while (board.boardStruct[random][random2].getStatus() != 0 || !cardinateEmptyCases(board, random, random2));
+            } while (board.boardStruct[random][random2].getStatus() != 0 || random == 0 || random2 == 0 || random == board.getSize() || random2 == board.getSize() || !cardinateEmptyCases(board, random, random2));
 
             board.boardStruct[random][random2] = Cells();
             board.boardStruct[random][random2].setStatus(j + 10);
 
-            cout << "bonus random" << random << " " << random2 << " status" << board.boardStruct[random][random2].getStatus() << endl;
         }
     }
 

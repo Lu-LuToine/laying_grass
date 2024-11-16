@@ -19,14 +19,15 @@ public:
 
     void setName(std::string);
     void setColor(int);
-    void setCells(int);
+    void setCells(int x, int y);
     void setBeginPlace(int, int);
     void setBonus(std::string);
     void deleteBonus(std::string);
 
     std::string getName();
     int getColor();
-    std::pair<int, int> getCells();
+
+    std::vector<std::pair<int, int>> getCells();
     std::pair<int, int> getBeginPlace();
     std::vector<std::string> getBonus();
 };
