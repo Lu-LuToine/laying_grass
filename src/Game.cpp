@@ -190,13 +190,12 @@ void setBonuses(Board &board, Game game){
             do {
                 random = rand() % board.getSize();
                 random2 = rand() % board.getSize();
-            } while (board.boardStruct[random][random2].getStatus() != 0);
+            } while (board.boardStruct[random][random2].getStatus() != 0 || !cardinateEmptyCases(board, random, random2));
 
             board.boardStruct[random][random2] = Cells();
             board.boardStruct[random][random2].setStatus(j + 10);
 
             cout << "bonus random" << random << " " << random2 << " status" << board.boardStruct[random][random2].getStatus() << endl;
-            cout << "empty cases" << cardinateEmptyCases(board, random, random2) << endl;
         }
     }
 
