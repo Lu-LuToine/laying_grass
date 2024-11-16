@@ -167,7 +167,7 @@ void Tiles::displayCurrentTile() {
     std::cout << std::endl;
 }
 
-bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int currentPlayer) {
+bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int currentPlayer, Player player[]) {
     bool isCompatible = true;
 
     int boardSize = board.getSize();
@@ -180,10 +180,15 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
         std::cout << "Error: out of range" << std::endl;
         return false;
     } else {
+        // Keep original status
+        std::vector<std::vector<int>> originalStatuses(formWidth, std::vector<int>(formHeight));
+
         for (int i = 0; i < formWidth; i++) {
             for (int j = 0; j < formHeight; j++) {
-                if (this->form[i][0] == 1) {
+                if (this->form[i][j] == 1) {
                     int status = board.boardStruct[player_x + i][player_y + j].getStatus();
+
+                    originalStatuses[i][j] = status;
 
                     if (status != 0 && status != 10 && status != 11 && status != 12) {
                         isCompatible = false;
@@ -203,16 +208,43 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
                     }
                 }
             }
-            allForms.erase(allForms.begin());
-            this->player = currentPlayer;
-            std::cout << this->name << this->player << std::endl;
-            return true;
+
+            int user_confirm;
+            board.getBoard(player);
+
+            do {
+                std::cout << "Would you confirm your position? - 1 yes | 2 no" << std::endl;
+                std::cin >> user_confirm;
+            } while (user_confirm != 1 && user_confirm != 2);
+
+            if (user_confirm == 2) {
+                for (int i = 0; i < formWidth; i++) {
+                    for (int j = 0; j < formHeight; j++) {
+                        if (this->form[i][j] == 1) {
+                            board.boardStruct[player_x + i][player_y + j].setStatus(originalStatuses[i][j]);
+                        }
+                    }
+                }
+                std::cout << "Position cancelled. Try another position." << std::endl;
+                return false;
+            }
+
+            if (currentPlayer == 1) {
+                allForms.erase(allForms.begin());
+                this->player = currentPlayer;
+                std::cout << this->name << " " << this->player << std::endl;
+                return true;
+            } else {
+                return false;
+            }
+
         } else {
             std::cout << "Current tile can't be placed here, nothing happened, try another position" << std::endl;
             return false;
         }
     }
 }
+
 
 
 

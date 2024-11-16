@@ -50,7 +50,7 @@ public:
 
     void displayCurrentTile();
 
-    bool placeFormInBoard(Board &board, int player_x, int player_y, int currentPlayer);
+    bool placeFormInBoard(Board &board, int player_x, int player_y, int currentPlayer, Player player[]);
 
     void displayQueueForm() ;
 

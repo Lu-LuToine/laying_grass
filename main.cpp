@@ -99,7 +99,7 @@ int main()
             cout << "DEBUG - placement de la tuile : y :" << endl;
             cin >> placementy;
 
-            tiles.placeFormInBoard(Board1, placementx, placementy, 1 );
+            tiles.placeFormInBoard(Board1, placementx, placementy, 1, players);
             Board1.getBoard(players);
             tiles.displayQueueForm();
             test++;
