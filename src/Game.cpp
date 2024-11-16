@@ -35,10 +35,10 @@ int Game::getNbPlayer(){
 
 /*Others Functions*/
 
-bool cardinateStatusCases(Board &board, int x, int y, bool bonusOrStartingPlace, int value) {
+bool cardinateStatusCases(Board &board, int x, int y, bool checkEmptyCases, int value) {
     // Check for bonus
     // 4 corners
-    if (bonusOrStartingPlace) {
+    if (checkEmptyCases) {
         if(x == 0 && y == 0) {
             if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
                 return true;
@@ -221,7 +221,7 @@ void startingPlace(Player players[], Game game, Board &board){
         cout << "*> ";
         cin >> y;
 
-        if (board.getSize() <= 20 && (0 > x || x > 20 || 65 > int(y) || int(y) > 84 || !cardinateStatusCases(board, x, yco, true, 0)) ){ // Check if x and y are correct
+        if (board.getSize() < 20 && (0 > x || x > 20 || 65 > int(y) || int(y) > 84 || !cardinateStatusCases(board, x, yco, true, 0)) ){ // Check if x and y are correct
             do {
                 setConsoleColor(79);
                 cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl;

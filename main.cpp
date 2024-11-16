@@ -79,28 +79,43 @@ int main()
         tiles.setForm(game);
         tiles.displayQueueForm();
 
-        tiles.rotateForm();
-        tiles.displayCurrentTile();
-        tiles.rotateForm();
-        tiles.displayCurrentTile();
-        tiles.rotateForm();
-        tiles.displayCurrentTile();
-        tiles.rotateForm();
-        tiles.displayCurrentTile();
-
-
         int test = 0;
         do {
             int placementx;
             int placementy;
+            int action;
+            bool placed = false;
 
-            cout << "DEBUG - placement de la tuile : x :" << endl;
-            cin >> placementx;
-            cout << "DEBUG - placement de la tuile : y :" << endl;
-            cin >> placementy;
+            do {
+                cout << "DEBUG - What do ? :" << endl;
+                cout << "DEBUG - 0 Placement" << endl;
+                cout << "DEBUG - 1 Rotate" << endl;
+                cin >> action;
 
-            tiles.placeFormInBoard(Board1, placementx, placementy, 1, players);
-            Board1.getBoard(players);
+                switch (action) {
+                    case 0 :
+                        cout << "DEBUG - placement de la tuile : x :" << endl;
+                        cin >> placementx;
+                        cout << "DEBUG - placement de la tuile : y :" << endl;
+                        cin >> placementy;
+
+                        tiles.placeFormInBoard(Board1, placementx, placementy, 1, players);
+
+                        placed = true;
+                        Board1.getBoard(players);
+                        break;
+                    case 1:
+                        tiles.rotateForm();
+                        tiles.displayCurrentTile();
+                        break;
+                    default:
+                        cout << "kaka";
+                        break;;
+                }
+
+
+            } while (!placed);
+
             tiles.displayQueueForm();
             test++;
         }while(test !=3);

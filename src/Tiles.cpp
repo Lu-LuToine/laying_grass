@@ -174,9 +174,9 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
     int formWidth = this->form.size();
     int formHeight = this->form[0].size();
 
-    std::cout << formWidth << std::endl;
+    std::cout << formWidth << formHeight << std::endl;
 
-    if (player_x < 0 || player_y < 0 || player_x + formHeight > boardSize || player_y + formWidth > boardSize || player_x + formHeight < 0 || player_y + formWidth < 0) {
+    if (player_x < 0 || player_y < 0 || player_x + formHeight > boardSize || player_y + formWidth > boardSize || player_x - formHeight < 0 || player_y - formWidth < 0) {
         std::cout << "Error: out of range" << std::endl;
         return false;
     } else {
@@ -185,12 +185,12 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
 
         for (int i = 0; i < formWidth; i++) {
             for (int j = 0; j < formHeight; j++) {
-                if (this->form[i][j] == 1) {
+                if (this->form[i][0] == 1) {
                     int status = board.boardStruct[player_x + i][player_y + j].getStatus();
 
                     originalStatuses[i][j] = status;
 
-                    if (status != 0 && status != 10 && status != 11 && status != 12 || !cardinateStatusCases(board, player_x, player_y, false, currentPlayer)) {
+                    if (status != 0 && status != 10 && status != 11 && status != 12) {
                         isCompatible = false;
                         std::cout << "Error: can't place at (" << player_x << ", " << player_y << ") invalid position." << std::endl;
                         break;
