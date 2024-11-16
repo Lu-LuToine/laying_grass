@@ -174,7 +174,9 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
     int formWidth = this->form.size();
     int formHeight = this->form[0].size();
 
-    if (player_x < 0 || player_y < 0 || player_x + formWidth > boardSize || player_y + formHeight > boardSize) {
+    std::cout << formWidth << std::endl;
+
+    if (player_x < 0 || player_y < 0 || player_x + formHeight > boardSize || player_y + formWidth > boardSize || player_x + formHeight < 0 || player_y + formWidth < 0) {
         std::cout << "Error: out of range" << std::endl;
         return false;
     } else {
