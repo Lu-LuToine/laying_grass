@@ -90,9 +90,6 @@ void startingPlace(Player players[], Game game, Board &board){
 }
 
 
-
-// TODO : booléen regarder haut bas gaiche droite que des cases vides
-
 bool cardinateEmptyCases(Board &board, int x, int y) {
     // 4 corners
     if(x == 0 && y == 0) {
