@@ -13,7 +13,6 @@ using namespace std;
 Game::Game(){
     this->turn = 0;
     this->nbPlayer = 0;
-    this->initBonus = {1, 2, 3};
 };
 
 void Game::setTurn(int turn){
@@ -31,14 +30,6 @@ void Game::setNbPlayer(int nbPlayer){
 int Game::getNbPlayer(){
     return this->nbPlayer;
 };
-
-std::vector<int> Game::getInitBonus(){
-    return this->initBonus;
-};
-
-/*std::vector<int> Game::removeInitBonus(int bonus){
-    this->initBonus.erase(find(this->initBonus.begin(), this->initBonus.end(), bonus));
-};*/
 
 
 /*Others Functions*/
@@ -98,12 +89,95 @@ void startingPlace(Player players[], Game game, Board &board){
     }
 }
 
+
+
+// TODO : booléen regarder haut bas gaiche droite que des cases vides
+
+bool cardinateEmptyCases(Board &board, int x, int y) {
+    // 4 corners
+    if(x == 0 && y == 0) {
+        if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+            return true;
+        }
+    }
+
+    else if(x == 0 && y == board.getSize()) {
+        if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0) {
+            return true;
+        }
+    }
+
+    else if(y == 0 && x == board.getSize()) {
+        if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+            return true;
+        }
+
+    }
+
+    else if(x  == board.getSize() && y == board.getSize()) {
+        if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+            return true;
+        }
+
+    }
+
+
+    // -------------------------------------
+
+
+    // 4 lines
+
+    // Top line
+    else if(x == 0 && y < board.getSize() -1 ) {
+        if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+            return true;
+        }
+
+    }
+
+    // Left line
+    else if(y == 0 && x < board.getSize() -1 ) {
+        if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0) {
+            return true;
+        }
+
+    }
+
+    // Bottom line
+    else if(y == board.getSize() && x < board.getSize() -1 ) {
+        if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x - 1][y].getStatus() == 0) {
+            return true;
+        }
+
+    }
+
+    // Right line
+    else if(x == board.getSize() && y < board.getSize() -1 ) {
+        if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+            return true;
+        }
+    }
+
+    // -------------------------------------
+
+
+    // Default
+    else if(x > 0 && x < board.getSize() - 1 && y > 0 && y < board.getSize() - 1) {
+        if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+            return true;
+        }
+    }
+
+    return false;
+
+}
+
 void setBonuses(Board &board, Game game){
 
     double probaBonus[3];
 
-    probaBonus[0] = 1.5*game.getNbPlayer();
-    probaBonus[1] = 0.5*game.getNbPlayer();
+    probaBonus[0] = round(1.5*game.getNbPlayer());
+    probaBonus[1] = round(0.5*game.getNbPlayer());
     probaBonus[2] = game.getNbPlayer();
 
     srand(time(0));
@@ -111,17 +185,18 @@ void setBonuses(Board &board, Game game){
     for(int j = 0; j < sizeof(probaBonus); j++){
         for(int i = 0; i < int(probaBonus[j]); i++){
 
-            do{
-                int random = rand() % board.getSize() ;
-                int random2 = rand() % board.getSize() ;
+            int random, random2;
 
-                board.boardStruct[random][random2] = Cells();
-                board.boardStruct[random][random2].setStatus(j + 10);
-            } while (board.boardStruct[random][random2].getStatus() = 0)
+            do {
+                random = rand() % board.getSize();
+                random2 = rand() % board.getSize();
+            } while (board.boardStruct[random][random2].getStatus() != 0);
 
+            board.boardStruct[random][random2] = Cells();
+            board.boardStruct[random][random2].setStatus(j + 10);
 
-
-            cout << "bonus random" << random << random2 << " status" << board.boardStruct[random][random2].getStatus() << endl;
+            cout << "bonus random" << random << " " << random2 << " status" << board.boardStruct[random][random2].getStatus() << endl;
+            cout << "empty cases" << cardinateEmptyCases(board, random, random2) << endl;
         }
     }
 

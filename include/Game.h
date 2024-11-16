@@ -11,7 +11,6 @@ class Game {
 private:
     int turn;
     int nbPlayer;
-    std::vector<int> initBonus;
 
 public:
 
@@ -24,8 +23,7 @@ public:
     void setNbPlayer(int);
     int getNbPlayer();
 
-    std::vector<int> getInitBonus();
-    std::vector<int> removeInitBonus(int);
+    bool cardinateEmptyCases(Board &board, int x, int y);
 };
 
 void startingPlace(Player players[], Game game, Board &board);
