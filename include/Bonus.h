@@ -57,6 +57,4 @@ public:
     int getType();
 };
 
-void afficherTousLesBonus(Bonus bonus[], int tailleBonus);
-
 #endif //LAYING_GRASS_BONUS_H

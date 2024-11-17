@@ -50,7 +50,7 @@ bool Tiles::getFlip() const{
     return this->flip;
 };
 
-void Tiles::setForm(Game game) {
+void Tiles::setForm(Game &game) {
     int count = 97;
     allForms.clear();
 
@@ -171,12 +171,12 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
     bool isCompatible = true;
 
     int boardSize = board.getSize();
-    int formWidth = this->form[0].size();  // Width of the form (number of columns)
-    int formHeight = this->form.size();     // Height of the form (number of rows)
+    int formWidth = this->form[0].size();
+    int formHeight = this->form.size();
 
     std::cout << "Form dimensions: Width = " << formWidth << ", Height = " << formHeight << ", currentPlayer = " << currentPlayer << std::endl;
 
-    // Find the first '1' in the column y = 0 of the form
+    // Found first 1 on y =0
     int startRow = -1;
     for (int i = 0; i < formHeight; ++i) {
         if (this->form[i][0] == 1) {
@@ -185,37 +185,25 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
         }
     }
 
-    // If no 1 was found in the first column, the form is invalid
-    if (startRow == -1) {
-        std::cout << "Error: no 1 found in the first column of the form." << std::endl;
-        return false;
-    }
+    int adjustedX = player_x;
+    int adjustedY = player_y;
 
-    // Calculate the adjusted starting position
-    int adjustedX = player_x;  // We use player_x as the row for the first '1'
-    int adjustedY = player_y;  // We use player_y as the column for the first '1'
-
-    // Check if the form can be placed within the board boundaries
     if (adjustedX - startRow < 0 || adjustedY < 0 || (adjustedX - startRow) + formHeight > boardSize || adjustedY + formWidth > boardSize) {
         std::cout << "Error: out of range" << std::endl;
         return false;
     }
 
-    // Adjust starting row to align the first '1' at the given coordinates
     adjustedX -= startRow;
 
-    // Keep original status of cells for rollback in case of cancellation
     std::vector<std::vector<int>> originalStatuses(formHeight, std::vector<int>(formWidth));
 
-    // Check if the form can be placed on the board
+    // Check status
     for (int i = 0; i < formHeight; i++) {
         for (int j = 0; j < formWidth; j++) {
-            // Check only if the current cell in the form is 1
             if (this->form[i][j] == 1) {
                 int status = board.boardStruct[adjustedX + i][adjustedY + j].getStatus();
                 originalStatuses[i][j] = status;
 
-                // Check if the placement is valid
                 if (status != 0 && status != 10 && status != 11 && status != 12) {
                     isCompatible = false;
                     std::cout << "Error: can't place at (" << adjustedX + i << ", " << adjustedY + j << ") invalid position." << std::endl;
@@ -227,20 +215,83 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
     }
 
     if (isCompatible) {
-        // Place the form on the board
+        // Set temporary status to 14 in order to check cardinate point if is current player territory
         for (int i = 0; i < formHeight; i++) {
             for (int j = 0; j < formWidth; j++) {
                 if (this->form[i][j] == 1) {
-                    // Corrected placement logic here
-                    board.boardStruct[adjustedX + i][adjustedY + j].setStatus(currentPlayer);
-                    std::cout << "Placing tile at: (" << (adjustedX + i) << ", " << (adjustedY + j) << ")" << std::endl;
+                    board.boardStruct[adjustedX + i][adjustedY + j].setStatus(14); // Temporary status
                 }
             }
         }
 
-        // Display the board and ask for confirmation
-        board.getBoard(player);
+        bool isAdjacentToPlayer = false;
 
+        for (int i = 0; i < formHeight; i++) {
+            for (int j = 0; j < formWidth; j++) {
+                if (this->form[i][j] == 1) {
+                    int nx = adjustedX + i;
+                    int ny = adjustedY + j;
+
+                    // Check if next to player's cell
+                    if (cardinateStatusCases(board, nx, ny, false, currentPlayer)) {
+                        isAdjacentToPlayer = true;
+                        break;
+                    }
+                }
+                if (isAdjacentToPlayer) break;
+            }
+            if (isAdjacentToPlayer) break;
+        }
+
+
+        if (!isAdjacentToPlayer) {
+            std::cout << "Error: no adjacent tile of current player found. The form can't be placed." << std::endl;
+
+            // Restore original status if failed
+            for (int i = 0; i < formHeight; i++) {
+                for (int j = 0; j < formWidth; j++) {
+                    if (this->form[i][j] == 1) {
+                        board.boardStruct[adjustedX + i][adjustedY + j].setStatus(originalStatuses[i][j]);
+                    }
+                }
+            }
+            return false;
+        }
+
+        for (int i = 0; i < formHeight; i++) {
+            for (int j = 0; j < formWidth; j++) {
+                if (this->form[i][j] == 1) {
+                    // Set current player status if success
+                    if (board.boardStruct[adjustedX + i][adjustedY + j].getStatus() == 14) {
+                        board.boardStruct[adjustedX + i][adjustedY + j].setStatus(currentPlayer);
+                    }
+                }
+            }
+        }
+
+        // Check cardinate point
+        for (int i = 0; i < formHeight; i++) {
+            for (int j = 0; j < formWidth; j++) {
+                if (this->form[i][j] == 1) {
+                    bool checkResult = cardinateStatusCases(board, adjustedX + i, adjustedY + j, false, currentPlayer);
+                    if (!checkResult) {
+                        // If failed => rollback
+                        for (int rollbackI = 0; rollbackI < formHeight; rollbackI++) {
+                            for (int rollbackJ = 0; rollbackJ < formWidth; rollbackJ++) {
+                                if (this->form[rollbackI][rollbackJ] == 1) {
+                                    board.boardStruct[adjustedX + rollbackI][adjustedY + rollbackJ].setStatus(originalStatuses[rollbackI][rollbackJ]);
+                                }
+                            }
+                        }
+                        std::cout << "Error: condition failed for the case at (" << adjustedX + i << ", " << adjustedY + j << "). Position rolled back." << std::endl;
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // Confirm position
+        board.getBoard(player);
         int user_confirm;
         do {
             std::cout << "Would you confirm your position? - 1 yes | 2 no" << std::endl;
@@ -248,7 +299,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
         } while (user_confirm != 1 && user_confirm != 2);
 
         if (user_confirm == 2) {
-            // Rollback changes if the user cancels
+            // Rollback if refused
             for (int i = 0; i < formHeight; i++) {
                 for (int j = 0; j < formWidth; j++) {
                     if (this->form[i][j] == 1) {
@@ -260,21 +311,20 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
             return false;
         }
 
-        // Confirm placement
         if (user_confirm == 1) {
             allForms.erase(allForms.begin());
             this->player = currentPlayer;
             std::cout << this->name << " " << this->player << std::endl;
             return true;
-        } else {
-            return false;
         }
-
     } else {
         std::cout << "Current tile can't be placed here, nothing happened, try another position" << std::endl;
         return false;
     }
+
+    return false;
 }
+
 
 
 void Tiles::displayQueueForm() {

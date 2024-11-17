@@ -73,61 +73,7 @@ int main()
         tiles.setForm(game);
         tiles.displayQueueForm();
 
-        int test = 0;
-        int currentPlayer = 1; // Index pour suivre le joueur actuel
-
-        do {
-            int placementx;
-            int placementy;
-            int action;
-            bool placed = false;
-
-
-                for (int i = 0; i < nb_player; i++) {
-                    do {
-                    cout << "PLAYER " << i + 1 << endl;  // Affiche le joueur actuel (ajoute 1 pour un affichage humain)
-                    cout << "DEBUG - What do ? :" << endl;
-                    cout << "DEBUG - 0 Placement" << endl;
-                    cout << "DEBUG - 1 Rotate" << endl;
-                    cin >> action;
-
-                    switch (action) {
-                        case 0:
-                            cout << "DEBUG - placement de la tuile : x :" << endl;
-                        cin >> placementx;
-                        cout << "DEBUG - placement de la tuile : y :" << endl;
-                        cin >> placementy;
-
-                        tiles.placeFormInBoard(Board1, placementx, placementy, i+1, players);
-
-                        placed = true;
-                        Board1.getBoard(players);
-                        break;
-
-                        case 1:
-                            tiles.rotateForm();
-                        tiles.displayCurrentTile();
-                        break;
-
-                        default:
-                            cout << "[ERROR] - Action non reconnue" << endl;
-                        break;
-
-                    }
-                    bonusCaptured(game, Board1, bonus, totalBonuses);
-                    tiles.displayQueueForm();
-                }while (!placed);
-            }
-
-                afficherTousLesBonus(bonus, totalBonuses);
-
-
-                test++;
-
-
-        } while (test != 3);
-
-
+        gameLoop(game, Board1, bonus, players, tiles, totalBonuses);
         delete[] players;
         delete[] bonus;
         system("pause");
