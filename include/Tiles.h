@@ -55,6 +55,8 @@ public:
 
     void displayQueueForm() ;
 
+    void tileExchange();
+
     std::vector<std::vector<int>> getForm() const;
 };
 

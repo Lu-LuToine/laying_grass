@@ -9,7 +9,7 @@ Player::Player() {
     this->name = "Player";
     this->color = 0;
     this->cells = {};
-    this->bonus[0];
+    this->bonus = {};
 }
 
 // ===== SETTERS =====
@@ -26,7 +26,7 @@ void Player::setCells(int x, int y){
     this->cells.emplace_back(x, y);
 };
 
-void Player::setBonus(string bonus){
+void Player::setBonus(int bonus){
     this->bonus.insert(this->bonus.end(), bonus);
 };
 
@@ -59,7 +59,7 @@ pair<int, int> Player::getBeginPlace() {
     return this->beginPlace;
 };
 
-vector<std::string> Player::getBonus(){
+vector<int> Player::getBonus(){
     return this->bonus;
 };
 
@@ -67,7 +67,8 @@ Player::~Player() {};
 
 // ===== Functions =====
 
+/*
 void Player::deleteBonus(std::string deletedElement){
     this->bonus.erase(find(this->bonus.begin(), this->bonus.end(), deletedElement));
-};
+};*/
 

@@ -254,11 +254,12 @@ void startingPlace(Player players[], Game game, Board &board){
     }
 }
 
-void bonusCaptured(Game &game, Board &board, Bonus bonus[], int bonusSize) {
+void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize) {
     for(int i = 0; i < bonusSize; i++) {
         for(int k = 1; k < game.getNbPlayer(); k++) {
             if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k)) {
                 bonus[i].setPlayer(k);
+                players[k].setBonus(bonus[i].getType());
             }
         }
     }
@@ -280,6 +281,8 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                 cout << "DEBUG - What do ? :" << endl;
                 cout << "DEBUG - 0 Placement" << endl;
                 cout << "DEBUG - 1 Rotate" << endl;
+                cout << "DEBUG - 2 Flip" << endl;
+                cout << "DEBUG - 3 Power-Up" << endl;
                 cin >> action;
 
                 switch (action) {
@@ -292,7 +295,7 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                         // If the placement is valid, end the turn
                         if (tiles.placeFormInBoard(board, playerX, playerY, i + 1, players)) {
                             board.getBoard(players);
-                            bonusCaptured(game, board, bonus, totalBonuses);
+                            bonusCaptured(game, board, bonus, players, totalBonuses);
                             for (int j = 0; j < totalBonuses; j++) {
                                 bonus[j].debug();
                             }
@@ -306,8 +309,28 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                     case 1:
                         tiles.rotateForm();
                         tiles.displayCurrentTile();
-                        // Do not end the turn if the action is a rotation
                         break;
+
+                    case 2:
+                        break;
+
+                    //TODO bonus tile exchange
+                    case 3:
+                        cout << "You have" << size(players[i].getBonus()) << "Power-Up" << endl;
+                        for (int bonusCount = 0; bonusCount < size(players[i].getBonus()); i++){
+                            cout << i << " : " << players[i].getBonus()[bonusCount];
+                        }
+
+                        int powerUp;
+
+                        cout << "Select a bonus : ";
+                        cin >> powerUp;
+
+                        if (powerUp < size(players[i].getBonus())){
+                            cout << "bonus";
+                        } else {
+                            cout << "[ERROR] - Action non reconnue";
+                        }
 
                     default:
                         cout << "[ERROR] - Action non reconnue" << endl;

@@ -136,6 +136,9 @@ void Board::getBoard(Player players[]) {
                 case 12:
                     std::cout << "R" << ' ';
                     break;
+                case 13:
+                    std::cout << char(254) << ' ';
+                    break;
                 default:
                     setConsoleColor(7);
                     break;
@@ -145,7 +148,5 @@ void Board::getBoard(Player players[]) {
         std::cout << std::endl;
     }
 }
-
-
 
 Board::~Board(){}

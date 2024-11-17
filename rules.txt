@@ -78,3 +78,6 @@ But you can place it a 1*1 void cell between it.
 2 - The game
 
 A player can
+
+
+■

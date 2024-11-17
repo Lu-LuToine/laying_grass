@@ -10,7 +10,7 @@ private:
     int color;
     std::vector<std::pair<int, int>> cells; // => Using "pair" to use (x, y) position
     std::pair<int, int> beginPlace;
-    std::vector<std::string> bonus;
+    std::vector<int> bonus;
 
 public:
     Player();
@@ -20,7 +20,7 @@ public:
     void setColor(int);
     void setCells(int x, int y);
     void setBeginPlace(int, int);
-    void setBonus(std::string);
+    void setBonus(int);
     void deleteBonus(std::string);
 
     std::string getName();
@@ -28,7 +28,7 @@ public:
 
     std::vector<std::pair<int, int>> getCells();
     std::pair<int, int> getBeginPlace();
-    std::vector<std::string> getBonus();
+    std::vector<int> getBonus();
 };
 
 

@@ -33,7 +33,7 @@ public:
 bool cardinateStatusCases(Board &board, int x, int y, bool allAndCases, int value);
 void startingPlace(Player players[], Game game, Board &board);
 int convertLetterToCoos(char);
-void bonusCaptured(Game &game, Board &board, Bonus bonus[], int bonusSize);
+void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize);
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses);
 
 

@@ -378,8 +378,16 @@ void Tiles::displayQueueForm() {
         std::cout << '\n';
     }
 }
+//TODO bonus tile exchange
+void Tiles::tileExchange(){
 
+    int tileToExchange;
 
+    std::cout << "Choose a form to exchange : ";
+    std::cin >> tileToExchange;
+
+    allForms[tileToExchange];
+}
 
 std::vector<std::vector<int>> Tiles::getForm() const {
     return this->form;
@@ -387,4 +395,3 @@ std::vector<std::vector<int>> Tiles::getForm() const {
 
 Tiles::~Tiles(){
 };
-
