@@ -11,7 +11,7 @@ using namespace std;
 
 /*Game Class*/
 Game::Game(){
-    this->turn = 0;
+    this->turn = 1;
     this->nbPlayer = 0;
 };
 
@@ -263,5 +263,65 @@ void bonusCaptured(Game &game, Board &board, Bonus bonus[], int bonusSize) {
         }
     }
 }
+
+void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses) {
+    // Loop until the desired number of turns has been reached
+    while (game.getTurn() < 9) {
+        // Each player plays during the same turn
+        for (int i = 0; i < game.getNbPlayer(); i++) {
+            int playerX;
+            int playerY;
+            int action;
+
+            bool turnComplete = false;
+
+            while (!turnComplete) {
+                cout << "PLAYER " << i + 1 << endl;
+                cout << "DEBUG - What do ? :" << endl;
+                cout << "DEBUG - 0 Placement" << endl;
+                cout << "DEBUG - 1 Rotate" << endl;
+                cin >> action;
+
+                switch (action) {
+                    case 0:
+                        cout << "DEBUG - placement de la tuile : x :" << endl;
+                        cin >> playerX;
+                        cout << "DEBUG - placement de la tuile : y :" << endl;
+                        cin >> playerY;
+
+                        // If the placement is valid, end the turn
+                        if (tiles.placeFormInBoard(board, playerX, playerY, i + 1, players)) {
+                            board.getBoard(players);
+                            bonusCaptured(game, board, bonus, totalBonuses);
+                            for (int j = 0; j < totalBonuses; j++) {
+                                bonus[j].debug();
+                            }
+                            tiles.displayQueueForm();
+                            turnComplete = true;  // End the current player's turn
+                        } else {
+                            cout << "[ERROR] - Invalid placement, try again." << endl;
+                        }
+                        break;
+
+                    case 1:
+                        tiles.rotateForm();
+                        tiles.displayCurrentTile();
+                        // Do not end the turn if the action is a rotation
+                        break;
+
+                    default:
+                        cout << "[ERROR] - Action non reconnue" << endl;
+                        break;
+                }
+            }
+        }
+
+        // Increment the turn counter after all players have played
+        game.setTurn(game.getTurn() + 1);
+        cout << "Turn " << game.getTurn() << endl;
+    }
+}
+
+
 
 Game::~Game(){};

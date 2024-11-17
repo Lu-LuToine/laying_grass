@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 
+class Game;
 
 class Tiles {
 
@@ -38,7 +39,7 @@ public:
     bool getFlip() const;
 
     // Static functions
-    static void setForm(Game game);
+    static void setForm(Game &game);
 
     static void debugDisplayAllForms();
 
