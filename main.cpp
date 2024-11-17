@@ -74,7 +74,6 @@ int main()
         tiles.displayQueueForm();
 
         int test = 0;
-        int currentPlayer = 1; // Index pour suivre le joueur actuel
 
         do {
             int placementx;
@@ -115,12 +114,12 @@ int main()
 
                     }
                     bonusCaptured(game, Board1, bonus, totalBonuses);
+                    for (int j = 0; j < totalBonuses; j++) {
+                         bonus[j].debug();
+                    }
                     tiles.displayQueueForm();
                 }while (!placed);
             }
-
-                afficherTousLesBonus(bonus, totalBonuses);
-
 
                 test++;
 

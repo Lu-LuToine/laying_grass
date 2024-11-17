@@ -26,10 +26,10 @@ void Bonus::setBonuses(Board &board, Game &game, Bonus bonus[]){
     probaBonus[2] = game.getNbPlayer();
 
     srand(time(0));
+    int k = 0;
 
     for(int j = 0; j < sizeof(probaBonus); j++){
         for(int i = 0; i < int(probaBonus[j]); i++){
-            int k = 0;
 
             int random, random2;
 
@@ -76,13 +76,6 @@ void Bonus::debug() {
     std::cout << "Utiliser immediatement: " << this->getUseNow() << std::endl;
     std::cout << "--------------------------------" << std::endl;
 }
-
-void afficherTousLesBonus(Bonus bonus[], int tailleBonus) {
-    for (int i = 0; i < tailleBonus; i++) {
-        bonus[i].debug();  // Appel à la méthode debug() pour chaque objet Bonus
-    }
-}
-
 
 void Bonus::setPosition(int x, int y) {
     this->position = std::make_pair(x, y);
