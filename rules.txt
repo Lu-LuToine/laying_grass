@@ -1,0 +1,50 @@
+██████╗ ██╗   ██╗██╗       ███████╗███████╗
+██╔══██╗██║   ██║██║       ██╔════╝██╔════╝
+██████╔╝██║   ██║██║       █████╗  ███████╗
+██╔══██╗██║   ██║██║       ██╔══╝  ╚════██║
+██║  ██║╚██████╔╝███████╗███████╗███████║
+╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝╚══════╝
+
+Welcome to laying grass !
+
+This game can be played between 2 and 9 players.
+The goal is simple, expand your territory.
+
+1 - Game Initialization
+
+First you'll have to chose the number of players between 2 and 9.
+The game board size will adapt among the player number.
+
+-> From 2 to 4 players the board size will be 20*20 cells.
+-> From 5 to 9 players the board size will be 30*30 cells.
+
+After that, each player will choose a username and a color (you'll can see the color list by using the keyword "colors"
+while you're in the color selection).
+
+Afterwards each player will choose an initial position on the board.
+
+Example of the board 20*20.
+
+     A B C D E F G H I J K L M N O P Q R S T
+00 | · · · · · · · · · · · · · · · · · · · ·
+01 | · · · · · · · · · · · · · · · · · · · ·
+02 | · · · · · · · · · · · · · · · · · · · ·
+03 | · · · · · · · · · · · · · · · · · · · ·
+04 | · · · · · · · · · · · · · · · · · · · ·
+05 | · · · · · · · · E · · · · · · · · · · ·
+06 | · · · · · · · · · · · · · · · · · · · ·
+07 | · · · · · · · · · · · · · · · · · · · ·
+08 | · · · · · · · · · S · · · · · · · · · ·
+09 | · · · · · · · · · · · · · · · · · · · ·
+10 | · · · · · · · · · · · · · · · · · · · ·
+11 | · · · · · · · · · · · · · · · · · · · ·
+12 | · · · · · · · · · · · · E · · · · · · ·
+13 | · · · · · · · · · · · · · · · · · · R ·
+14 | · · · E · · · · · · · · · · · · · · · ·
+15 | · · · · · · · · R · · · · · · · · · · ·
+16 | · · · · · · · · · · · · · · · · · · · ·
+17 | · · · · · · · · · · · · · · · · · · · ·
+18 | · · · · · · · · · · · · · · · · · · · ·
+19 | · · · · · · · · · · · · · · · · · · · ·
+
+
