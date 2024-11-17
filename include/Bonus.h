@@ -14,6 +14,7 @@ private:
     std::string description;
     std::pair<int, int> position;
     int bonusType;
+    bool useNow;
 
 public:
 
@@ -34,6 +35,10 @@ public:
 
     void setName(std::string);
     std::string getName();
+
+    void setUseNow(bool now);
+
+    bool getUseNow();
 
     void setDescription(std::string);
     std::string getDescription();

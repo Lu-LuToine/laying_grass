@@ -13,6 +13,7 @@ Bonus::Bonus(){
     this->description = "";
     this->position;
     this->bonusType;
+    this->useNow;
 };
 
 void Bonus::setBonuses(Board &board, Game game, Bonus bonus[]){
@@ -46,14 +47,17 @@ void Bonus::setBonuses(Board &board, Game game, Bonus bonus[]){
             if (j == 0) {
                 bonus[k].setName("Tile Exchange");
                 bonus[k].setDescription("Exchange your current tile with a tile in the queue.");
+                bonus[k].setUseNow(false);
             }
             else if (j == 1) {
                 bonus[k].setName("Stone");
                 bonus[k].setDescription("Place a stone and block your enemy.");
+                bonus[k].setUseNow(true);
             }
             else if (j == 2) {
                 bonus[k].setName("Robbery");
                 bonus[k].setDescription("Choose a tile from your enemy territory, this tile becomes part of your territory.");
+                bonus[k].setUseNow(true);
             }
             k++;
             debug();
@@ -67,6 +71,7 @@ void Bonus::debug() {
     std::cout << "Description: " << this->getDescription() << std::endl;
     std::cout << "Type: " << this->getType() << std::endl;
     std::cout << "Position: (" << this->getPositon().first << ", " << this->getPositon().second << ")" << std::endl;
+    std::cout << "Utiliser immediatement: " << this->getUseNow() << std::endl;
     std::cout << "--------------------------------" << std::endl;
 }
 
@@ -92,6 +97,14 @@ void Bonus::setName(std::string name){
 
 std::string Bonus::getName(){
     return this->name;
+};
+
+void Bonus::setUseNow(bool now){
+    this->useNow = now;
+};
+
+bool Bonus::getUseNow(){
+    return this->useNow;
 };
 
 void Bonus::setDescription(string desc){
