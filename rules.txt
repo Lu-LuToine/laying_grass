@@ -18,12 +18,7 @@ The game board size will adapt among the player number.
 -> From 2 to 4 players the board size will be 20*20 cells.
 -> From 5 to 9 players the board size will be 30*30 cells.
 
-After that, each player will choose a username and a color (you'll can see the color list by using the keyword "colors"
-while you're in the color selection).
-
-Afterwards each player will choose an initial position on the board.
-
-Example of the board 20*20.
+Example of the board 20*20 size :
 
      A B C D E F G H I J K L M N O P Q R S T
 00 | · · · · · · · · · · · · · · · · · · · ·
@@ -31,20 +26,55 @@ Example of the board 20*20.
 02 | · · · · · · · · · · · · · · · · · · · ·
 03 | · · · · · · · · · · · · · · · · · · · ·
 04 | · · · · · · · · · · · · · · · · · · · ·
-05 | · · · · · · · · E · · · · · · · · · · ·
+05 | · · · · · · · · · · · · · · · · · · · ·
 06 | · · · · · · · · · · · · · · · · · · · ·
 07 | · · · · · · · · · · · · · · · · · · · ·
-08 | · · · · · · · · · S · · · · · · · · · ·
+08 | · · · · · · · · · · · · · · · · · · · ·
 09 | · · · · · · · · · · · · · · · · · · · ·
 10 | · · · · · · · · · · · · · · · · · · · ·
 11 | · · · · · · · · · · · · · · · · · · · ·
-12 | · · · · · · · · · · · · E · · · · · · ·
-13 | · · · · · · · · · · · · · · · · · · R ·
-14 | · · · E · · · · · · · · · · · · · · · ·
-15 | · · · · · · · · R · · · · · · · · · · ·
+12 | · · · · · · · · · · · · · · · · · · · ·
+13 | · · · · · · · · · · · · · · · · · · · ·
+14 | · · · · · · · · · · · · · · · · · · · ·
+15 | · · · · · · · · · · · · · · · · · · · ·
 16 | · · · · · · · · · · · · · · · · · · · ·
 17 | · · · · · · · · · · · · · · · · · · · ·
 18 | · · · · · · · · · · · · · · · · · · · ·
 19 | · · · · · · · · · · · · · · · · · · · ·
 
+After that, each player will choose a username and a color (you'll can see the color list by using the keyword "colors"
+while you're in the color selection).
 
+    1.1 - Bonuses
+
+Bonuses will be placed around the board. Each Power-up (Bonus) is represented by a letter and has his special effect.
+
+-> Tile exchange represented by an E on the board :
+    - Allow the current player to exchange the current tile with an other tile in the queue. The current tile will be put
+    at the end of the queue after the exchange.
+    - Allow the player to buy a 1*1 tile at the end of the game.
+
+-> Stone represented by an S on the board :
+    /!\ This Power-Up is used instantly after capture /!\
+    - Allow the player to place a 1*1 Stone tile on an empty space.
+    - This tile DO NOT count as any player's territory.
+    - The players can't place their tile on it.
+    - To remove this tile the player have to use a TILE EXCHANGE Power-up.
+
+-Robbery represented by a R on the board :
+    /!\ This Power-Up is used instantly after capture /!\
+    - Allow the player to choose and enemy tile and add it to his territory.
+
+Power-up will give you an edge one the other players so catch them all !
+
+    1.2 - Tiles
+
+When all players have choose a username and a color, each off them will choose an initial position on the board.
+A 1*1 tile will be placed on this position.
+
+/!\ The initial territory can't be stick to an other player territory /!\
+But you can place it a 1*1 void cell between it.
+
+2 - The game
+
+A player can
