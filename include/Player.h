@@ -2,7 +2,6 @@
 #define LAYING_GRASS_PLAYER_H
 
 #include <iostream>
-#include <list>
 #include <vector>
 
 class Player {

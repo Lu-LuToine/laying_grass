@@ -35,31 +35,31 @@ int Game::getNbPlayer(){
 
 /*Others Functions*/
 
-bool cardinateStatusCases(Board &board, int x, int y, bool checkEmptyCases, int value) {
+bool cardinateStatusCases(Board &board, int x, int y, bool allAndCases, int value) {
     // Check for bonus
     // 4 corners
-    if (checkEmptyCases) {
+    if (allAndCases) {
         if(x == 0 && y == 0) {
-            if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+            if (board.boardStruct[x][y + 1].getStatus() == value && board.boardStruct[x + 1][y].getStatus() == value) {
                 return true;
             }
         }
 
         else if(x == 0 && y == board.getSize()) {
-            if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0) {
+            if (board.boardStruct[x - 1][y].getStatus() == value && board.boardStruct[x][y + 1].getStatus() == value) {
                 return true;
             }
         }
 
         else if(y == 0 && x == board.getSize()) {
-            if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+            if (board.boardStruct[x][y - 1].getStatus() == value && board.boardStruct[x + 1][y].getStatus() == value) {
                 return true;
             }
 
         }
 
         else if(x  == board.getSize() && y == board.getSize()) {
-            if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+            if (board.boardStruct[x - 1][y].getStatus() == value && board.boardStruct[x][y - 1].getStatus() == value) {
                 return true;
             }
 
@@ -73,7 +73,7 @@ bool cardinateStatusCases(Board &board, int x, int y, bool checkEmptyCases, int 
 
         // Top line
         else if(x == 0 && y < board.getSize() -1 ) {
-            if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0) {
+            if (board.boardStruct[x][y - 1].getStatus() == value && board.boardStruct[x][y + 1].getStatus() == value && board.boardStruct[x + 1][y].getStatus() == value) {
                 return true;
             }
 
@@ -81,7 +81,7 @@ bool cardinateStatusCases(Board &board, int x, int y, bool checkEmptyCases, int 
 
         // Left line
         else if(y == 0 && x < board.getSize() -1 ) {
-            if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0) {
+            if (board.boardStruct[x - 1][y].getStatus() == value && board.boardStruct[x + 1][y].getStatus() == value && board.boardStruct[x][y + 1].getStatus() == value) {
                 return true;
             }
 
@@ -89,7 +89,7 @@ bool cardinateStatusCases(Board &board, int x, int y, bool checkEmptyCases, int 
 
         // Bottom line
         else if(y == board.getSize() && x < board.getSize() -1 ) {
-            if (board.boardStruct[x][y - 1].getStatus() == 0 && board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x - 1][y].getStatus() == 0) {
+            if (board.boardStruct[x][y - 1].getStatus() == value && board.boardStruct[x][y + 1].getStatus() == value && board.boardStruct[x - 1][y].getStatus() == value) {
                 return true;
             }
 
@@ -97,7 +97,7 @@ bool cardinateStatusCases(Board &board, int x, int y, bool checkEmptyCases, int 
 
         // Right line
         else if(x == board.getSize() && y < board.getSize() -1 ) {
-            if (board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+            if (board.boardStruct[x - 1][y].getStatus() == value && board.boardStruct[x + 1][y].getStatus() == value && board.boardStruct[x][y - 1].getStatus() == value) {
                 return true;
             }
         }
@@ -107,7 +107,7 @@ bool cardinateStatusCases(Board &board, int x, int y, bool checkEmptyCases, int 
 
         // Default
         else if(x > 0 && x < board.getSize() - 1 && y > 0 && y < board.getSize() - 1) {
-            if (board.boardStruct[x][y + 1].getStatus() == 0 && board.boardStruct[x + 1][y].getStatus() == 0 && board.boardStruct[x - 1][y].getStatus() == 0 && board.boardStruct[x][y - 1].getStatus() == 0) {
+            if (board.boardStruct[x][y + 1].getStatus() == value && board.boardStruct[x + 1][y].getStatus() == value && board.boardStruct[x - 1][y].getStatus() == value && board.boardStruct[x][y - 1].getStatus() == 0) {
                 return true;
             }
         }
@@ -255,32 +255,22 @@ void startingPlace(Player players[], Game game, Board &board){
 
 
 
-void setBonuses(Board &board, Game game){
 
-    double probaBonus[3];
 
-    probaBonus[0] = round(1.5*game.getNbPlayer());
-    probaBonus[1] = round(0.5*game.getNbPlayer());
-    probaBonus[2] = game.getNbPlayer();
-
-    srand(time(0));
-
-    for(int j = 0; j < sizeof(probaBonus); j++){
-        for(int i = 0; i < int(probaBonus[j]); i++){
-
-            int random, random2;
-
-            do {
-                random = rand() % board.getSize();
-                random2 = rand() % board.getSize();
-            } while (board.boardStruct[random][random2].getStatus() != 0 || random == 0 || random2 == 0 || random == board.getSize() || random2 == board.getSize() || !cardinateStatusCases(board, random, random2, true, 0));
-
-            board.boardStruct[random][random2] = Cells();
-            board.boardStruct[random][random2].setStatus(j + 10);
-
+/*void bonusCaptured(Board &board, Game &game) {
+    for(int i = 0; i < board.getSize(); i++) {
+        for(int j = 0; j < board.getSize(); j++) {
+            if(board.boardStruct[i][j].getStatus() == 10 || board.boardStruct[i][j].getStatus() == 11 || board.boardStruct[i][j].getStatus() == 12) {
+                for(int k = 1; k < game.getNbPlayer(); k++) {
+                    if(cardinateStatusCases(board, i, j, true, k)) {
+                        board.boardStruct[i][j] = Bonus();
+                        board.boardStruct[i][j].setPlayer(k);
+                    }
+                }
+            }
         }
     }
 
-};
+}*/
 
 Game::~Game(){};

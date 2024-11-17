@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "Game.h"
+
 class Bonus {
 
 private:
@@ -10,10 +12,21 @@ private:
     std::string name;
     int status;
     std::string description;
+    std::pair<int, int> position;
+    int bonusType;
 
 public:
 
     Bonus();
+
+    void setBonuses(Board &board, Game game, Bonus bonus[]);
+
+    void debug();
+
+    void setPositon(int x, int y);
+
+    std::pair<int, int> getPositon();
+
     ~Bonus();
 
     void setPlayer(int);
@@ -25,6 +38,9 @@ public:
     void setDescription(std::string);
     std::string getDescription();
 
+    void setType(int type);
+
+    int getType();
 };
 
 

@@ -7,26 +7,14 @@
 #include "include/Bonus.h"
 
 #include <iostream>
+#include <cmath>
+
 
 using namespace std;
 
 int main()
 {
     startGameName();
-
-    /*Bonus Initialization*/
-    Bonus TileExchange;
-    Bonus Stone;
-    Bonus Robbery;
-
-    TileExchange.setName("Tile Exchange");
-    TileExchange.setDescription("Exchange your current tile with a tile in the queue.");
-
-    Stone.setName("Stone");
-    Stone.setDescription("Place a stone and block your enemy.");
-
-    Robbery.setName("Robbery");
-    Robbery.setDescription("Choose a tile from your enemy territory, this tile becames part of your's territory.");
 
     if (startGameMenu() == 3) {
         return 0;
@@ -61,7 +49,11 @@ int main()
         Board1.setSize(game.getNbPlayer());
         Board1.setBoard();
 
-        setBonuses(Board1, game);
+        int totalBonuses = round(1.5*game.getNbPlayer()) + round(0.5*game.getNbPlayer()) + game.getNbPlayer();
+        Bonus* bonus = new Bonus[totalBonuses];
+
+
+        bonus->setBonuses(Board1, game, bonus);
 
         //2
         Board1.getBoard(players);
@@ -79,7 +71,7 @@ int main()
         tiles.setForm(game);
         tiles.displayQueueForm();
 
-        int test = 0;
+        /*int test = 0;
         do {
             int placementx;
             int placementy;
@@ -118,12 +110,13 @@ int main()
 
             tiles.displayQueueForm();
             test++;
-        }while(test !=3);
+        }while(test !=3);*/
 
 
 
 
         delete[] players;
+        delete[] bonus;
         system("pause");
         return 0;
     }

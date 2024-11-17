@@ -25,9 +25,9 @@ public:
 
 };
 
-bool cardinateStatusCases(Board &board, int x, int y, bool checkEmptyCases, int value);
+bool cardinateStatusCases(Board &board, int x, int y, bool allAndCases, int value);
 void startingPlace(Player players[], Game game, Board &board);
 int convertLetterToCoos(char);
-void setBonuses(Board &board, Game game);
+void bonusCaptured(Board &board, Game game);
 
 #endif //LAYING_GRASS_GAME_H
