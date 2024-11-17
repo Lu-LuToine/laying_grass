@@ -52,6 +52,7 @@ int startGameMenu(){
         case 3:
             return 3;
     }
+    return 0;
 }
 
 void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game){

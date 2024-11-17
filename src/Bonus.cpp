@@ -14,9 +14,10 @@ Bonus::Bonus(){
     this->position;
     this->bonusType;
     this->useNow;
+    this->used;
 };
 
-void Bonus::setBonuses(Board &board, Game game, Bonus bonus[]){
+void Bonus::setBonuses(Board &board, Game &game, Bonus bonus[]){
 
     double probaBonus[3];
 
@@ -42,7 +43,7 @@ void Bonus::setBonuses(Board &board, Game game, Bonus bonus[]){
 
             bonus[k] = Bonus();
             bonus[k].setType(j);
-            bonus[k].setPositon(random, random2);
+            bonus[k].setPosition(random, random2);
 
             if (j == 0) {
                 bonus[k].setName("Tile Exchange");
@@ -70,16 +71,24 @@ void Bonus::debug() {
     std::cout << "Name: " << this->getName() << std::endl;
     std::cout << "Description: " << this->getDescription() << std::endl;
     std::cout << "Type: " << this->getType() << std::endl;
-    std::cout << "Position: (" << this->getPositon().first << ", " << this->getPositon().second << ")" << std::endl;
+    std::cout << "Player : " << this->getPlayer() << std::endl;
+    std::cout << "Position: (" << this->getPosition().first << ", " << this->getPosition().second << ")" << std::endl;
     std::cout << "Utiliser immediatement: " << this->getUseNow() << std::endl;
     std::cout << "--------------------------------" << std::endl;
 }
 
-void Bonus::setPositon(int x, int y) {
+void afficherTousLesBonus(Bonus bonus[], int tailleBonus) {
+    for (int i = 0; i < tailleBonus; i++) {
+        bonus[i].debug();  // Appel à la méthode debug() pour chaque objet Bonus
+    }
+}
+
+
+void Bonus::setPosition(int x, int y) {
     this->position = std::make_pair(x, y);
 }
 
-std::pair<int, int> Bonus::getPositon() {
+std::pair<int, int> Bonus::getPosition() {
     return this->position;
 }
 
@@ -106,6 +115,14 @@ void Bonus::setUseNow(bool now){
 bool Bonus::getUseNow(){
     return this->useNow;
 };
+
+/*void Bonus::setUsed(bool used){
+    this->used = used;
+};
+
+bool Bonus::getUsed(){
+    return this->used;
+};*/
 
 void Bonus::setDescription(string desc){
     this->description = desc;

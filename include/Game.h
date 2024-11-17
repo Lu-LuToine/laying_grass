@@ -3,8 +3,11 @@
 
 #include "Player.h"
 #include "board/Board.h"
+#include "Bonus.h"
 
 #include <vector>
+
+class Bonus;
 
 class Game {
 
@@ -28,6 +31,9 @@ public:
 bool cardinateStatusCases(Board &board, int x, int y, bool allAndCases, int value);
 void startingPlace(Player players[], Game game, Board &board);
 int convertLetterToCoos(char);
-void bonusCaptured(Board &board, Game game);
+
+void bonusCaptured(Game &game, Board &board, Bonus bonus[], int bonusSize);
+
+
 
 #endif //LAYING_GRASS_GAME_H

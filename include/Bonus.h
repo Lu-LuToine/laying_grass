@@ -1,9 +1,12 @@
 #ifndef LAYING_GRASS_BONUS_H
 #define LAYING_GRASS_BONUS_H
 
+#include "Game.h"
+#include "board/Board.h"
+
 #include <iostream>
 
-#include "Game.h"
+class Game;
 
 class Bonus {
 
@@ -15,18 +18,20 @@ private:
     std::pair<int, int> position;
     int bonusType;
     bool useNow;
+    bool used;
 
 public:
 
     Bonus();
 
-    void setBonuses(Board &board, Game game, Bonus bonus[]);
+    void setBonuses(Board &board, Game &game, Bonus bonus[]);
+
 
     void debug();
 
-    void setPositon(int x, int y);
+    void setPosition(int x, int y);
 
-    std::pair<int, int> getPositon();
+    std::pair<int, int> getPosition();
 
     ~Bonus();
 
@@ -40,6 +45,10 @@ public:
 
     bool getUseNow();
 
+    void setUsed(bool used);
+
+    bool getUsed();
+
     void setDescription(std::string);
     std::string getDescription();
 
@@ -48,5 +57,6 @@ public:
     int getType();
 };
 
+void afficherTousLesBonus(Bonus bonus[], int tailleBonus);
 
 #endif //LAYING_GRASS_BONUS_H

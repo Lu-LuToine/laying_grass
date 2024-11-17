@@ -220,24 +220,25 @@ void startingPlace(Player players[], Game game, Board &board){
         cout << "Choose your starting place y (a letter) : " << endl;
         cout << "*> ";
         cin >> y;
+        yco = convertLetterToCoos(y);
 
-        if (board.getSize() < 20 && (0 > x || x > 20 || 65 > int(y) || int(y) > 84 || !cardinateStatusCases(board, x, yco, true, 0)) ){ // Check if x and y are correct
+        if (0 > x || x > board.getSize() || 65 > int(y) || int(y) > 84 || !cardinateStatusCases(board, x, yco, true, 0)){ // Check if x and y are correct
             do {
                 setConsoleColor(79);
-                cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl;
+                board.getSize() == 20 ? cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl : cout << "[ERROR] - Chose a valid X position (between 0 and 30)" << endl;
                 setConsoleColor(10);
                 cout << "Choose your starting place x (a number) : " << endl;
                 cout << "*> ";
                 cin >> x;
 
                 setConsoleColor(79);
-                cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl;
+                board.getSize() == 20 ? cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl : cout << "[ERROR] - Chose a valid Y position (between A and d)" << endl;
                 setConsoleColor(10);
                 cout << "Choose your starting place y (a number) : " << endl;
                 cout << "*> ";
                 cin >> y;
                 yco = convertLetterToCoos(y);
-            } while (0 > x || x > 20 || 65 > int(y) || int(y) > 84 || !cardinateStatusCases(board, x, yco, true, 0));
+            } while (0 > x || x > board.getSize() || 65 > int(y) || int(y) > 84 || !cardinateStatusCases(board, x, yco, true, 0));
         }
 
         yco = convertLetterToCoos(y);
@@ -253,24 +254,14 @@ void startingPlace(Player players[], Game game, Board &board){
     }
 }
 
-
-
-
-
-/*void bonusCaptured(Board &board, Game &game) {
-    for(int i = 0; i < board.getSize(); i++) {
-        for(int j = 0; j < board.getSize(); j++) {
-            if(board.boardStruct[i][j].getStatus() == 10 || board.boardStruct[i][j].getStatus() == 11 || board.boardStruct[i][j].getStatus() == 12) {
-                for(int k = 1; k < game.getNbPlayer(); k++) {
-                    if(cardinateStatusCases(board, i, j, true, k)) {
-                        board.boardStruct[i][j] = Bonus();
-                        board.boardStruct[i][j].setPlayer(k);
-                    }
-                }
+void bonusCaptured(Game &game, Board &board, Bonus bonus[], int bonusSize) {
+    for(int i = 0; i < bonusSize; i++) {
+        for(int k = 1; k < game.getNbPlayer(); k++) {
+            if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k)) {
+                bonus[i].setPlayer(k);
             }
         }
     }
-
-}*/
+}
 
 Game::~Game(){};

@@ -53,7 +53,9 @@ int main()
         Bonus* bonus = new Bonus[totalBonuses];
 
 
+
         bonus->setBonuses(Board1, game, bonus);
+
 
         //2
         Board1.getBoard(players);
@@ -71,49 +73,49 @@ int main()
         tiles.setForm(game);
         tiles.displayQueueForm();
 
-        /*int test = 0;
+        int test = 0;
         do {
             int placementx;
             int placementy;
             int action;
             bool placed = false;
 
-            do {
-                cout << "DEBUG - What do ? :" << endl;
-                cout << "DEBUG - 0 Placement" << endl;
-                cout << "DEBUG - 1 Rotate" << endl;
-                cin >> action;
+            for (int i = 0; i < game.getNbPlayer(); i++) {
+                do {
+                    cout << "DEBUG - What do ? :" << endl;
+                    cout << "DEBUG - 0 Placement" << endl;
+                    cout << "DEBUG - 1 Rotate" << endl;
+                    cin >> action;
 
-                switch (action) {
-                    case 0 :
-                        cout << "DEBUG - placement de la tuile : x :" << endl;
+                    switch (action) {
+                        case 0 :
+                            cout << "DEBUG - placement de la tuile : x :" << endl;
                         cin >> placementx;
                         cout << "DEBUG - placement de la tuile : y :" << endl;
                         cin >> placementy;
 
-                        tiles.placeFormInBoard(Board1, placementx, placementy, 1, players);
+                        tiles.placeFormInBoard(Board1, placementx, placementy, i, players);
 
                         placed = true;
                         Board1.getBoard(players);
                         break;
-                    case 1:
-                        tiles.rotateForm();
+                        case 1:
+                            tiles.rotateForm();
                         tiles.displayCurrentTile();
                         break;
-                    default:
-                        cout << "kaka";
+                        default:
+                            cout << "kaka";
                         break;;
-                }
+                    }
 
+                } while (!placed);
+                afficherTousLesBonus(bonus, totalBonuses);
+                bonusCaptured(game, Board1, bonus, totalBonuses);
+                tiles.displayQueueForm();
+                test++;
+            }
 
-            } while (!placed);
-
-            tiles.displayQueueForm();
-            test++;
-        }while(test !=3);*/
-
-
-
+        }while(test !=3);
 
         delete[] players;
         delete[] bonus;
