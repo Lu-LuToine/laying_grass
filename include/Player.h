@@ -21,7 +21,7 @@ public:
     void setCells(int x, int y);
     void setBeginPlace(int, int);
     void setBonus(int);
-    void deleteBonus(std::string);
+    void deleteBonus(int);
 
     std::string getName();
     int getColor();
