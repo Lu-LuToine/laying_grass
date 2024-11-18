@@ -300,8 +300,6 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                                 bonus[j].debug();
                             }
                             tiles.displayQueueForm();
-                            players[i].setCells(playerX, playerY);
-                            players[i].getCells();
                             turnComplete = true;  // End the current player's turn
                         } else {
                             cout << "[ERROR] - Invalid placement, try again." << endl;
