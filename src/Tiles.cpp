@@ -383,10 +383,28 @@ void Tiles::tileExchange(){
 
     int tileToExchange;
 
-    std::cout << "Choose a form to exchange : ";
-    std::cin >> tileToExchange;
+    do {
+        std::cout << "Choose a form to exchange : ";
+        std::cin >> tileToExchange;
+    } while(tileToExchange < 1 || tileToExchange > 5);
 
-    allForms[tileToExchange];
+
+    if (tileToExchange >= 0 && tileToExchange < allForms.size()) {
+        // Save allForms[0]
+        Tiles firstTile = allForms[0];
+
+        Tiles chosenTile = allForms[tileToExchange];
+        allForms.erase(allForms.begin() + tileToExchange); // Delete from actual position
+        allForms.insert(allForms.begin(), chosenTile); // Push it in first position
+
+
+        allForms.erase(allForms.begin() + 1); // Delete old allform[0] from his actual position
+        allForms.push_back(firstTile); // Push it back
+
+        std::cout << "Tile exchanged with success" << std::endl;
+    } else {
+        std::cout << "Error - Invalid Index." << std::endl;
+    }
 }
 
 std::vector<std::vector<int>> Tiles::getForm() const {

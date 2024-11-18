@@ -331,6 +331,10 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                         } else {
                             cout << "[ERROR] - Action non reconnue";
                         }
+                    // TODO enlever c'est un debug
+                    case 4:
+                        tiles.tileExchange();
+                        tiles.displayQueueForm();
 
                     default:
                         cout << "[ERROR] - Action non reconnue" << endl;
