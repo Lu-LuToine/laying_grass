@@ -27,9 +27,8 @@ public:
 
     void setNbPlayer(int);
     int getNbPlayer();
-    /*
-    void endGameCalculTerritory(Game &game, Player players[], Board &board);
-    */
+
+    void endGameCalculTerritory(Player players[], Board &board);
 
 };
 
@@ -38,7 +37,6 @@ void startingPlace(Player players[], Game game, Board &board);
 int convertLetterToCoos(char);
 void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize);
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses);
-
 
 
 #endif //LAYING_GRASS_GAME_H

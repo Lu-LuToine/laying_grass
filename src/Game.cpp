@@ -1,4 +1,7 @@
 #include "../include/Game.h"
+
+#include <algorithm>
+
 #include "../include/Colors.h"
 #include "../include/Player.h"
 #include "../include/Bonus.h"
@@ -268,7 +271,7 @@ void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], in
 
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses) {
     // Loop until the desired number of turns has been reached
-    while (game.getTurn() < 2) {
+    while (game.getTurn() < 3) {
         // Each player plays during the same turn
         for (int i = 0; i < game.getNbPlayer(); i++) {
             int playerX;
@@ -349,19 +352,94 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
 
         game.setTurn(game.getTurn() + 1);
         cout << "Turn " << game.getTurn() << endl;
-        if (game.getTurn() == 2) {
+        if (game.getTurn() == 3) {
             for (int i = 0; i < game.getNbPlayer(); i++) {
             }
-            /*
-            game.endGameCalculTerritory(game, players, board);
-        */
+                game.endGameCalculTerritory(players, board);
         }
+
     }
 }
 
-/*void Game::endGameCalculTerritory(Game &game, Player players[], Board &board) {
+void Game::endGameCalculTerritory(Player players[], Board &board) {
+    vector<pair<int, int>> allPlayerSize;
 
-}*/
+    for (int k = 0; k < getNbPlayer(); k++) {
+        std::cout << "player " << k << std::endl;
+        vector<pair<int, int>> cells = players[k].getCells();
+        vector<int> currentPlayerSizes;
+
+        int xMin;
+        int yMin;
+        int xMax;
+        int yMax;
+
+        for (const auto &cell : cells) {
+            xMin = min(xMin, cell.first);
+            yMin = min(yMin, cell.second);
+            xMax = max(xMax, cell.first);
+            yMax = max(yMax, cell.second);
+        }
+
+        std::cout << "xMin, xMax, yMin, yMax: " << xMin << " " << xMax << " " << yMin  << " " << yMax << std::endl;
+
+        for (int i = xMin; i < xMax; i++) {
+            for (int j = yMin; j < yMax; j++) {
+                double totalCases = 0;
+
+                if(i + 1 < board.boardStruct.size() && j + 1 < board.boardStruct[0].size() &&
+                   board.boardStruct[i][j].getStatus() == k + 1 &&
+                   board.boardStruct[i+1][j].getStatus() == k + 1 &&
+                   board.boardStruct[i][j+1].getStatus() == k + 1 &&
+                   board.boardStruct[i+1][j+1].getStatus() == k + 1)
+                {
+                    std::cout << "hi from if" << std::endl;
+                    totalCases += 1;
+
+                    while (i + 2 < board.boardStruct.size() && j + 2 < board.boardStruct[0].size() &&
+                        board.boardStruct[i+1][j+1].getStatus() == k + 1 &&
+                        board.boardStruct[i+2][j+1].getStatus() == k + 1 &&
+                        board.boardStruct[i+1][j+2].getStatus() == k + 1 &&
+                        board.boardStruct[i+2][j+2].getStatus() == k + 1)
+                    {
+                        totalCases += 0.5;
+                        i += 2;
+                        j += 2;
+                        std::cout << "hi from else" << std::endl;
+                    }
+
+                    std::cout << "TOTAL CASES before 2: " << totalCases << std::endl;
+                    totalCases = totalCases * 2;
+                    std::cout << "TOTAL CASES: " << totalCases << std::endl;
+                    currentPlayerSizes.push_back(int(totalCases));
+                }
+            }
+        }
+
+        if (!currentPlayerSizes.empty()) {
+            int maxSize = *max_element(currentPlayerSizes.begin(), currentPlayerSizes.end());
+            allPlayerSize.emplace_back(k, maxSize);
+        } else {
+            allPlayerSize.emplace_back(k, 0);
+        }
+
+        currentPlayerSizes.clear();
+    }
+
+    std::cout << "All players' territories: ";
+    for (const auto &size : allPlayerSize) {
+        std::cout << "(" << size.first << ", " << size.second << ") ";
+    }
+    std::cout << std::endl;
+
+    auto maxIt = max_element(allPlayerSize.begin(), allPlayerSize.end(),
+                               [](const pair<int, int>& a, const pair<int, int>& b) {
+                                   return a.second < b.second;
+                               });
+    size_t winnerIndex = maxIt->first;  // Player ID of the winner
+    std::cout << "== WINNER IS Player " << winnerIndex + 1 << " with " << maxIt->second << " territory points." << std::endl;
+
+}
 
 
 Game::~Game(){};
