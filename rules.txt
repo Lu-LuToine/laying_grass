@@ -61,6 +61,8 @@ Bonuses will be placed around the board. Each Power-up (Bonus) is represented by
     - The players can't place their tile on it.
     - To remove this tile the player have to use a TILE EXCHANGE Power-up.
 
+    -> /!\ The 1*1 Stone tile is represented by the symbol " ■ " on the board /!\
+
 -Robbery represented by a R on the board :
     /!\ This Power-Up is used instantly after capture /!\
     - Allow the player to choose and enemy tile and add it to his territory.
@@ -77,7 +79,25 @@ But you can place it a 1*1 void cell between it.
 
 2 - The game
 
-A player can
+Tiles are randomly distributed in a queue.
+All players have the same queue.
 
+-> The current player have a tile and have to place it on the board next to his territory.
+-> You can't change the current tile without a Power-Up.
+-> You can Rotate and flip your tile as you want before placing it.
 
-■
+You can only place your tile next to your territory, so your first tile will be placed stick to your begin position
+and after that you'll can place your next tile stick to your tiles.
+
+-> The next player will have the next tile in the queue.
+
+3 - How to win ?
+
+    3.1 - End game
+
+-> After 9 turns you can use a TILE EXCHANGE coupon to place a 1*1 tile everywhere you want on the board whatever
+if it's stick to your territory.
+
+    3.2 - End
+
+-> The winner is the player with the biggest square surface full emptied by his territory.
