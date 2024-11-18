@@ -27,6 +27,7 @@ public:
     int getColor();
 
     std::vector<std::pair<int, int>> getCells();
+    void deleteCells(std::pair<int, int>);
     std::pair<int, int> getBeginPlace();
     std::vector<int> getBonus();
 };

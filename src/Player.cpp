@@ -71,3 +71,8 @@ void Player::deleteBonus(int deletedElement){
     this->bonus.erase(std::next(this->bonus.begin(), deletedElement));
 };
 
+//TODO FUNC DELETCELLS
+void Player::deleteCells(std::pair<int, int> coos){
+    this->cells.erase(find(this->cells.begin(), this->cells.end(), coos));
+};
+

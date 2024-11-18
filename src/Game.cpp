@@ -300,6 +300,8 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                                 bonus[j].debug();
                             }
                             tiles.displayQueueForm();
+                            players[i].setCells(playerX, playerY);
+                            players[i].getCells();
                             turnComplete = true;  // End the current player's turn
                         } else {
                             cout << "[ERROR] - Invalid placement, try again." << endl;
@@ -334,7 +336,7 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                             tiles.displayQueueForm();
                             players[i].deleteBonus(powerUp);
                             //TODO SET USE TO TRUE
-                            bonus[i].setUsed(true);
+                            //bonus[i].setUsed(true);
                         } else {
                             cout << "[ERROR] - Action non reconnue";
                         }
