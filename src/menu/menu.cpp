@@ -3,6 +3,7 @@
 #include "../../include/Player.h"
 
 #include <unistd.h>
+#include <cstdlib>
 #include <iostream>
 
 using namespace std;
@@ -102,6 +103,22 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game
     setConsoleColor(32);
     cout << "[INIT-MENU] - Last step now choose your territory !" << endl;
 };
+
+
+void openRulesFile(const std::string &file) {
+#ifdef _WIN32
+    // Windows
+    std::string cmd = "start " + file;
+#elif __APPLE__
+    // MacOS
+    std::string cmd = "open " + file;
+#else
+    // Linux
+    std::string cmd = "xdg-open " + file;
+#endif
+
+    system(cmd.c_str()); // Execute cmd
+}
 
 
 //DEBUG MOI
