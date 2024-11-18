@@ -109,13 +109,13 @@ bool Bonus::getUseNow(){
     return this->useNow;
 };
 
-/*void Bonus::setUsed(bool used){
+void Bonus::setUsed(bool used){
     this->used = used;
 };
 
 bool Bonus::getUsed(){
     return this->used;
-};*/
+};
 
 void Bonus::setDescription(string desc){
     this->description = desc;

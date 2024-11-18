@@ -4,6 +4,7 @@
 #include "../include/Bonus.h"
 
 #include <iostream>
+#include <queue>
 #include <random>
 #include <vector>
 
@@ -247,8 +248,8 @@ void startingPlace(Player players[], Game game, Board &board){
 
         board.boardStruct[x][yco] = Cells();
         board.boardStruct[x][yco].setStatus(i + 1);
-        players->setCells(x, yco);
-        players->getCells();
+        players[i].setCells(x, yco);
+        players[i].getCells();
 
         board.getBoard(players);
     }
@@ -267,7 +268,7 @@ void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], in
 
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses) {
     // Loop until the desired number of turns has been reached
-    while (game.getTurn() < 9) {
+    while (game.getTurn() < 2) {
         // Each player plays during the same turn
         for (int i = 0; i < game.getNbPlayer(); i++) {
             int playerX;
@@ -277,7 +278,7 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
             bool turnComplete = false;
 
             while (!turnComplete) {
-                cout << "PLAYER " << i + 1 << endl;
+                cout << "PLAYER " << i + 1 << " || " << players[i].getName() << endl;
                 cout << "DEBUG - What do ? :" << endl;
                 cout << "DEBUG - 0 Placement" << endl;
                 cout << "DEBUG - 1 Rotate" << endl;
@@ -318,17 +319,16 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                         break;
 
                     case 3:
-                        cout << "You have" << size(players[i].getBonus()) << "Power-Up" << endl;
-                        for (int bonusCount = 0; bonusCount < size(players[i].getBonus()); i++){
-                            cout << i << " : " << players[i].getBonus()[bonusCount];
+                        cout << "You have " << players[i].getBonus().size() << " Power-Up(s)" << endl;
+                        for (int bonusCount = 0; bonusCount < players[i].getBonus().size(); bonusCount++) {
+                            cout << bonusCount << " : " << players[i].getBonus()[bonusCount] << endl;
                         }
 
                         int powerUp;
-
                         cout << "Select a bonus : ";
                         cin >> powerUp;
 
-                        if (powerUp < size(players[i].getBonus())){
+                        if (powerUp < players[i].getBonus().size()) {
                             cout << "bonus";
                             tiles.tileExchange();
                             tiles.displayQueueForm();
@@ -336,21 +336,32 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                             //TODO SET USE TO TRUE
                             //bonus[i].setUsed(true);
                         } else {
-                            cout << "[ERROR] - Action non reconnue";
+                            cout << "[ERROR] - Invalid selection." << endl;
                         }
+                        break;
+
                     default:
-                        cout << "[ERROR] - Action non reconnue" << endl;
+                        cout << "[ERROR] - Unrecognized action" << endl;
                         break;
                 }
             }
         }
 
-        // Increment the turn counter after all players have played
         game.setTurn(game.getTurn() + 1);
         cout << "Turn " << game.getTurn() << endl;
+        if (game.getTurn() == 2) {
+            for (int i = 0; i < game.getNbPlayer(); i++) {
+            }
+            /*
+            game.endGameCalculTerritory(game, players, board);
+        */
+        }
     }
 }
 
+/*void Game::endGameCalculTerritory(Game &game, Player players[], Board &board) {
+
+}*/
 
 
 Game::~Game(){};

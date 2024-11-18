@@ -166,6 +166,8 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
     int formWidth = this->form[0].size();
     int formHeight = this->form.size();
 
+    std::vector<std::pair<int, int>> temporaryGetCells;
+
     std::cout << "Form dimensions: Width = " << formWidth << ", Height = " << formHeight << ", currentPlayer = " << currentPlayer << std::endl;
 
     // Found first 1 on y =0
@@ -256,6 +258,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
                     // Set current player status if success
                     if (board.boardStruct[adjustedX + i][adjustedY + j].getStatus() == 14) {
                         board.boardStruct[adjustedX + i][adjustedY + j].setStatus(currentPlayer);
+                        temporaryGetCells.push_back(std::make_pair(adjustedX + i, adjustedY + j));
                     }
                 }
             }
@@ -272,6 +275,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
                             for (int rollbackJ = 0; rollbackJ < formWidth; rollbackJ++) {
                                 if (this->form[rollbackI][rollbackJ] == 1) {
                                     board.boardStruct[adjustedX + rollbackI][adjustedY + rollbackJ].setStatus(originalStatuses[rollbackI][rollbackJ]);
+                                    temporaryGetCells.clear();
                                 }
                             }
                         }
@@ -296,6 +300,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
                 for (int j = 0; j < formWidth; j++) {
                     if (this->form[i][j] == 1) {
                         board.boardStruct[adjustedX + i][adjustedY + j].setStatus(originalStatuses[i][j]);
+                        temporaryGetCells.clear();
                     }
                 }
             }
@@ -307,13 +312,17 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
             allForms.erase(allForms.begin());
             this->player = currentPlayer;
             std::cout << this->name << " " << this->player << std::endl;
+            for (const auto& cell : temporaryGetCells) {
+                player[currentPlayer - 1].setCells(cell.first, cell.second);
+           }
             return true;
         }
     } else {
+        temporaryGetCells.clear();
         std::cout << "Current tile can't be placed here, nothing happened, try another position" << std::endl;
         return false;
     }
-
+    temporaryGetCells.clear();
     return false;
 }
 

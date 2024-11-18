@@ -40,16 +40,21 @@ int Player::getColor(){
     return this->color;
 };
 
-std::vector<std::pair<int, int>> Player::getCells(){
-    if (!this->cells.empty()) {
-        // DEBUG => display
-        for (const auto& cell : this->cells) {
-            cout << "cells : x " << cell.first << " y " << cell.second << endl;
-        }
-        return this->cells;
+std::vector<std::pair<int, int>> Player::getCells() {
+    // DEBUG => display all elements of this->cells
+    for (const auto& cell : this->cells) {
+        std::cout << "cells : x " << cell.first << " y " << cell.second << std::endl;
     }
-    return std::vector<std::pair<int, int> >((-1, -1));
-};
+
+    // If cells is empty, return a vector with one pair (-1, -1)
+    if (this->cells.empty()) {
+        return std::vector<std::pair<int, int>>{ { -1, -1 } };
+    }
+
+    // Otherwise, return the cells
+    return this->cells;
+}
+
 
 void Player::setBeginPlace(int cos1, int cos2){
     this->beginPlace = std::make_pair(cos1, cos2);
@@ -75,4 +80,6 @@ void Player::deleteBonus(int deletedElement){
 void Player::deleteCells(std::pair<int, int> coos){
     this->cells.erase(find(this->cells.begin(), this->cells.end(), coos));
 };
+
+
 
