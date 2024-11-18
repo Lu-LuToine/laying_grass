@@ -32,12 +32,6 @@ public:
     void setLetters();
     char getLetters() const;
 
-    void setRotation(int);
-    int getRotation() const;
-
-    void setFlip(bool);
-    bool getFlip() const;
-
     // Static functions
     static void setForm(Game &game);
 
@@ -48,6 +42,8 @@ public:
     bool isSameShape(const std::vector<std::vector<int>> &a, const std::vector<std::vector<int>> &b) const;
 
     void rotateForm();
+
+    void flipForm();
 
     void displayCurrentTile();
 

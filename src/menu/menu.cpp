@@ -67,9 +67,6 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game
         cout << "[INIT] - Players's " << i + 1 << " name : " << endl;
         cout << "*> :";
         cin >> name;
-
-        //TODO retirer le commentaire
-
         do {
             setConsoleColor(10);
             cout << "[INIT] - Choose colors (you can see all available colors with : 'colors') : "<< endl;

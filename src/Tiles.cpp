@@ -13,9 +13,7 @@ std::vector<Tiles> Tiles::allForms;
 Tiles::Tiles(){
     this->name =  "";
     this->player = 0;
-    this->rotation = 0;
     this->letters = 'a';
-    this->flip = false;
     this->form;
 };
 
@@ -33,22 +31,6 @@ void Tiles::setLetters() {
 char Tiles::getLetters() const {
     return this->letters;
 }
-
-void Tiles::setRotation(int rotation){
-    this->rotation = rotation;
-};
-
-int Tiles::getRotation() const{
-    return this->rotation;
-};
-
-void Tiles::setFlip(bool flip){
-    this->flip = flip;
-};
-
-bool Tiles::getFlip() const{
-    return this->flip;
-};
 
 void Tiles::setForm(Game &game) {
     int count = 97;
@@ -144,6 +126,16 @@ void Tiles::rotateForm() {
     if (!isSameShape(currentForm, rotatedForm)) {
         this->form = rotatedForm;
     }
+}
+
+void Tiles::flipForm(){
+    std::vector<std::vector<int>> currentForm = this->form;
+
+    std::reverse(currentForm.begin(), currentForm.end());
+
+    this->form = currentForm;
+    rotateForm();
+    rotateForm();
 }
 
 void Tiles::displayCurrentTile() {
@@ -378,7 +370,7 @@ void Tiles::displayQueueForm() {
         std::cout << '\n';
     }
 }
-//TODO bonus tile exchange
+
 void Tiles::tileExchange(){
 
     int tileToExchange;

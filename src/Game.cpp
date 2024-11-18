@@ -312,9 +312,11 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                         break;
 
                     case 2:
+                        tiles.flipForm();
+                        cout << "fliped" << endl;
+                        tiles.displayCurrentTile();
                         break;
 
-                    //TODO bonus tile exchange
                     case 3:
                         cout << "You have" << size(players[i].getBonus()) << "Power-Up" << endl;
                         for (int bonusCount = 0; bonusCount < size(players[i].getBonus()); i++){
@@ -331,6 +333,8 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                             tiles.tileExchange();
                             tiles.displayQueueForm();
                             players[i].deleteBonus(powerUp);
+                            //TODO SET USE TO TRUE
+                            bonus[i].setUsed(true);
                         } else {
                             cout << "[ERROR] - Action non reconnue";
                         }
