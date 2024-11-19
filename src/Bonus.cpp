@@ -65,17 +65,6 @@ void Bonus::setBonuses(Board &board, Game &game, Bonus bonus[]){
     }
 };
 
-void Bonus::debug() {
-    std::cout << "Bonus Info:" << std::endl;
-    std::cout << "Name: " << this->getName() << std::endl;
-    std::cout << "Description: " << this->getDescription() << std::endl;
-    std::cout << "Type: " << this->getType() << std::endl;
-    std::cout << "Player : " << this->getPlayer() << std::endl;
-    std::cout << "Position: (" << this->getPosition().first << ", " << this->getPosition().second << ")" << std::endl;
-    std::cout << "Utiliser immediatement: " << this->getUseNow() << std::endl;
-    std::cout << "--------------------------------" << std::endl;
-}
-
 void Bonus::setPosition(int x, int y) {
     this->position = std::make_pair(x, y);
 }

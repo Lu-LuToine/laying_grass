@@ -47,10 +47,13 @@ int startGameMenu(){
 
     switch (user_choice) {
         case 1 :
+            cout << endl;
             return 1;
         case 2 :
+            cout << endl;
             return 2;
         case 3:
+            cout << endl;
             return 3;
     }
     return 0;
@@ -93,7 +96,7 @@ void chooseStats(Player players[], int nb_player, Colors chooseColors, Game game
     cout << "[INIT] - Player's list" << endl;
     for (int i = 0; i < game.getNbPlayer(); i++) {
         setConsoleColor(players[i].getColor());
-        cout << "Player " << i+1 << " : " << players[i].getName() << endl;
+        cout << "- Player " << i+1 << " : " << players[i].getName() << endl;
         setConsoleColor(7);
     }
 
@@ -117,20 +120,3 @@ void openRulesFile(const std::string &file) {
     system(cmd.c_str()); // Execute cmd
 }
 
-
-//DEBUG MOI
-void DEBUGchooseStats(Player players[], int nb_player){
-
-    for (int i = 0; i < nb_player; i++) {
-        if (i == 1) {
-            players[i].setName("Jean michel");
-            players[i].setColor(2);
-        } else {
-            players[i].setName("Edward");
-            players[i].setColor(3);
-        }
-        setConsoleColor(players[i].getColor());
-        cout << "Hi i'm " << players[i].getName() << endl;
-        setConsoleColor(7);
-    }
-};

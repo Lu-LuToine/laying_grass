@@ -1,4 +1,7 @@
 #include "../include/Tiles.h"
+#include "../include/Colors.h"
+#include "../include/Game.h"
+
 
 #include <cstdlib>
 #include <algorithm>
@@ -6,7 +9,6 @@
 #include <iostream>
 #include <random>
 
-#include "../include/Game.h"
 
 std::vector<Tiles> Tiles::allForms;
 
@@ -56,7 +58,7 @@ void Tiles::setForm(Game &game) {
             }
             file.close();
         } else {
-            std::cerr << "Error - can't open this file : " << filename << std::endl;
+            std::cerr << "[ERROR] - can't open this file : " << filename << std::endl;
         }
 
         Tiles tile;
@@ -81,27 +83,7 @@ void Tiles::setForm(Game &game) {
     }
 }
 
-void Tiles::debugDisplayAllForms() {
-    for (size_t i = 0; i < allForms.size(); ++i) {
-        const Tiles& tile = allForms[i];
-        std::cout << "Tile " << i << " (" << tile.name << "):" << std::endl;
-
-        for (const auto& row : tile.form) {
-            for (int cell : row) {
-                std::cout << (cell == 1 ? char(219) : ' ');
-            }
-            std::cout << std::endl;
-        }
-        std::cout << "-------------------------" << std::endl;
-    }
-}
-
 std::vector<std::vector<int>> Tiles::rotate90(const std::vector<std::vector<int>>& matrice) const {
-    if (matrice.empty() || matrice[0].empty()) {
-        std::cerr << "Error : can't rotate this tiles\n";
-        return matrice;
-    }
-
     int rows = matrice.size();
     int cols = matrice[0].size();
     std::vector<std::vector<int>> rotated(cols, std::vector<int>(rows));
@@ -168,9 +150,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
 
     std::vector<std::pair<int, int>> temporaryGetCells;
 
-    std::cout << "Form dimensions: Width = " << formWidth << ", Height = " << formHeight << ", currentPlayer = " << currentPlayer << std::endl;
-
-    // Found first 1 on y =0
+    // Found first 1 on y = 0
     int startRow = -1;
     for (int i = 0; i < formHeight; ++i) {
         if (this->form[i][0] == 1) {
@@ -183,7 +163,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
     int adjustedY = player_y;
 
     if (adjustedX - startRow < 0 || adjustedY < 0 || (adjustedX - startRow) + formHeight > boardSize || adjustedY + formWidth > boardSize) {
-        std::cout << "Error: out of range" << std::endl;
+        std::cout << "[ERROR] - out of range" << std::endl;
         return false;
     }
 
@@ -200,7 +180,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
 
                 if (status != 0 && status != 10 && status != 11 && status != 12) {
                     isCompatible = false;
-                    std::cout << "Error: can't place at (" << adjustedX + i << ", " << adjustedY + j << ") invalid position." << std::endl;
+                    std::cout << "[ERROR] - Can't place here invalid position." << std::endl;
                     break;
                 }
             }
@@ -239,7 +219,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
 
 
         if (!isAdjacentToPlayer) {
-            std::cout << "Error: no adjacent tile of current player found. The form can't be placed." << std::endl;
+            std::cout << "[ERROR] - tile not placed next to your terrytory.<" << std::endl;
 
             // Restore original status if failed
             for (int i = 0; i < formHeight; i++) {
@@ -279,7 +259,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
                                 }
                             }
                         }
-                        std::cout << "Error: condition failed for the case at (" << adjustedX + i << ", " << adjustedY + j << "). Position rolled back." << std::endl;
+                        std::cout << "[ERROR] - condition failed for the case at (" << adjustedX + i << ", " << adjustedY + j << "). Position rolled back." << std::endl;
                         return false;
                     }
                 }
@@ -290,7 +270,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
         board.getBoard(player);
         int user_confirm;
         do {
-            std::cout << "Would you confirm your position? - 1 yes | 2 no" << std::endl;
+            std::cout << "[Tiles] - Would you confirm your position? - 1 yes | 2 no" << std::endl;
             std::cout << "*> :";
             std::cin >> user_confirm;
         } while (user_confirm != 1 && user_confirm != 2);
@@ -305,7 +285,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
                     }
                 }
             }
-            std::cout << "Position cancelled. Try another position." << std::endl;
+            std::cout << "[Tiles] - Position cancelled. Try another position." << std::endl;
             return false;
         }
 
@@ -320,7 +300,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
         }
     } else {
         temporaryGetCells.clear();
-        std::cout << "Current tile can't be placed here, nothing happened, try another position" << std::endl;
+        std::cout << "[ERROR] - Current tile can't be placed here, nothing happened, try another position" << std::endl;
         return false;
     }
     temporaryGetCells.clear();
@@ -381,15 +361,13 @@ void Tiles::displayQueueForm() {
     }
 }
 
-void Tiles::tileExchange(Board &board){
+int Tiles::tileExchange(Board &board){
     bool stoneFound = false;
-    int howManyStones;
+    int howManyStones = 0;
     int action;
 
-    int tileToExchange;
-
     for(int i = 0; i < board.getSize(); i++){
-        for(int j = 0; j < board.getSize(); i++){
+        for(int j = 0; j < board.getSize(); j++){
             if(board.boardStruct[i][j].getStatus() == 13){
                 howManyStones+=1;
                 stoneFound = true;
@@ -398,8 +376,8 @@ void Tiles::tileExchange(Board &board){
     }
 
     if(stoneFound){
-        std::cout << "OH ! " << howManyStones << " has been found on this board" << std::endl;
-        std::cout << "Do you want to remove ";
+        std::cout << "[Bonus] - OH ! " << howManyStones << " has been found on this board" << std::endl;
+        std::cout << "[Bonus] - Do you want to remove ";
         if(howManyStones == 1){
             std::cout << " it ?" << std::endl;
         } else {
@@ -415,56 +393,64 @@ void Tiles::tileExchange(Board &board){
     if (stoneFound && action ==1){
         int xStone;
         char yStone;
+        int yStoneInt;
 
-        std::cout << "Choose x for stone" << std::endl;
+        std::cout << "[Bonus] - Choose x for stone" << std::endl;
         std::cout << "*> ";
         std::cin >> xStone;
-        std::cout << "Choose y for stone" << std::endl;
+        std::cout << "[Bonus] - Choose y for stone" << std::endl;
         std::cout << "*> ";
         std::cin >> yStone;
 
-        yStone = convertLetterToCoos(yStone);
+        yStoneInt = convertLetterToCoos(yStone);
 
-        do {
-            std::cout << "ERROR Not stone - Choose x for stone (a number)" << std::endl;
-            std::cout << "*> ";
-            std::cin >> xStone;
-            std::cout << "ERROR Not stone - Choose y for stone (a letter)" << std::endl;
-            std::cout << "*> ";
-            std::cin >> yStone;
-            yStone = convertLetterToCoos(yStone);
-        } while(board.boardStruct[xStone][yStone].getStatus() != 13);
+        if (0 > xStone || xStone > board.getSize() || 65 > int(yStone) || int(yStone) > 84) {
+            do {
+                setConsoleColor(79);
+                std::cout << "[ERROR Not stone] - Choose x for stone (a number)" << std::endl;
+                setConsoleColor(10);
+                std::cout << "*> ";
+                std::cin >> xStone;
 
-        board.boardStruct[xStone][yStone].setStatus(0);
-
-        return;
-
-    } else {
-        do {
-            std::cout << "Choose a form to exchange : ";
-            std::cout << "*> ";
-            std::cin >> tileToExchange;
-        } while(tileToExchange < 1 || tileToExchange > 5);
-
-
-        if (tileToExchange >= 0 && tileToExchange < allForms.size()) {
-            // Save allForms[0]
-            Tiles firstTile = allForms[0];
-
-            Tiles chosenTile = allForms[tileToExchange];
-            allForms.erase(allForms.begin() + tileToExchange); // Delete from actual position
-            allForms.insert(allForms.begin(), chosenTile); // Push it in first position
-
-
-            allForms.erase(allForms.begin() + 1); // Delete old allform[0] from his actual position
-            allForms.push_back(firstTile); // Push it back
-
-            std::cout << "Tile exchanged with success" << std::endl;
-        } else {
-            std::cout << "Error - Invalid Index." << std::endl;
+                setConsoleColor(79);
+                std::cout << "[ERROR Not stone] - Choose y for stone (a letter)" << std::endl;
+                setConsoleColor(10);
+                std::cout << "*> ";
+                std::cin >> yStone;
+                yStoneInt = convertLetterToCoos(yStone);
+            } while(0 > xStone || xStone > board.getSize() || 65 > int(yStone) || int(yStone) > 84 || board.boardStruct[xStone][yStoneInt].getStatus() != 13);
         }
 
+        board.boardStruct[xStone][yStoneInt].setStatus(0);
+
+        return 0;
+
     }
+    int tileToExchange;
+    do {
+        std::cout << "[Bonus] - Choose a form to exchange : ";
+        std::cout << "*> ";
+        std::cin >> tileToExchange;
+    } while(tileToExchange < 1 || tileToExchange > 5);
+
+
+    if (tileToExchange >= 0 && tileToExchange < allForms.size()) {
+        // Save allForms[0]
+        Tiles firstTile = allForms[0];
+
+        Tiles chosenTile = allForms[tileToExchange];
+        allForms.erase(allForms.begin() + tileToExchange); // Delete from actual position
+        allForms.insert(allForms.begin(), chosenTile); // Push it in first position
+
+
+        allForms.erase(allForms.begin() + 1); // Delete old allform[0] from his actual position
+        allForms.push_back(firstTile); // Push it back
+
+        std::cout << "[Bonus] - Tile exchanged with success" << std::endl;
+    } else {
+        std::cout << "[ERROR] - Invalid Index." << std::endl;
+    }
+    return 0;
 }
 
 std::vector<std::vector<int>> Tiles::getForm() const {

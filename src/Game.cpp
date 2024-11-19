@@ -1,15 +1,13 @@
 #include "../include/Game.h"
-
-#include <algorithm>
-
 #include "../include/Colors.h"
 #include "../include/Player.h"
 #include "../include/Bonus.h"
 
 #include <iostream>
-#include <queue>
 #include <random>
 #include <vector>
+#include <algorithm>
+
 
 using namespace std;
 
@@ -19,7 +17,6 @@ Game::Game(){
     this->nbPlayer = 0;
 };
 
-// TODO => attention pour finir le jeu on doit faire que 9 turn, on ne doit s pas poser toutes les tuiles !!
 void Game::setTurn(int turn){
     this->turn = turn;
 };
@@ -198,7 +195,6 @@ bool cardinateStatusCases(Board &board, int x, int y, bool allAndCases, int valu
 
 int convertLetterToCoos(char letter){
     int yco = int(letter);
-    cout << "LETTER RESULT" << yco-65 << endl;
     if (yco-65 > 26){
         return yco-71;
     } else {
@@ -215,11 +211,11 @@ void startingPlace(Player players[], Game game, Board &board){
         setConsoleColor(players[i].getColor());
         cout << "Player " << i+1 << endl;
         setConsoleColor(10);
-        cout << "Choose your starting place x (a number) : " << endl;
+        cout << "[INIT] - Choose your starting place x (a number) : " << endl;
         cout << "*> ";
         cin >> x;
 
-        cout << "Choose your starting place y (a letter) : " << endl;
+        cout << "[INIT] - Choose your starting place y (a letter) : " << endl;
         cout << "*> ";
         cin >> y;
         yco = convertLetterToCoos(y);
@@ -236,7 +232,7 @@ void startingPlace(Player players[], Game game, Board &board){
                 setConsoleColor(79);
                 board.getSize() == 20 ? cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl : cout << "[ERROR] - Chose a valid Y position (between A and d)" << endl;
                 setConsoleColor(10);
-                cout << "Choose your starting place y (a number) : " << endl;
+                cout << "Choose your starting place y (a letter) : " << endl;
                 cout << "*> ";
                 cin >> y;
                 yco = convertLetterToCoos(y);
@@ -251,13 +247,10 @@ void startingPlace(Player players[], Game game, Board &board){
         board.boardStruct[x][yco].setStatus(i + 1);
         players[i].setCells(x, yco);
         players[i].getCells();
-
-        board.getBoard(players);
     }
 }
 
 void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize) {
-    std::cout << bonusSize<< endl;
     for(int i = 0; i < bonusSize; i++) {
         for(int k = 0; k < game.getNbPlayer(); k++) {
             if(bonus[i].getPlayer() == 0) {
@@ -268,7 +261,11 @@ void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], in
                         players[k].setBonus(bonusType);
                         std::cout << "Nice ! Player " << k + 1 << " received bonus: " << bonus[i].getName() << std::endl;
                         bonus[i].setPlayer(k + 1);
-                        board.boardStruct[bonus[i].getPosition().first][bonus[i].getPosition().second].setPlayer(k);
+                        board.boardStruct[bonus[i].getPosition().first][bonus[i].getPosition().second].setPlayer(k + 1);
+                    }
+
+                    if(bonus[i].getType() == 1) {
+                        stonePowerUp(board);
                     }
                 }
             }
@@ -279,36 +276,61 @@ void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], in
 
 
 
-
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses) {
-    // Loop until the desired number of turns has been reached
     while (game.getTurn() < 9) {
-        // Each player plays during the same turn
         for (int i = 0; i < game.getNbPlayer(); i++) {
             int playerX;
-            int playerY;
+            char playerY;
+            int  playerYint;
             int action;
 
             bool turnComplete = false;
 
             while (!turnComplete) {
-                cout << "PLAYER " << i + 1 << " || " << players[i].getName() << endl;
-                cout << "DEBUG - What do ? :" << endl;
-                cout << "DEBUG - 0 Placement" << endl;
-                cout << "DEBUG - 1 Rotate" << endl;
-                cout << "DEBUG - 2 Flip" << endl;
-                cout << "DEBUG - 3 Power-Up" << endl;
-                cin >> action;
+                do {
+                    cout << "== PLAYER " << i + 1 << " || " << players[i].getName() << endl;
+                    cout << "[Play] - Choose your next action ? :" << endl;
+                    cout << "0 - Placement" << endl;
+                    cout << "1 - Rotate" << endl;
+                    cout << "2 - Flip" << endl;
+                    cout << "3 - Power-Up" << endl;
+                    cout << "4 - Blocked ? pass" << endl;
+                    cout << "*> ";
+                    cin >> action;
+                } while (0 > action && action > 4);
 
                 switch (action) {
                     case 0:
-                        cout << "DEBUG - placement de la tuile : x :" << endl;
+                        cout << "[Tiles] - Set x for your tile (a number) : " << endl;
+                        cout << "*> " << endl;
                         cin >> playerX;
-                        cout << "DEBUG - placement de la tuile : y :" << endl;
+                        cout << "[Tiles] - Set y for your tile (a letter) : " << endl;
+                        cout << "*> ";
                         cin >> playerY;
 
+                        if (0 > playerX || playerX > board.getSize() || 65 > int(playerY) || int(playerY) > 84){
+                            do {
+                                setConsoleColor(79);
+                                board.getSize() == 20 ? cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl : cout << "[ERROR] - Chose a valid X position (between 0 and 30)" << endl;
+                                setConsoleColor(10);
+                                cout << "[Tiles] - Choose your starting place x (a number) : " << endl;
+                                cout << "*> ";
+                                cin >> playerX;
+
+                                setConsoleColor(79);
+                                board.getSize() == 20 ? cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl : cout << "[ERROR] - Chose a valid Y position (between A and d)" << endl;
+                                setConsoleColor(10);
+                                cout << "[Tiles] - Choose your starting place y (a letter) : " << endl;
+                                cout << "*> ";
+                                cin >> playerY;
+                            } while (0 > playerX || playerX > board.getSize() || 65 > int(playerY) || int(playerY) > 84);
+                        }
+
+                        playerYint = convertLetterToCoos(playerY);
+
+
                         // If the placement is valid, end the turn
-                        if (tiles.placeFormInBoard(board, playerX, playerY, i + 1, players)) {
+                        if (tiles.placeFormInBoard(board, playerX, playerYint, i + 1, players)) {
                             bonusCaptured(game, board, bonus, players, totalBonuses);
                             tiles.displayQueueForm();
                             turnComplete = true;  // End the current player's turn
@@ -319,33 +341,44 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
 
                     case 1:
                         tiles.rotateForm();
+                        cout << "[Tiles] - Tile rotated !" << endl;
                         tiles.displayCurrentTile();
                         break;
 
                     case 2:
                         tiles.flipForm();
-                        cout << "fliped" << endl;
+                        cout << "[Tiles] - Tile flipped !" << endl;
                         tiles.displayCurrentTile();
                         break;
 
                     case 3:
-                        cout << "You have " << players[i].getBonus().size() << " Power-Up(s)" << endl;
-                        for (int bonusCount = 0; bonusCount < players[i].getBonus().size(); bonusCount++) {
-                            cout << bonusCount << " : " << players[i].getBonus()[bonusCount] << endl;
-                        }
+                        cout << "[Bonus] - You have " << players[i].getBonus().size() << " Power-Up(s)" << endl;
+                        if (players[i].getBonus().size() > 0) {
+                            for (int bonusCount = 0; bonusCount < players[i].getBonus().size(); bonusCount++) {
+                                cout << bonusCount << " : " << "Tile exchange" << endl;
+                            }
 
-                        int powerUp;
-                        cout << "Select a bonus : ";
-                        cin >> powerUp;
+                            int powerUp;
+                            do {
+                                cout << "[Bonus] - Select a bonus : ";
+                                cout << "*> ";
+                                cin >> powerUp;
+                            } while(powerUp < 0);
 
-                        if (powerUp < players[i].getBonus().size()) {
-                            cout << "bonus";
-                            tiles.tileExchange(board);
-                            tiles.displayQueueForm();
-                            players[i].deleteBonus(powerUp);
-                        } else {
-                            cout << "[ERROR] - Invalid selection." << endl;
+
+                            if (powerUp < players[i].getBonus().size()) {
+                                tiles.tileExchange(board);
+                                tiles.displayQueueForm();
+                                players[i].deleteBonus(powerUp);
+                            } else {
+                                cout << "[ERROR] - Invalid selection." << endl;
+                            }
                         }
+                        break;
+
+                    case 4:
+                        cout << "Blocked - next player  : ";
+                        turnComplete = true;
                         break;
 
                     default:
@@ -354,13 +387,21 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                 }
             }
             board.getBoard(players);
+            tiles.displayQueueForm();
             bonusCaptured(game, board, bonus, players, totalBonuses);
         }
 
         game.setTurn(game.getTurn() + 1);
-        cout << "Turn " << game.getTurn() << endl;
-        if (game.getTurn() == 9) {
+        cout << "=== Turn " << game.getTurn() << " ===" << endl;
+        if (game.getTurn() == 10) {
             for (int i = 0; i < game.getNbPlayer(); i++) {
+                for (int bonusCount = 0; bonusCount < players[i].getBonus().size(); bonusCount++) {
+                    if (!players[i].getBonus().empty()) {
+                        cout << "== PLAYER " << i + 1 << " || " << players[i].getName() << endl;
+                        finalTileExchange(board, i);
+                    };
+                }
+
             }
                 game.endGameCalculTerritory(players, board);
         }
@@ -372,7 +413,6 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
     vector<pair<int, int>> allPlayerSize;
 
     for (int k = 0; k < getNbPlayer(); k++) {
-        std::cout << "player " << k << std::endl;
         vector<pair<int, int>> cells = players[k].getCells();
         vector<int> currentPlayerSizes;
 
@@ -388,8 +428,6 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
             yMax = max(yMax, cell.second);
         }
 
-        std::cout << "xMin, xMax, yMin, yMax: " << xMin << " " << xMax << " " << yMin  << " " << yMax << std::endl;
-
         for (int i = xMin; i < xMax; i++) {
             for (int j = yMin; j < yMax; j++) {
                 double totalCases = 0;
@@ -400,7 +438,6 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
                    board.boardStruct[i][j+1].getStatus() == k + 1 &&
                    board.boardStruct[i+1][j+1].getStatus() == k + 1)
                 {
-                    std::cout << "hi from if" << std::endl;
                     totalCases += 1;
 
                     while (i + 2 < board.boardStruct.size() && j + 2 < board.boardStruct[0].size() &&
@@ -412,12 +449,8 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
                         totalCases += 0.5;
                         i += 2;
                         j += 2;
-                        std::cout << "hi from else" << std::endl;
                     }
-
-                    std::cout << "TOTAL CASES before 2: " << totalCases << std::endl;
                     totalCases = totalCases * 2;
-                    std::cout << "TOTAL CASES: " << totalCases << std::endl;
                     currentPlayerSizes.push_back(int(totalCases));
                 }
             }
@@ -436,7 +469,7 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
     std::cout << "[FINAL] - GAME'S STATISTIC : " << endl;
     for (const auto &size : allPlayerSize) {
         setConsoleColor(players[size.first].getColor());
-        std::cout << "- Player " << size.first + 1 << " : " << size.second  << "*" << size.second << std::endl;
+        std::cout << "- Player " << size.first + 1 << " - " << players[size.first].getName() << " : " << size.second  << "*" << size.second << std::endl;
     }
     std::cout << std::endl;
 
@@ -454,7 +487,7 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
 
     if (winners.size() == 1) {
         setConsoleColor(96);
-        std::cout << "== WINNER IS Player " << winners[0] + 1 << " with " << maxScore << " territory points." << std::endl;
+        std::cout << "== WINNER IS Player " << winners[0] + 1 << " - " << players[winners[0]].getName() << " with " << maxScore << "*" << maxScore << " territory point !!" << std::endl;
     } else {
         setConsoleColor(111);
         std::cout << "== IT'S A TIE! Calculating winner ... " << std::endl;
@@ -472,7 +505,7 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
            );
         int finalWinner = maxElement->first;
         setConsoleColor(96);
-        std::cout << "== WINNER IS Player " << finalWinner + 1 << " with " << maxScore << " territory points." << std::endl;
+        std::cout << "== WINNER IS Player " << finalWinner + 1 << " - " << players[finalWinner].getName() << " with " << maxScore << "*" << maxScore << " territory point !!" << std::endl;
     }
     setConsoleColor(7);
 }
@@ -480,17 +513,73 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
 
 Game::~Game(){};
 
-void stonePowerUp(Board board){
+void stonePowerUp(Board &board){
 
     int cosx;
-    int cosy;
+    char cosy;
 
-    std::cout << "Enter cosx : ";
-    std::cin >> cosx;
+    cout << "[Tiles] - Set x for your tile (a number) : " << endl;
+    cout << "*> " << endl;
+    cin >> cosx;
+    cout << "[Tiles] - Set y for your tile (a letter) : " << endl;
+    cout << "*> " << endl;
+    cin >> cosy;
 
-    std::cout << "Enter cosy : ";
-    std::cin >> cosy;
+    if (0 > cosx || cosx > board.getSize() || 65 > int(cosy) || int(cosy) > 84){
+        do {
+            setConsoleColor(79);
+            board.getSize() == 20 ? cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl : cout << "[ERROR] - Chose a valid X position (between 0 and 30)" << endl;
+            setConsoleColor(10);
+            cout << "[Tiles] - Choose your starting place x (a number) : " << endl;
+            cout << "*> ";
+            cin >> cosx;
 
-    board.boardStruct[cosx][cosy].setStatus(13);
+            setConsoleColor(79);
+            board.getSize() == 20 ? cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl : cout << "[ERROR] - Chose a valid Y position (between A and d)" << endl;
+            setConsoleColor(10);
+            cout << "[Tiles] - Choose your starting place y (a letter) : " << endl;
+            cout << "*> ";
+            cin >> cosy;
+        } while (0 > cosx || cosy > board.getSize() || 65 > int(cosy) || int(cosy) > 84);
+    }
+
+    int cosyint = convertLetterToCoos(cosy);
+
+    board.boardStruct[cosx][cosyint].setStatus(13);
 
 };
+
+void finalTileExchange(Board &board, int playerStatus) {
+    int cosx;
+    char cosy;
+
+    cout << "[Tiles] - Set x for your tile (a number) : " << endl;
+    cout << "*> " << endl;
+    cin >> cosx;
+    cout << "[Tiles] - Set y for your tile (a letter) : " << endl;
+    cout << "*> " << endl;
+    cin >> cosy;
+
+    if (0 > cosx || cosx > board.getSize() || 65 > int(cosy) || int(cosy) > 84){
+        do {
+            setConsoleColor(79);
+            board.getSize() == 20 ? cout << "[ERROR] - Chose a valid X position (between 0 and 20)" << endl : cout << "[ERROR] - Chose a valid X position (between 0 and 30)" << endl;
+            setConsoleColor(10);
+            cout << "[Tiles] - Choose your starting place x (a number) : " << endl;
+            cout << "*> ";
+            cin >> cosx;
+
+            setConsoleColor(79);
+            board.getSize() == 20 ? cout << "[ERROR] - Chose a valid Y position (between A and T)" << endl : cout << "[ERROR] - Chose a valid Y position (between A and d)" << endl;
+            setConsoleColor(10);
+            cout << "[Tiles] - Choose your starting place y (a letter) : " << endl;
+            cout << "*> ";
+            cin >> cosy;
+        } while (0 > cosx || cosy > board.getSize() || 65 > int(cosy) || int(cosy) > 84);
+    }
+
+    int cosyint = convertLetterToCoos(cosy);
+
+    board.boardStruct[cosx][cosyint].setStatus(playerStatus+1);
+}
+

@@ -26,9 +26,6 @@ public:
 
     void setBonuses(Board &board, Game &game, Bonus bonus[]);
 
-
-    void debug();
-
     void setPosition(int x, int y);
 
     std::pair<int, int> getPosition();

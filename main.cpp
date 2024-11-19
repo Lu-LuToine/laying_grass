@@ -23,9 +23,11 @@ int main()
         if (menuReturn == 2) {
             // Open the rules file and show rules
             openRulesFile("../rules.txt");
-            // Continue loop to return to the menu
+            cout << endl;
+            setConsoleColor(7);
             continue;
         }
+
 
         if (menuReturn == 3) {
             // Exit the game
@@ -53,7 +55,6 @@ int main()
     }
 
     game.setNbPlayer(nb_player);
-
     setConsoleColor(10);
     cout << "[INIT] - You chose " << game.getNbPlayer() << " Players" << endl;
 
@@ -63,30 +64,27 @@ int main()
     Board1.setSize(game.getNbPlayer());
     Board1.setBoard();
 
-    int totalBonuses = round(1.5*game.getNbPlayer()) + round(0.5*game.getNbPlayer()) + game.getNbPlayer();
-    Bonus* bonus = new Bonus[totalBonuses];
-
-
+    int totalBonuses = round(1.5*game.getNbPlayer()) + round(0.5*game.getNbPlayer()) + game.getNbPlayer(); // Set number of bonus
+    Bonus* bonus = new Bonus[totalBonuses]; // Set bonus
 
     bonus->setBonuses(Board1, game, bonus);
 
-
-    //2
-    Board1.getBoard(players);
-
-    Colors UsersColors;
+    Colors UsersColors; // Set colors
 
     chooseStats(players, game.getNbPlayer(), UsersColors, game);
-
-    //Board1.getBoard();
-
-    startingPlace(players, game, Board1);
     Board1.getBoard(players);
+    startingPlace(players, game, Board1);
+
     Tiles tiles;
 
     tiles.setForm(game);
-    tiles.displayQueueForm();
 
+    setConsoleColor(32);
+    cout << endl;
+    cout << "[INIT-MENU] - Initialization finished ! Good game at all " << endl;
+    Board1.getBoard(players);
+    setConsoleColor(11);
+    tiles.displayQueueForm();
     gameLoop(game, Board1, bonus, players, tiles, totalBonuses);
     delete[] players;
     delete[] bonus;

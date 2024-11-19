@@ -38,6 +38,7 @@ int convertLetterToCoos(char);
 void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize);
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses);
 
-void stonePowerUp();
+void stonePowerUp(Board &board);
+void finalTileExchange(Board &board, int playerStatus);
 
 #endif //LAYING_GRASS_GAME_H

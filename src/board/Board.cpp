@@ -126,7 +126,6 @@ void Board::getBoard(Player players[]) {
                     std::cout << "9" << ' ';
                     setConsoleColor(7);
                     break;
-                // TODO : faire dans la classe bonus un player pour assigner si le bonus appartient a un jouer ou non et auquel, puis, dans les switch case, faire un if si assigné a un joueur, récupérer la couleur du player pour l'afficher
                 case 10:
                     if (cell.getPlayer() != 0) {
                         int playerId = cell.getPlayer();
@@ -164,6 +163,7 @@ void Board::getBoard(Player players[]) {
         row_count++;
         std::cout << std::endl;
     }
+    setConsoleColor(11);
 }
 
 Board::~Board(){}
