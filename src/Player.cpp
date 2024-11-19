@@ -41,17 +41,6 @@ int Player::getColor(){
 };
 
 std::vector<std::pair<int, int>> Player::getCells() {
-    // DEBUG => display all elements of this->cells
-    for (const auto& cell : this->cells) {
-        std::cout << "cells : x " << cell.first << " y " << cell.second << std::endl;
-    }
-
-    // If cells is empty, return a vector with one pair (-1, -1)
-    if (this->cells.empty()) {
-        return std::vector<std::pair<int, int>>{ { -1, -1 } };
-    }
-
-    // Otherwise, return the cells
     return this->cells;
 }
 

@@ -259,19 +259,28 @@ void startingPlace(Player players[], Game game, Board &board){
 }
 
 void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize) {
+    std::cout << "BONUS CAPTURED" << std::endl;
     for(int i = 0; i < bonusSize; i++) {
         for(int k = 1; k < game.getNbPlayer(); k++) {
-            if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k) && bonus[i].getPlayer() == 0 && !bonus[i].getUsed()) {
-                bonus[i].setPlayer(k);
-                players[k].setBonus(bonus[i].getType());
+            bool condition = cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().second, true, k) && !bonus[i].getUsed();
+
+            std::cout << condition << endl;
+            std::cout << "cond détaillé " << cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k) << " " << (!bonus[i].getUsed() == false) << " k :" << k  << endl;
+            if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k) == true) {
+                if (bonus[i].getUsed() == false || bonus[i].getUsed() == 1 ) {
+                    std::cout << "HI FROM CONDITION" << std::endl;
+                    bonus[i].setPlayer(k);
+                    players[k].setBonus(bonus[i].getType());
+                }
             }
         }
     }
 }
 
+
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses) {
     // Loop until the desired number of turns has been reached
-    while (game.getTurn() < 3) {
+    while (game.getTurn() < 9) {
         // Each player plays during the same turn
         for (int i = 0; i < game.getNbPlayer(); i++) {
             int playerX;
@@ -300,9 +309,6 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                         if (tiles.placeFormInBoard(board, playerX, playerY, i + 1, players)) {
                             board.getBoard(players);
                             bonusCaptured(game, board, bonus, players, totalBonuses);
-                            for (int j = 0; j < totalBonuses; j++) {
-                                bonus[j].debug();
-                            }
                             tiles.displayQueueForm();
                             turnComplete = true;  // End the current player's turn
                         } else {
@@ -348,11 +354,15 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                         break;
                 }
             }
+            bonusCaptured(game, board, bonus, players, totalBonuses);
+            for (int j = 0; j < totalBonuses; j++) {
+                bonus[j].debug();
+            }
         }
 
         game.setTurn(game.getTurn() + 1);
         cout << "Turn " << game.getTurn() << endl;
-        if (game.getTurn() == 3) {
+        if (game.getTurn() == 9) {
             for (int i = 0; i < game.getNbPlayer(); i++) {
             }
                 game.endGameCalculTerritory(players, board);
@@ -369,10 +379,10 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
         vector<pair<int, int>> cells = players[k].getCells();
         vector<int> currentPlayerSizes;
 
-        int xMin;
-        int yMin;
-        int xMax;
-        int yMax;
+        int xMin = 0;
+        int yMin = 0;
+        int xMax = 0;
+        int yMax = 0;
 
         for (const auto &cell : cells) {
             xMin = min(xMin, cell.first);
@@ -426,19 +436,48 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
         currentPlayerSizes.clear();
     }
 
-    std::cout << "All players' territories: ";
+    std::cout << "[FINAL] - GAME'S STATISTIC : " << endl;
     for (const auto &size : allPlayerSize) {
-        std::cout << "(" << size.first << ", " << size.second << ") ";
+        setConsoleColor(players[size.first].getColor());
+        std::cout << "- Player " << size.first + 1 << " : " << size.second  << "*" << size.second << std::endl;
     }
     std::cout << std::endl;
 
-    auto maxIt = max_element(allPlayerSize.begin(), allPlayerSize.end(),
-                               [](const pair<int, int>& a, const pair<int, int>& b) {
+    int maxScore = max_element(allPlayerSize.begin(), allPlayerSize.end(),
+                               [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
                                    return a.second < b.second;
-                               });
-    size_t winnerIndex = maxIt->first;  // Player ID of the winner
-    std::cout << "== WINNER IS Player " << winnerIndex + 1 << " with " << maxIt->second << " territory points." << std::endl;
+                               })->second;
 
+    std::vector<int> winners;
+    for (const auto& size : allPlayerSize) {
+        if (size.second == maxScore) {
+            winners.push_back(size.first);
+        }
+    }
+
+    if (winners.size() == 1) {
+        setConsoleColor(96);
+        std::cout << "== WINNER IS Player " << winners[0] + 1 << " with " << maxScore << " territory points." << std::endl;
+    } else {
+        setConsoleColor(111);
+        std::cout << "== IT'S A TIE! Calculating winner ... " << std::endl;
+        vector<pair<int, int>> tieMaxSize;
+        for (size_t i = 0; i < winners.size(); ++i) {
+            int playerIndex = winners[i];
+            tieMaxSize.push_back(std::make_pair(playerIndex, players[playerIndex].getCells().size()));
+        }
+        auto maxElement = std::max_element(
+               tieMaxSize.begin(),
+               tieMaxSize.end(),
+               [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                   return a.second < b.second;
+               }
+           );
+        int finalWinner = maxElement->first;
+        setConsoleColor(96);
+        std::cout << "== WINNER IS Player " << finalWinner + 1 << " with " << maxScore << " territory points." << std::endl;
+    }
+    setConsoleColor(7);
 }
 
 

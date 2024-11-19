@@ -14,7 +14,7 @@ Bonus::Bonus(){
     this->position;
     this->bonusType;
     this->useNow;
-    this->used;
+    this->used = false;
 };
 
 void Bonus::setBonuses(Board &board, Game &game, Bonus bonus[]){
@@ -61,7 +61,6 @@ void Bonus::setBonuses(Board &board, Game &game, Bonus bonus[]){
                 bonus[k].setUseNow(true);
             }
             k++;
-            debug();
         }
     }
 };
