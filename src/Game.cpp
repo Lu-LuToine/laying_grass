@@ -111,7 +111,7 @@ bool cardinateStatusCases(Board &board, int x, int y, bool allAndCases, int valu
 
         // Default
         else if(x > 0 && x < board.getSize() - 1 && y > 0 && y < board.getSize() - 1) {
-            if (board.boardStruct[x][y + 1].getStatus() == value && board.boardStruct[x + 1][y].getStatus() == value && board.boardStruct[x - 1][y].getStatus() == value && board.boardStruct[x][y - 1].getStatus() == 0) {
+            if (board.boardStruct[x][y + 1].getStatus() == value && board.boardStruct[x + 1][y].getStatus() == value && board.boardStruct[x - 1][y].getStatus() == value && board.boardStruct[x][y - 1].getStatus() == value) {
                 return true;
             }
         }
@@ -259,10 +259,18 @@ void startingPlace(Player players[], Game game, Board &board){
 void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize) {
     std::cout << bonusSize<< endl;
     for(int i = 0; i < bonusSize; i++) {
-        for(int k = 1; k < game.getNbPlayer(); k++) {
-            if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().second, true, k)){
-                bonus[i].setPlayer(k);
-                players[k].setBonus(bonus[i].getType());
+        for(int k = 0; k < game.getNbPlayer(); k++) {
+            if(bonus[i].getPlayer() == 0) {
+                if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().second, true, k + 1)){
+                    int bonusType = bonus[i].getType();  // Get the type of the bonus
+
+                    if (bonusType >= 0) {
+                        players[k].setBonus(bonusType);
+                        std::cout << "Nice ! Player " << k + 1 << " received bonus: " << bonus[i].getName() << std::endl;
+                        bonus[i].setPlayer(k + 1);
+                        board.boardStruct[bonus[i].getPosition().first][bonus[i].getPosition().second].setPlayer(k);
+                    }
+                }
             }
         }
     }
@@ -301,7 +309,6 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
 
                         // If the placement is valid, end the turn
                         if (tiles.placeFormInBoard(board, playerX, playerY, i + 1, players)) {
-                            board.getBoard(players);
                             bonusCaptured(game, board, bonus, players, totalBonuses);
                             tiles.displayQueueForm();
                             turnComplete = true;  // End the current player's turn
@@ -336,8 +343,6 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                             tiles.tileExchange(board);
                             tiles.displayQueueForm();
                             players[i].deleteBonus(powerUp);
-                            //TODO SET USE TO TRUE
-                            //bonus[i].setUsed(true);
                         } else {
                             cout << "[ERROR] - Invalid selection." << endl;
                         }
@@ -348,10 +353,8 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
                         break;
                 }
             }
+            board.getBoard(players);
             bonusCaptured(game, board, bonus, players, totalBonuses);
-            for (int j = 0; j < totalBonuses; j++) {
-                bonus[j].debug();
-            }
         }
 
         game.setTurn(game.getTurn() + 1);
