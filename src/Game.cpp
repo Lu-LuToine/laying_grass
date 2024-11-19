@@ -192,8 +192,6 @@ bool cardinateStatusCases(Board &board, int x, int y, bool allAndCases, int valu
             }
         }
     }
-
-
     return false;
 
 }
@@ -259,23 +257,19 @@ void startingPlace(Player players[], Game game, Board &board){
 }
 
 void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize) {
-    std::cout << "BONUS CAPTURED" << std::endl;
+    std::cout << bonusSize<< endl;
     for(int i = 0; i < bonusSize; i++) {
         for(int k = 1; k < game.getNbPlayer(); k++) {
-            bool condition = cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().second, true, k) && !bonus[i].getUsed();
-
-            std::cout << condition << endl;
-            std::cout << "cond détaillé " << cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k) << " " << (!bonus[i].getUsed() == false) << " k :" << k  << endl;
-            if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k) == true) {
-                if (bonus[i].getUsed() == false || bonus[i].getUsed() == 1 ) {
-                    std::cout << "HI FROM CONDITION" << std::endl;
-                    bonus[i].setPlayer(k);
-                    players[k].setBonus(bonus[i].getType());
-                }
+            if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().second, true, k)){
+                bonus[i].setPlayer(k);
+                players[k].setBonus(bonus[i].getType());
             }
         }
     }
 }
+
+
+
 
 
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses) {
