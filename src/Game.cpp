@@ -261,7 +261,7 @@ void startingPlace(Player players[], Game game, Board &board){
 void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], int bonusSize) {
     for(int i = 0; i < bonusSize; i++) {
         for(int k = 1; k < game.getNbPlayer(); k++) {
-            if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k)) {
+            if(cardinateStatusCases(board, bonus[i].getPosition().first, bonus[i].getPosition().first, true, k) && bonus[i].getPlayer() == 0 && !bonus[i].getUsed()) {
                 bonus[i].setPlayer(k);
                 players[k].setBonus(bonus[i].getType());
             }
@@ -333,7 +333,7 @@ void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &
 
                         if (powerUp < players[i].getBonus().size()) {
                             cout << "bonus";
-                            tiles.tileExchange();
+                            tiles.tileExchange(board);
                             tiles.displayQueueForm();
                             players[i].deleteBonus(powerUp);
                             //TODO SET USE TO TRUE
@@ -443,3 +443,18 @@ void Game::endGameCalculTerritory(Player players[], Board &board) {
 
 
 Game::~Game(){};
+
+void stonePowerUp(Board board){
+
+    int cosx;
+    int cosy;
+
+    std::cout << "Enter cosx : ";
+    std::cin >> cosx;
+
+    std::cout << "Enter cosy : ";
+    std::cin >> cosy;
+
+    board.boardStruct[cosx][cosy].setStatus(13);
+
+};

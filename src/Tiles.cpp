@@ -380,31 +380,80 @@ void Tiles::displayQueueForm() {
     }
 }
 
-void Tiles::tileExchange(){
+void Tiles::tileExchange(Board &board){
+    bool stoneFound = false;
+    int howManyStones;
+    int action;
 
     int tileToExchange;
 
-    do {
-        std::cout << "Choose a form to exchange : ";
-        std::cin >> tileToExchange;
-    } while(tileToExchange < 1 || tileToExchange > 5);
+    for(int i = 0; i < board.getSize(); i++){
+        for(int j = 0; j < board.getSize(); i++){
+            if(board.boardStruct[i][j].getStatus() == 13){
+                howManyStones+=1;
+                stoneFound = true;
+            }
+        }
+    }
 
+    if(stoneFound){
+        std::cout << "OH ! " << howManyStones << " has been found on this board" << std::endl;
+        std::cout << "Do you want to remove ";
+        if(howManyStones == 1){
+            std::cout << " it ?" << std::endl;
+        } else {
+            std::cout << " one of them ?" << std::endl;
+        }
+        std::cout << " 1- yes | 2 - no" << std::endl;
+        do {
+            std::cout << "*> " << std::endl;
+            std::cin >> action;
+        }while(action !=1 && action !=2);
+    }
 
-    if (tileToExchange >= 0 && tileToExchange < allForms.size()) {
-        // Save allForms[0]
-        Tiles firstTile = allForms[0];
+    if (stoneFound && action ==1){
+        int xStone;
+        int yStone;
 
-        Tiles chosenTile = allForms[tileToExchange];
-        allForms.erase(allForms.begin() + tileToExchange); // Delete from actual position
-        allForms.insert(allForms.begin(), chosenTile); // Push it in first position
+        std::cout << "Choose x for stone " << std::endl;
+        std::cin >> xStone;
+        std::cout << "Choose y for stone " << std::endl;
+        std::cin >> yStone;
 
+        do {
+            std::cout << "ERROR Not stone - Choose x for stone " << std::endl;
+            std::cin >> xStone;
+            std::cout << "ERROR Not stone - Choose y for stone " << std::endl;
+            std::cin >> yStone;
+        }while(board.boardStruct[xStone][yStone].getStatus() == 13);
+        board.boardStruct[xStone][yStone].setStatus(0);
 
-        allForms.erase(allForms.begin() + 1); // Delete old allform[0] from his actual position
-        allForms.push_back(firstTile); // Push it back
+        return;
 
-        std::cout << "Tile exchanged with success" << std::endl;
     } else {
-        std::cout << "Error - Invalid Index." << std::endl;
+        do {
+            std::cout << "Choose a form to exchange : ";
+            std::cin >> tileToExchange;
+        } while(tileToExchange < 1 || tileToExchange > 5);
+
+
+        if (tileToExchange >= 0 && tileToExchange < allForms.size()) {
+            // Save allForms[0]
+            Tiles firstTile = allForms[0];
+
+            Tiles chosenTile = allForms[tileToExchange];
+            allForms.erase(allForms.begin() + tileToExchange); // Delete from actual position
+            allForms.insert(allForms.begin(), chosenTile); // Push it in first position
+
+
+            allForms.erase(allForms.begin() + 1); // Delete old allform[0] from his actual position
+            allForms.push_back(firstTile); // Push it back
+
+            std::cout << "Tile exchanged with success" << std::endl;
+        } else {
+            std::cout << "Error - Invalid Index." << std::endl;
+        }
+
     }
 }
 
