@@ -291,6 +291,7 @@ bool Tiles::placeFormInBoard(Board &board, int player_x, int player_y, int curre
         int user_confirm;
         do {
             std::cout << "Would you confirm your position? - 1 yes | 2 no" << std::endl;
+            std::cout << "*> :";
             std::cin >> user_confirm;
         } while (user_confirm != 1 && user_confirm != 2);
 
@@ -408,7 +409,7 @@ void Tiles::tileExchange(Board &board){
         do {
             std::cout << "*> " << std::endl;
             std::cin >> action;
-        }while(action !=1 && action !=2);
+        }while(action != 1 && action != 2);
     }
 
     if (stoneFound && action ==1){
@@ -416,16 +417,21 @@ void Tiles::tileExchange(Board &board){
         int yStone;
 
         std::cout << "Choose x for stone " << std::endl;
+        std::cout << "*> ";
         std::cin >> xStone;
         std::cout << "Choose y for stone " << std::endl;
+        std::cout << "*> ";
         std::cin >> yStone;
 
         do {
             std::cout << "ERROR Not stone - Choose x for stone " << std::endl;
+            std::cout << "*> ";
             std::cin >> xStone;
             std::cout << "ERROR Not stone - Choose y for stone " << std::endl;
+            std::cout << "*> ";
             std::cin >> yStone;
-        }while(board.boardStruct[xStone][yStone].getStatus() == 13);
+        } while(board.boardStruct[xStone][yStone].getStatus() != 13);
+
         board.boardStruct[xStone][yStone].setStatus(0);
 
         return;
@@ -433,6 +439,7 @@ void Tiles::tileExchange(Board &board){
     } else {
         do {
             std::cout << "Choose a form to exchange : ";
+            std::cout << "*> ";
             std::cin >> tileToExchange;
         } while(tileToExchange < 1 || tileToExchange > 5);
 
