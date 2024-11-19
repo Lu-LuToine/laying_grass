@@ -414,22 +414,25 @@ void Tiles::tileExchange(Board &board){
 
     if (stoneFound && action ==1){
         int xStone;
-        int yStone;
+        char yStone;
 
-        std::cout << "Choose x for stone " << std::endl;
+        std::cout << "Choose x for stone" << std::endl;
         std::cout << "*> ";
         std::cin >> xStone;
-        std::cout << "Choose y for stone " << std::endl;
+        std::cout << "Choose y for stone" << std::endl;
         std::cout << "*> ";
         std::cin >> yStone;
 
+        yStone = convertLetterToCoos(yStone);
+
         do {
-            std::cout << "ERROR Not stone - Choose x for stone " << std::endl;
+            std::cout << "ERROR Not stone - Choose x for stone (a number)" << std::endl;
             std::cout << "*> ";
             std::cin >> xStone;
-            std::cout << "ERROR Not stone - Choose y for stone " << std::endl;
+            std::cout << "ERROR Not stone - Choose y for stone (a letter)" << std::endl;
             std::cout << "*> ";
             std::cin >> yStone;
+            yStone = convertLetterToCoos(yStone);
         } while(board.boardStruct[xStone][yStone].getStatus() != 13);
 
         board.boardStruct[xStone][yStone].setStatus(0);
