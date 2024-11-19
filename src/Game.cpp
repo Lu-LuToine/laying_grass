@@ -261,7 +261,7 @@ void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], in
                         players[k].setBonus(bonusType);
                         std::cout << "Nice ! Player " << k + 1 << " received bonus: " << bonus[i].getName() << std::endl;
                         bonus[i].setPlayer(k + 1);
-                        board.boardStruct[bonus[i].getPosition().first][bonus[i].getPosition().second].setPlayer(k + 1);
+                        board.boardStruct[bonus[i].getPosition().first][bonus[i].getPosition().second].setPlayer(k);
                     }
 
                     if(bonus[i].getType() == 1) {
