@@ -277,7 +277,7 @@ void bonusCaptured(Game &game, Board &board, Bonus bonus[], Player players[], in
 
 
 void gameLoop(Game &game, Board &board, Bonus bonus[], Player players[], Tiles &tiles, int totalBonuses) {
-    while (game.getTurn() < 9) {
+    while (game.getTurn() < 10) {
         for (int i = 0; i < game.getNbPlayer(); i++) {
             int playerX;
             char playerY;
